@@ -1,0 +1,8 @@
+﻿@model Iseu.Models.IndexModel
+<a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Login)">Войти</a>
+ <br />
+ <a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Register)">Регистрация</a>
+ <br />
+ <a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Logout)">Выйти</a>
+<p>@Model.User.LoginName</p>
+<p> @Model.User.Password</p>

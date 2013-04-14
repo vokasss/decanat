@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище DBcontext" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Хранилище DBcontextContainer">
+    <EntitySet Name="Chairs" EntityType="Хранилище DBcontext.Chairs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Faculties" EntityType="Хранилище DBcontext.Faculties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groups" EntityType="Хранилище DBcontext.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Notes" EntityType="Хранилище DBcontext.Notes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Parents" EntityType="Хранилище DBcontext.Parents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Students" EntityType="Хранилище DBcontext.Students" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudentsViews" EntityType="Хранилище DBcontext.StudentsViews" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Subjects" EntityType="Хранилище DBcontext.Subjects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="Хранилище DBcontext.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="Хранилище DBcontext.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Chairs_Faculty" Association="Хранилище DBcontext.FK_Chairs_Faculty">
+      <End Role="Faculties" EntitySet="Faculties" />
+      <End Role="Chairs" EntitySet="Chairs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Groups_Chairs" Association="Хранилище DBcontext.FK_Groups_Chairs">
+      <End Role="Chairs" EntitySet="Chairs" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notes_Subjects" Association="Хранилище DBcontext.FK_Notes_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Notes" EntitySet="Notes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Parents_Users" Association="Хранилище DBcontext.FK_Parents_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Parents" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Groups" Association="Хранилище DBcontext.FK_Students_Groups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Users" Association="Хранилище DBcontext.FK_Students_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Subjects_Chairs" Association="Хранилище DBcontext.FK_Subjects_Chairs">
+      <End Role="Chairs" EntitySet="Chairs" />
+      <End Role="Subjects" EntitySet="Subjects" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Chairs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="FacultyId" Type="int" />
+  </EntityType>
+  <EntityType Name="Faculties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="ChairId" Type="int" />
+  </EntityType>
+  <EntityType Name="Notes">
+    <Key>
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="SubjectId" />
+    </Key>
+    <Property Name="StudentId" Type="int" Nullable="false" />
+    <Property Name="SubjectId" Type="int" Nullable="false" />
+    <Property Name="Note1" Type="int" />
+  </EntityType>
+  <EntityType Name="Parents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Job" Type="nvarchar(max)" />
+    <Property Name="StudentId" Type="int" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="EntryYear" Type="int" />
+    <Property Name="GraduationYear" Type="int" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Type" Type="int" />
+    <Property Name="GroupId" Type="int" />
+  </EntityType>
+  <EntityType Name="StudentsViews">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="EntryYear" Type="int" />
+    <Property Name="GraduationYear" Type="int" />
+    <Property Name="StudentStatus" Type="int" />
+    <Property Name="GroupTitle" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ChairId" Type="int" />
+    <Property Name="Title" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Role" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="LoginName" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar(max)" />
+    <Property Name="Salt" Type="nvarchar(max)" />
+    <Property Name="DateRegistered" Type="datetime2" />
+    <Property Name="DateLastVisited" Type="datetime2" />
+  </EntityType>
+  <Association Name="FK_Chairs_Faculty">
+    <End Role="Faculties" Type="Хранилище DBcontext.Faculties" Multiplicity="0..1" />
+    <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculties">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chairs">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Groups_Chairs">
+    <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="0..1" />
+    <End Role="Groups" Type="Хранилище DBcontext.Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chairs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="ChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notes_Subjects">
+    <End Role="Subjects" Type="Хранилище DBcontext.Subjects" Multiplicity="1" />
+    <End Role="Notes" Type="Хранилище DBcontext.Notes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Parents_Users">
+    <End Role="Users" Type="Хранилище DBcontext.Users" Multiplicity="1" />
+    <End Role="Parents" Type="Хранилище DBcontext.Parents" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parents">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Groups">
+    <End Role="Groups" Type="Хранилище DBcontext.Groups" Multiplicity="0..1" />
+    <End Role="Students" Type="Хранилище DBcontext.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Users">
+    <End Role="Users" Type="Хранилище DBcontext.Users" Multiplicity="1" />
+    <End Role="Students" Type="Хранилище DBcontext.Students" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Subjects_Chairs">
+    <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="0..1" />
+    <End Role="Subjects" Type="Хранилище DBcontext.Subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chairs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subjects">
+        <PropertyRef Name="ChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

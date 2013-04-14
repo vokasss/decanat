@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBcontext" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Chairs" EntityType="DBcontext.Chair" />
+    <EntitySet Name="Faculties" EntityType="DBcontext.Faculty" />
+    <EntitySet Name="Groups" EntityType="DBcontext.Group" />
+    <EntitySet Name="Notes" EntityType="DBcontext.Note" />
+    <EntitySet Name="Parents" EntityType="DBcontext.Parent" />
+    <EntitySet Name="Students" EntityType="DBcontext.Student" />
+    <EntitySet Name="StudentsViews" EntityType="DBcontext.StudentsView" />
+    <EntitySet Name="Subjects" EntityType="DBcontext.Subject" />
+    <EntitySet Name="sysdiagrams" EntityType="DBcontext.sysdiagram" />
+    <EntitySet Name="Users" EntityType="DBcontext.User" />
+    <AssociationSet Name="FK_Chairs_Faculty" Association="DBcontext.FK_Chairs_Faculty">
+      <End Role="Faculties" EntitySet="Faculties" />
+      <End Role="Chairs" EntitySet="Chairs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Groups_Chairs" Association="DBcontext.FK_Groups_Chairs">
+      <End Role="Chairs" EntitySet="Chairs" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Subjects_Chairs" Association="DBcontext.FK_Subjects_Chairs">
+      <End Role="Chairs" EntitySet="Chairs" />
+      <End Role="Subjects" EntitySet="Subjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Groups" Association="DBcontext.FK_Students_Groups">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notes_Subjects" Association="DBcontext.FK_Notes_Subjects">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Notes" EntitySet="Notes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Parents_Users" Association="DBcontext.FK_Parents_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Parents" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Users" Association="DBcontext.FK_Students_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Chair">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="FacultyId" Type="Int32" />
+    <NavigationProperty Name="Faculty" Relationship="DBcontext.FK_Chairs_Faculty" FromRole="Chairs" ToRole="Faculties" />
+    <NavigationProperty Name="Groups" Relationship="DBcontext.FK_Groups_Chairs" FromRole="Chairs" ToRole="Groups" />
+    <NavigationProperty Name="Subjects" Relationship="DBcontext.FK_Subjects_Chairs" FromRole="Chairs" ToRole="Subjects" />
+  </EntityType>
+  <EntityType Name="Faculty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Chairs" Relationship="DBcontext.FK_Chairs_Faculty" FromRole="Faculties" ToRole="Chairs" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ChairId" Type="Int32" />
+    <NavigationProperty Name="Chair" Relationship="DBcontext.FK_Groups_Chairs" FromRole="Groups" ToRole="Chairs" />
+    <NavigationProperty Name="Students" Relationship="DBcontext.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Note">
+    <Key>
+      <PropertyRef Name="StudentId" />
+      <PropertyRef Name="SubjectId" />
+    </Key>
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="SubjectId" Type="Int32" Nullable="false" />
+    <Property Name="Note1" Type="Int32" />
+    <NavigationProperty Name="Subject" Relationship="DBcontext.FK_Notes_Subjects" FromRole="Notes" ToRole="Subjects" />
+  </EntityType>
+  <EntityType Name="Parent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Job" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="StudentId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="DBcontext.FK_Parents_Users" FromRole="Parents" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="EntryYear" Type="Int32" />
+    <Property Name="GraduationYear" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Type" Type="Int32" />
+    <Property Name="GroupId" Type="Int32" />
+    <NavigationProperty Name="Group" Relationship="DBcontext.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
+    <NavigationProperty Name="User" Relationship="DBcontext.FK_Students_Users" FromRole="Students" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="StudentsView">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="EntryYear" Type="Int32" />
+    <Property Name="GraduationYear" Type="Int32" />
+    <Property Name="StudentStatus" Type="Int32" />
+    <Property Name="GroupTitle" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ChairId" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Chair" Relationship="DBcontext.FK_Subjects_Chairs" FromRole="Subjects" ToRole="Chairs" />
+    <NavigationProperty Name="Notes" Relationship="DBcontext.FK_Notes_Subjects" FromRole="Subjects" ToRole="Notes" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="Gender" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CityId" Type="Int32" />
+    <Property Name="Address" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Role" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="LoginName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Salt" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DateRegistered" Type="DateTime" Precision="7" />
+    <Property Name="DateLastVisited" Type="DateTime" Precision="7" />
+    <NavigationProperty Name="Parent" Relationship="DBcontext.FK_Parents_Users" FromRole="Users" ToRole="Parents" />
+    <NavigationProperty Name="Student" Relationship="DBcontext.FK_Students_Users" FromRole="Users" ToRole="Students" />
+  </EntityType>
+  <Association Name="FK_Chairs_Faculty">
+    <End Role="Faculties" Type="DBcontext.Faculty" Multiplicity="0..1" />
+    <End Role="Chairs" Type="DBcontext.Chair" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculties">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chairs">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Groups_Chairs">
+    <End Role="Chairs" Type="DBcontext.Chair" Multiplicity="0..1" />
+    <End Role="Groups" Type="DBcontext.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chairs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="ChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Subjects_Chairs">
+    <End Role="Chairs" Type="DBcontext.Chair" Multiplicity="0..1" />
+    <End Role="Subjects" Type="DBcontext.Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chairs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subjects">
+        <PropertyRef Name="ChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Groups">
+    <End Role="Groups" Type="DBcontext.Group" Multiplicity="0..1" />
+    <End Role="Students" Type="DBcontext.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notes_Subjects">
+    <End Role="Subjects" Type="DBcontext.Subject" Multiplicity="1" />
+    <End Role="Notes" Type="DBcontext.Note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notes">
+        <PropertyRef Name="SubjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Parents_Users">
+    <End Role="Users" Type="DBcontext.User" Multiplicity="1" />
+    <End Role="Parents" Type="DBcontext.Parent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parents">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_Users">
+    <End Role="Users" Type="DBcontext.User" Multiplicity="1" />
+    <End Role="Students" Type="DBcontext.Student" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

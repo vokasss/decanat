@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DBcontext" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="Хранилище DBcontextContainer">
+          <EntitySet Name="Chairs" EntityType="Хранилище DBcontext.Chairs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Faculties" EntityType="Хранилище DBcontext.Faculties" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Groups" EntityType="Хранилище DBcontext.Groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Notes" EntityType="Хранилище DBcontext.Notes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Parents" EntityType="Хранилище DBcontext.Parents" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Students" EntityType="Хранилище DBcontext.Students" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StudentsViews" EntityType="Хранилище DBcontext.StudentsViews" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Subjects" EntityType="Хранилище DBcontext.Subjects" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="Хранилище DBcontext.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="Хранилище DBcontext.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Chairs_Faculty" Association="Хранилище DBcontext.FK_Chairs_Faculty">
+            <End Role="Faculties" EntitySet="Faculties" />
+            <End Role="Chairs" EntitySet="Chairs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Chairs" Association="Хранилище DBcontext.FK_Groups_Chairs">
+            <End Role="Chairs" EntitySet="Chairs" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_Subjects" Association="Хранилище DBcontext.FK_Notes_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parents_Users" Association="Хранилище DBcontext.FK_Parents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Parents" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="Хранилище DBcontext.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Users" Association="Хранилище DBcontext.FK_Students_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subjects_Chairs" Association="Хранилище DBcontext.FK_Subjects_Chairs">
+            <End Role="Chairs" EntitySet="Chairs" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Chairs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="FacultyId" Type="int" />
+        </EntityType>
+        <EntityType Name="Faculties">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="ChairId" Type="int" />
+        </EntityType>
+        <EntityType Name="Notes">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="Note1" Type="int" />
+        </EntityType>
+        <EntityType Name="Parents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Job" Type="nvarchar(max)" />
+          <Property Name="StudentId" Type="int" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EntryYear" Type="int" />
+          <Property Name="GraduationYear" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Type" Type="int" />
+          <Property Name="GroupId" Type="int" />
+        </EntityType>
+        <EntityType Name="StudentsViews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EntryYear" Type="int" />
+          <Property Name="GraduationYear" Type="int" />
+          <Property Name="StudentStatus" Type="int" />
+          <Property Name="GroupTitle" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ChairId" Type="int" />
+          <Property Name="Title" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="LoginName" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Salt" Type="nvarchar(max)" />
+          <Property Name="DateRegistered" Type="datetime2" />
+          <Property Name="DateLastVisited" Type="datetime2" />
+        </EntityType>
+        <Association Name="FK_Chairs_Faculty">
+          <End Role="Faculties" Type="Хранилище DBcontext.Faculties" Multiplicity="0..1" />
+          <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculties">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chairs">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Chairs">
+          <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="0..1" />
+          <End Role="Groups" Type="Хранилище DBcontext.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chairs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="ChairId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_Subjects">
+          <End Role="Subjects" Type="Хранилище DBcontext.Subjects" Multiplicity="1" />
+          <End Role="Notes" Type="Хранилище DBcontext.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parents_Users">
+          <End Role="Users" Type="Хранилище DBcontext.Users" Multiplicity="1" />
+          <End Role="Parents" Type="Хранилище DBcontext.Parents" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parents">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="Хранилище DBcontext.Groups" Multiplicity="0..1" />
+          <End Role="Students" Type="Хранилище DBcontext.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Users">
+          <End Role="Users" Type="Хранилище DBcontext.Users" Multiplicity="1" />
+          <End Role="Students" Type="Хранилище DBcontext.Students" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subjects_Chairs">
+          <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="0..1" />
+          <End Role="Subjects" Type="Хранилище DBcontext.Subjects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chairs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subjects">
+              <PropertyRef Name="ChairId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBcontext" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Chairs" EntityType="DBcontext.Chair" />
+          <EntitySet Name="Faculties" EntityType="DBcontext.Faculty" />
+          <EntitySet Name="Groups" EntityType="DBcontext.Group" />
+          <EntitySet Name="Notes" EntityType="DBcontext.Note" />
+          <EntitySet Name="Parents" EntityType="DBcontext.Parent" />
+          <EntitySet Name="Students" EntityType="DBcontext.Student" />
+          <EntitySet Name="StudentsViews" EntityType="DBcontext.StudentsView" />
+          <EntitySet Name="Subjects" EntityType="DBcontext.Subject" />
+          <EntitySet Name="sysdiagrams" EntityType="DBcontext.sysdiagram" />
+          <EntitySet Name="Users" EntityType="DBcontext.User" />
+          <AssociationSet Name="FK_Chairs_Faculty" Association="DBcontext.FK_Chairs_Faculty">
+            <End Role="Faculties" EntitySet="Faculties" />
+            <End Role="Chairs" EntitySet="Chairs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups_Chairs" Association="DBcontext.FK_Groups_Chairs">
+            <End Role="Chairs" EntitySet="Chairs" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subjects_Chairs" Association="DBcontext.FK_Subjects_Chairs">
+            <End Role="Chairs" EntitySet="Chairs" />
+            <End Role="Subjects" EntitySet="Subjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="DBcontext.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_Subjects" Association="DBcontext.FK_Notes_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parents_Users" Association="DBcontext.FK_Parents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Parents" EntitySet="Parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Users" Association="DBcontext.FK_Students_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Chair">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="FacultyId" Type="Int32" />
+          <NavigationProperty Name="Faculty" Relationship="DBcontext.FK_Chairs_Faculty" FromRole="Chairs" ToRole="Faculties" />
+          <NavigationProperty Name="Groups" Relationship="DBcontext.FK_Groups_Chairs" FromRole="Chairs" ToRole="Groups" />
+          <NavigationProperty Name="Subjects" Relationship="DBcontext.FK_Subjects_Chairs" FromRole="Chairs" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Chairs" Relationship="DBcontext.FK_Chairs_Faculty" FromRole="Faculties" ToRole="Chairs" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ChairId" Type="Int32" />
+          <NavigationProperty Name="Chair" Relationship="DBcontext.FK_Groups_Chairs" FromRole="Groups" ToRole="Chairs" />
+          <NavigationProperty Name="Students" Relationship="DBcontext.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="Note1" Type="Int32" />
+          <NavigationProperty Name="Subject" Relationship="DBcontext.FK_Notes_Subjects" FromRole="Notes" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Job" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="StudentId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="DBcontext.FK_Parents_Users" FromRole="Parents" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EntryYear" Type="Int32" />
+          <Property Name="GraduationYear" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="GroupId" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="DBcontext.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
+          <NavigationProperty Name="User" Relationship="DBcontext.FK_Students_Users" FromRole="Students" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="StudentsView">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EntryYear" Type="Int32" />
+          <Property Name="GraduationYear" Type="Int32" />
+          <Property Name="StudentStatus" Type="Int32" />
+          <Property Name="GroupTitle" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ChairId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Chair" Relationship="DBcontext.FK_Subjects_Chairs" FromRole="Subjects" ToRole="Chairs" />
+          <NavigationProperty Name="Notes" Relationship="DBcontext.FK_Notes_Subjects" FromRole="Subjects" ToRole="Notes" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="LoginName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Salt" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateRegistered" Type="DateTime" Precision="7" />
+          <Property Name="DateLastVisited" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Parent" Relationship="DBcontext.FK_Parents_Users" FromRole="Users" ToRole="Parents" />
+          <NavigationProperty Name="Student" Relationship="DBcontext.FK_Students_Users" FromRole="Users" ToRole="Students" />
+        </EntityType>
+        <Association Name="FK_Chairs_Faculty">
+          <End Role="Faculties" Type="DBcontext.Faculty" Multiplicity="0..1" />
+          <End Role="Chairs" Type="DBcontext.Chair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculties">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chairs">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups_Chairs">
+          <End Role="Chairs" Type="DBcontext.Chair" Multiplicity="0..1" />
+          <End Role="Groups" Type="DBcontext.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chairs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="ChairId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subjects_Chairs">
+          <End Role="Chairs" Type="DBcontext.Chair" Multiplicity="0..1" />
+          <End Role="Subjects" Type="DBcontext.Subject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chairs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subjects">
+              <PropertyRef Name="ChairId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="DBcontext.Group" Multiplicity="0..1" />
+          <End Role="Students" Type="DBcontext.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_Subjects">
+          <End Role="Subjects" Type="DBcontext.Subject" Multiplicity="1" />
+          <End Role="Notes" Type="DBcontext.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parents_Users">
+          <End Role="Users" Type="DBcontext.User" Multiplicity="1" />
+          <End Role="Parents" Type="DBcontext.Parent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Parents">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Users">
+          <End Role="Users" Type="DBcontext.User" Multiplicity="1" />
+          <End Role="Students" Type="DBcontext.Student" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DBcontextContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Chairs">
+            <EntityTypeMapping TypeName="DBcontext.Chair">
+              <MappingFragment StoreEntitySet="Chairs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="DBcontext.Faculty">
+              <MappingFragment StoreEntitySet="Faculties">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="DBcontext.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notes">
+            <EntityTypeMapping TypeName="DBcontext.Note">
+              <MappingFragment StoreEntitySet="Notes">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Note1" ColumnName="Note1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parents">
+            <EntityTypeMapping TypeName="DBcontext.Parent">
+              <MappingFragment StoreEntitySet="Parents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="DBcontext.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EntryYear" ColumnName="EntryYear" />
+                <ScalarProperty Name="GraduationYear" ColumnName="GraduationYear" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentsViews">
+            <EntityTypeMapping TypeName="DBcontext.StudentsView">
+              <MappingFragment StoreEntitySet="StudentsViews">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EntryYear" ColumnName="EntryYear" />
+                <ScalarProperty Name="GraduationYear" ColumnName="GraduationYear" />
+                <ScalarProperty Name="StudentStatus" ColumnName="StudentStatus" />
+                <ScalarProperty Name="GroupTitle" ColumnName="GroupTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="DBcontext.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBcontext.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DBcontext.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
+                <ScalarProperty Name="DateLastVisited" ColumnName="DateLastVisited" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

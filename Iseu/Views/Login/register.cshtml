@@ -1,0 +1,21 @@
+﻿@model Iseu.Models.RegisterModel
+@if (ViewBag.Failed == 1)
+{
+    <div>Введено неправильное имя пользователя или пароль.</div> 
+}
+<form action="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Register)" method="post">
+    @Html.LabelFor(m => m.LoginName)
+    @Html.TextBoxFor(m => m.LoginName)
+    @Html.ValidationMessageFor(m=>m.LoginName)
+    @Html.LabelFor(m => m.Email)
+    @Html.TextBoxFor(m => m.Email)
+    @Html.ValidationMessageFor(m=>m.Email)
+    @Html.LabelFor(m => m.Password)
+    @Html.TextBoxFor(m => m.Password, new { type="password" })
+    @Html.ValidationMessageFor(m=>m.Password)
+    @Html.LabelFor(m => m.ConfirmPassword)
+    @Html.TextBoxFor(m => m.ConfirmPassword, new { type="password" })
+    @Html.ValidationMessageFor(m=>m.ConfirmPassword)
+    <button type="submit">Зарегистрироваться</button>
+    <a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Home)">Отмена</a>
+</form>
