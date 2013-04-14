@@ -171,6 +171,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Extensions\Entities\UsersExtension.cs" />
+    <Compile Include="Extensions\Entities\EntitiesExtension.cs" />
     <Compile Include="Extensions\Routing\RouteCollectionExtension.cs" />
     <Compile Include="Extensions\Routing\Routes.cs" />
     <Compile Include="Faculty.cs">
@@ -202,6 +203,7 @@
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Login\Password.cs" />
     <Compile Include="Models\IndexModel.cs" />
+    <Compile Include="Models\Search\StudentViewModel.cs" />
     <Compile Include="Models\Student\StudentViewModel.cs" />
     <Compile Include="Note.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
@@ -356,6 +358,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\register.cshtml" />
     <Content Include="Views\Login\login.cshtml" />
+    <Content Include="Views\Student\add.cshtml" />
+    <Content Include="Views\Student\student.cshtml" />
+    <Content Include="Views\Home\search.cshtml" />
+    <Content Include="Views\Student\list-students.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

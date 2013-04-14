@@ -56,6 +56,7 @@ namespace Iseu.Controllers
             return RedirectToRoute(HomeRoutes.Home);
         }
 
+        [HttpGet]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
@@ -64,5 +65,14 @@ namespace Iseu.Controllers
         }
 
         #endregion
+        [HttpGet]
+        public ActionResult Search(string pattern)
+        {
+            var students = !String.IsNullOrEmpty(pattern) ? DBcontext.Students.Search(pattern).ToList() : DBcontext.Students.ToList();
+            SearchModel search = new SearchModel();
+            search.Pattern = pattern;
+            search.Result = students;
+            return View("~/Views/Home/search.cshtml", search);
+        }
     }
 }

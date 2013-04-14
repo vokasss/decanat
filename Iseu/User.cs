@@ -32,7 +32,7 @@ namespace Iseu
         public string Salt { get; set; }
         public Nullable<System.DateTime> DateRegistered { get; set; }
         public Nullable<System.DateTime> DateLastVisited { get; set; }
-    
+        
         public virtual Parent Parent { get; set; }
         public virtual Student Student { get; set; }
 

@@ -16,6 +16,7 @@ namespace Iseu.Routing
             routes.MapRoute(HomeRoutes.Login, "Home/Login");
             routes.MapRoute(HomeRoutes.Register, "Home/Register");
             routes.MapRoute(HomeRoutes.Logout, "Home/Logout");
+            routes.MapRoute(HomeRoutes.Search, "Home/Search");
             /*routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
@@ -28,8 +29,8 @@ namespace Iseu.Routing
         public const string Login = "iseu.login";
         public const string Register = "iseu.register";
         public const string Logout = "iseu.logout";
+        public static string Search = "iseu.search";
         /*public static string Home = "iseu.home";
-        public static string Home = "iseu.home";
         public static string Home = "iseu.home";
         public static string Home = "iseu.home";
         public static string Home = "iseu.home";*/

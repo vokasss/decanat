@@ -10,10 +10,30 @@ namespace Iseu.Models
         Normal,
         Banned
     }
+
     public enum AccountRole 
     { 
         Normal,
         Employee,
         Admin
+    }
+
+    public enum Gender
+    {
+        Male,
+        Female
+    }
+
+    public enum PaymentStatus
+    {
+        Free,
+        Paid
+    }
+
+    public enum StudyStatus
+    {
+        Active,
+        Graduated,
+        Expelled
     }
 }

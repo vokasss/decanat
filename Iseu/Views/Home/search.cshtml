@@ -1,0 +1,6 @@
+﻿@model SearchModel
+<form action="@Url.RouteUrl(HomeRoutes.Search)" method="get">
+    <input type="text" name="Pattern" value="@Model.Pattern"/>
+    <button type="submit">Найти</button>
+</form>
+@Html.Partial("~/Views/Student/list-students.cshtml", Model.Result)

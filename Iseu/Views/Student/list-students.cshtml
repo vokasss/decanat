@@ -1,0 +1,7 @@
+﻿@model List<Student>
+<ul>
+@foreach (var i in Model)
+{
+   <li>@i.User.LastName @i.User.FirstName @i.User.MiddleName @i.EntryYear @i.GraduationYear @i.Group.Title</li>  
+}
+</ul>
