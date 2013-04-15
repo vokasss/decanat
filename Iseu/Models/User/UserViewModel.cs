@@ -8,8 +8,8 @@ using System.Web;
 
 namespace Iseu.Models
 {
-    public class HeaderModel {
-
-        public User User { get; set; }
+    public class UserViewModel : GuestableModel
+    {
+        public User Owner { get; set; }
     }
 }

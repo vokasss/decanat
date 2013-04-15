@@ -1,0 +1,10 @@
+﻿@model UserViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>ФИО: @Model.Owner.LastName @Model.Owner.FirstName @Model.Owner.MiddleName</div>
+<div>Дата рождения: @Model.Owner.BirthDate</div>
+@if(Model.GuestIsDecanat || Model.GuestIsAdmin)
+{
+<a href="@Url.RouteUrl(UserRoutes.Edit, new { id = Model.Owner.Id })">Редактировать</a>
+}

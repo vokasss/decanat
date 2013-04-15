@@ -2,7 +2,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<form action="@Url.RouteUrl(HomeRoutes.Search)" method="get">
+<h5>Поиск студентов:</h5>
+<form action="@Url.RouteUrl(SearchRoutes.Index)" method="get">
     <input type="text" name="Pattern"/>
     <button type="submit">Найти</button>
 </form>

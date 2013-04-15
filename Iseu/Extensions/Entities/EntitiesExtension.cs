@@ -16,11 +16,12 @@ namespace Iseu.Models
         }*/
         public static IEnumerable<Student> Search(this IEnumerable<Student> students, string pattern)
         {
-            return students.Where(s => (!String.IsNullOrEmpty(s.User.FirstName) && s.User.FirstName.Contains(pattern))
-                || (!String.IsNullOrEmpty(s.User.LastName) && s.User.LastName.Contains(pattern))
-                || (!String.IsNullOrEmpty(s.User.MiddleName) && s.User.MiddleName.Contains(pattern))
-                || (!String.IsNullOrEmpty(s.Group.Title) && s.Group.Title.Contains(pattern))
-                || (!String.IsNullOrEmpty(s.User.Address) && s.User.Address.Contains(pattern)));
+            pattern = pattern.ToLower();
+            return students.Where(s => (!String.IsNullOrEmpty(s.User.FirstName) && s.User.FirstName.ToLower().Contains(pattern))
+                || (!String.IsNullOrEmpty(s.User.LastName) && s.User.LastName.ToLower().Contains(pattern))
+                || (!String.IsNullOrEmpty(s.User.MiddleName) && s.User.MiddleName.ToLower().Contains(pattern))
+                || (!String.IsNullOrEmpty(s.Group.Title) && s.Group.Title.ToLower().Contains(pattern))
+                || (!String.IsNullOrEmpty(s.User.Address) && s.User.Address.ToLower().Contains(pattern)));
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Iseu.Models
     { 
         Normal,
         Professor,
+        Decanat,
         Admin
     }
 

@@ -1,0 +1,14 @@
+﻿@model StudentViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>ФИО: @Model.LastName @Model.FirstName @Model.MiddleName</div>
+<div>Дата рождения: @Model.BirthDate</div>
+<div>Год поступления: @Model.EntryYear</div>
+<div>Группа: @Model.Group</div>
+<div>Характеристика: </div>
+<br />
+@if(Model.GuestIsDecanat || Model.GuestIsAdmin)
+{
+<a href="@Url.RouteUrl(UserRoutes.Edit, new { id = Model.Id })">Редактировать</a>
+}

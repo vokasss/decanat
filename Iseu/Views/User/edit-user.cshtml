@@ -1,0 +1,14 @@
+﻿@model UserViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form action="@Url.RouteUrl(UserRoutes.Edit, new { id = Model.Owner.Id })" method="post">
+    @Html.TextBoxFor(m=>m.Owner.LastName)
+    @Html.TextBoxFor(m=>m.Owner.FirstName)
+    @Html.TextBoxFor(m=>m.Owner.MiddleName)
+    @Html.TextBoxFor(m=>m.Owner.BirthDate)
+    @Html.TextBoxFor(m=>m.Owner.Phone)
+    @Html.TextBoxFor(m=>m.Owner.Address)
+    @Html.TextBoxFor(m=>m.Owner.Email)
+    <input type="submit" value="Сохранить"/>
+</form>

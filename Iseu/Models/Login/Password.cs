@@ -84,18 +84,5 @@ namespace Iseu.Models
         {
             return new Password(salt, hash);
         }
-
-        public bool IsEmpty
-        {
-            get { return string.IsNullOrEmpty(Hash); }
-        }
-       
-        public bool Verify(string password)
-        {
-            var h = CalculateHash(_salt, password);
-            return String.Equals(_hash, h, StringComparison.Ordinal);
-        }
-
-       
     }
 }

@@ -1,0 +1,32 @@
+﻿@model List<Student>
+<table>
+    <thead id="list-students">
+        <tr>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th>Год поступления</th>
+            <th>Год окончания</th>
+            <th>Группа</th>
+            <th>Форма обучения</th>
+            <th>Телефон</th>
+            <th>Адрес</th>
+            <th>E-mail</th>
+            <th>Ведомость</th>
+        </tr>
+        @foreach (var i in Model)
+{
+  <tr>
+      <td><a href="@Url.RouteUrl(UserRoutes.Index, new { id = i.Id })">@i.User.LastName @i.User.FirstName @i.User.MiddleName</a></td>
+      <td>@i.User.BirthDate</td>
+      <td>@i.EntryYear</td>
+      <td>@(i.GraduationYear < DateTime.Now.Year ? i.GraduationYear.ToString() : "")</td>
+      <td><a href="@Url.RouteUrl(SearchRoutes.Group, new { id = i.GroupId })">@i.Group.Title</a></td>
+      <td>@(i.Type == (int)PaymentStatus.Free ? "Бюджет" : "Платник")</td>
+      <td>@i.User.Phone</td>
+      <td>@i.User.Address</td>
+      <td>@i.User.Email</td>
+      <td><a href="#">Ведомость >></a></td>
+  </tr> 
+}
+    </thead>
+</table>

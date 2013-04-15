@@ -6,24 +6,56 @@ using System.Web.Mvc;
 using Iseu;
 using Iseu.Routing;
 using Iseu.Models;
-using System.Web.Security;
 
 namespace Iseu.Controllers
 {
-    public class StudentController : BaseIseuController
+    public class AdminController : BaseIseuController
     {
         [HttpGet]
-        public ActionResult AddStudent()
+        public ActionResult SetRole(int id, int role)
         {
-            return View("~/Views/Student/add.cshtml");
+            if (!CurrentUser.IsAdmin)
+            {
+                return Error("Действие доступно только администратору");
+            }
+            var user = DBcontext.Users.Single(u => u.Id == id);
+            user.Role = role;
+            DBcontext.SaveChanges();
+            return RedirectToAction("User", "Index", new { id = id });
+        }
+
+        [HttpGet]
+        public ActionResult Ban(int id)
+        {
+            if (!CurrentUser.IsAdmin)
+            {
+                return Error("Действие доступно только администратору");
+            }
+            var user = DBcontext.Users.Single(u => u.Id == id);
+            user.Status = (int)AccountStatus.Banned;
+            DBcontext.SaveChanges();
+            return RedirectToAction("User", "Index", new { id = id });
+        }
+
+        [HttpGet]
+        public ActionResult Unban(int id)
+        {
+            if (!CurrentUser.IsAdmin)
+            {
+                return Error("Действие доступно только администратору");
+            }
+            var user = DBcontext.Users.Single(u => u.Id == id);
+            user.Status = (int)AccountStatus.Normal;
+            DBcontext.SaveChanges();
+            return RedirectToAction("User", "Index", new { id = id });
         }
 
         [HttpPost]
-        public ActionResult AddStudent(StudentViewModel model)
+        public ActionResult Add(StudentViewModel model)
         {
             if(!ModelState.IsValid)
             {
-                 return View("~/Views/Student/add.cshtml");
+                 return View("~/Views/User/add.cshtml");
             }
 
             Student newStudent = DBcontext.Students.Add(new Student());
@@ -53,11 +85,11 @@ namespace Iseu.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditStudent(StudentViewModel model)
+        public ActionResult Edit(StudentViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View("~/Views/Student/add.cshtml");
+                return View("~/Views/User/add.cshtml");
             }
 
             Student student = DBcontext.Students.Single(s => s.Id == model.Id);
@@ -82,13 +114,6 @@ namespace Iseu.Controllers
             }
             DBcontext.SaveChanges();
             return View("~/Views/Home/Index.cshtml");
-        }
-
-        [HttpGet]
-        public ActionResult Student(StudentViewModel model)
-        {
-
-            return View("~/Views/Student/student.cshtml");
         }
 
     }

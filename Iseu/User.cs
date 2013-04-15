@@ -12,6 +12,7 @@ namespace Iseu
     using System;
     using System.Collections.Generic;
     using System.Security.Principal;
+    using Iseu.Models;
     
     public partial class User
     {
@@ -41,6 +42,38 @@ namespace Iseu
             get
             {
                 return Id < 1;
+            }
+        }
+
+        public bool IsStudent
+        {
+            get
+            {
+                return Student != null;
+            }
+        }
+
+        public bool IsBanned
+        {
+            get
+            {
+                return Status == (int)AccountStatus.Banned;
+            }
+        }
+
+        public bool IsAdmin
+        {
+            get
+            {
+                return Role == (int)AccountRole.Admin;
+            }
+        }
+
+        public bool IsDecanat
+        {
+            get
+            {
+                return Role == (int)AccountRole.Decanat;
             }
         }
     }

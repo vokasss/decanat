@@ -1,0 +1,17 @@
+﻿@model StudentViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form action="@(Url.RouteUrl(UserRoutes.Add))" method="post">
+    @Html.TextBoxFor(m=>m.LastName)
+    @Html.TextBoxFor(m=>m.FirstName)
+    @Html.TextBoxFor(m=>m.MiddleName)
+    @Html.TextBoxFor(m=>m.BirthDate)
+    @Html.TextBoxFor(m=>m.Phone)
+    @Html.TextBoxFor(m=>m.Address)
+    @Html.TextBoxFor(m=>m.Email)
+    @Html.TextBoxFor(m=>m.Group)
+    @Html.TextBoxFor(m=>m.EntryYear)
+    @Html.TextBoxFor(m=>m.GraduationYear)
+    <input type="submit" value="Сохранить"/>
+</form>

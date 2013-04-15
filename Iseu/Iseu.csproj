@@ -168,12 +168,12 @@
     </Compile>
     <Compile Include="Controllers\BaseIseuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Extensions\Entities\UsersExtension.cs" />
     <Compile Include="Extensions\Entities\EntitiesExtension.cs" />
     <Compile Include="Extensions\Routing\RouteCollectionExtension.cs" />
-    <Compile Include="Extensions\Routing\Routes.cs" />
     <Compile Include="Faculty.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
@@ -204,8 +204,10 @@
     <Compile Include="Models\Login\Password.cs" />
     <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\Partial\HeaderModel.cs" />
-    <Compile Include="Models\Search\StudentViewModel.cs" />
-    <Compile Include="Models\Student\StudentViewModel.cs" />
+    <Compile Include="Models\Partial\GuestableModel.cs" />
+    <Compile Include="Models\Search\SearchModel.cs" />
+    <Compile Include="Models\User\StudentViewModel.cs" />
+    <Compile Include="Models\User\UserViewModel.cs" />
     <Compile Include="Note.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
@@ -359,19 +361,25 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\register.cshtml" />
     <Content Include="Views\Login\login.cshtml" />
-    <Content Include="Views\Student\add.cshtml" />
-    <Content Include="Views\Student\student.cshtml" />
+    <Content Include="Views\User\add.cshtml" />
+    <Content Include="Views\User\student.cshtml" />
     <Content Include="Views\Home\search.cshtml" />
-    <Content Include="Views\Student\list-students.cshtml" />
+    <Content Include="Views\User\list-students.cshtml" />
     <Content Include="Views\partial\header.cshtml" />
     <Content Include="Views\partial\footer.cshtml" />
     <Content Include="Views\partial\sidebar.cshtml" />
     <Content Include="Views\Shared\_Main.cshtml" />
+    <Content Include="Views\Errors\404.cshtml" />
+    <Content Include="Views\Errors\Error.cshtml" />
+    <Content Include="Views\User\user.cshtml" />
+    <Content Include="Views\User\edit-user.cshtml" />
+    <Content Include="Views\User\edit-student.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

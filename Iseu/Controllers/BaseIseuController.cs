@@ -23,5 +23,15 @@ namespace Iseu.Controllers
         {
             DBcontext = new Entities();
         }
+
+        public ActionResult Error(string e)
+        {
+            return View("~/Views/Errors/Error.cshtml", (object)e);
+        }
+
+        public ActionResult PageNotFound()
+        {
+            return View("~/Views/Errors/404.cshtml");
+        }
     }
 }

@@ -32,11 +32,27 @@ namespace Iseu.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
+            User user = null;
+
+            if (DBcontext.Users.Any(u => u.LoginName == model.LoginName && u.Status != (int)AccountStatus.Banned))
+                user = DBcontext.Users.Single(u => u.LoginName == model.LoginName);
+            else
+            {
+                ViewBag.Failed = 1;
+                ViewBag.Message = "Пользователя с таким логином не существует";
+                return RedirectToRoute(HomeRoutes.Home);
+            }
+            if(user.Password != Password.CalculateHash(user.Salt, model.Password))
+            {
+                ViewBag.Failed = 1;
+                ViewBag.Message = "Неверный пароль";
+                return RedirectToRoute(HomeRoutes.Home);
+            }
             if (ModelState.IsValid)
             {
                 FormsAuthentication.SetAuthCookie(model.LoginName, model.RememberMe);
-            }   
-
+            }
+            ViewBag.Failed = 0;
             return RedirectToRoute(HomeRoutes.Home);
         }
 
@@ -70,15 +86,5 @@ namespace Iseu.Controllers
         }
 
         #endregion
-
-        [HttpGet]
-        public ActionResult Search(string pattern)
-        {
-            var students = !String.IsNullOrEmpty(pattern) ? DBcontext.Students.Search(pattern).ToList() : DBcontext.Students.ToList();
-            SearchModel search = new SearchModel();
-            search.Pattern = pattern;
-            search.Result = students;
-            return View("~/Views/Home/search.cshtml", search);
-        }
     }
 }
