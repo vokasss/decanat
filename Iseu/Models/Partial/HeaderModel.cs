@@ -8,10 +8,9 @@ using System.Web;
 
 namespace Iseu.Models
 {
-    public class IndexModel {
+    public class HeaderModel {
 
         public User User { get; set; }
-        public SearchModel Search { get; set; }
     
     }
 }

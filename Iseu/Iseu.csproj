@@ -203,6 +203,7 @@
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Login\Password.cs" />
     <Compile Include="Models\IndexModel.cs" />
+    <Compile Include="Models\Partial\HeaderModel.cs" />
     <Compile Include="Models\Search\StudentViewModel.cs" />
     <Compile Include="Models\Student\StudentViewModel.cs" />
     <Compile Include="Note.cs">
@@ -362,6 +363,10 @@
     <Content Include="Views\Student\student.cshtml" />
     <Content Include="Views\Home\search.cshtml" />
     <Content Include="Views\Student\list-students.cshtml" />
+    <Content Include="Views\partial\header.cshtml" />
+    <Content Include="Views\partial\footer.cshtml" />
+    <Content Include="Views\partial\sidebar.cshtml" />
+    <Content Include="Views\Shared\_Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

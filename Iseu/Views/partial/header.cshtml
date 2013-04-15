@@ -1,0 +1,17 @@
+﻿@model HeaderModel
+
+@if(Model.User.IsAnounymous)
+{
+<form action="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Login)" method="post">
+    <input type="text" name="LoginName"/>
+    <input type="password" name="Password"/>
+    <input type="checkbox" name="RememberMe" />
+    <button type="submit">Войти</button>
+    <a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Register)">Регистрация</a>
+</form>
+}
+else
+{
+<a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Logout)">Выйти</a>
+}
+ 

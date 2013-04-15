@@ -17,6 +17,11 @@ namespace Iseu.Controllers
             return View("~/Views/Home/Index.cshtml", new IndexModel() { User = CurrentUser });
         }
 
+        public ActionResult Header()
+        {
+            return PartialView("~/Views/partial/header.cshtml", new HeaderModel() { User = CurrentUser });
+        }
+
         #region Registration and Login
         [HttpGet]
         public ActionResult Login()
@@ -65,6 +70,7 @@ namespace Iseu.Controllers
         }
 
         #endregion
+
         [HttpGet]
         public ActionResult Search(string pattern)
         {

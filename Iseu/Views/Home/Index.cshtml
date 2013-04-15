@@ -1,8 +1,15 @@
-﻿@model Iseu.Models.IndexModel
-<a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Login)">Войти</a>
- <br />
- <a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Register)">Регистрация</a>
- <br />
- <a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Logout)">Выйти</a>
-<p>@Model.User.LoginName</p>
-<p> @Model.User.Password</p>
+﻿@model IndexModel
+
+@{
+    Layout = "~/Views/Shared/_Main.cshtml";
+}
+
+@section main{
+
+<form action="@Url.RouteUrl(HomeRoutes.Search)" method="get">
+    <input type="text" name="Pattern" value="@Model.Search.Pattern"/>
+    <button type="submit">Найти</button>
+</form>
+@Html.Partial("~/Views/Student/list-students.cshtml", Model.Search.Result)
+
+}
