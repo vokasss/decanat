@@ -1,15 +1,9 @@
 ﻿@model IndexModel
-
 @{
-    Layout = "~/Views/Shared/_Main.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@section main{
-
 <form action="@Url.RouteUrl(HomeRoutes.Search)" method="get">
-    <input type="text" name="Pattern" value="@Model.Search.Pattern"/>
+    <input type="text" name="Pattern"/>
     <button type="submit">Найти</button>
 </form>
-@Html.Partial("~/Views/Student/list-students.cshtml", Model.Search.Result)
 
-}

@@ -11,7 +11,6 @@ namespace Iseu.Models
     public class IndexModel {
 
         public User User { get; set; }
-        public SearchModel Search { get; set; }
     
     }
 }
