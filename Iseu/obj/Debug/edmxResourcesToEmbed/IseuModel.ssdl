@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Хранилище DBcontext" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="Хранилище DBcontextContainer">
+    <EntitySet Name="ADegrees" EntityType="Хранилище DBcontext.ADegrees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ATitles" EntityType="Хранилище DBcontext.ATitles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Chairs" EntityType="Хранилище DBcontext.Chairs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Faculties" EntityType="Хранилище DBcontext.Faculties" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Groups" EntityType="Хранилище DBcontext.Groups" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Notes" EntityType="Хранилище DBcontext.Notes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Parents" EntityType="Хранилище DBcontext.Parents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Professors" EntityType="Хранилище DBcontext.Professors" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Students" EntityType="Хранилище DBcontext.Students" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StudentsViews" EntityType="Хранилище DBcontext.StudentsViews" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Subjects" EntityType="Хранилище DBcontext.Subjects" store:Type="Tables" Schema="dbo" />
@@ -27,6 +30,22 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Parents" EntitySet="Parents" />
     </AssociationSet>
+    <AssociationSet Name="FK_Professors_ADegrees" Association="Хранилище DBcontext.FK_Professors_ADegrees">
+      <End Role="ADegrees" EntitySet="ADegrees" />
+      <End Role="Professors" EntitySet="Professors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Professors_ATitles" Association="Хранилище DBcontext.FK_Professors_ATitles">
+      <End Role="ATitles" EntitySet="ATitles" />
+      <End Role="Professors" EntitySet="Professors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Professors_Chairs" Association="Хранилище DBcontext.FK_Professors_Chairs">
+      <End Role="Chairs" EntitySet="Chairs" />
+      <End Role="Professors" EntitySet="Professors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Professors_Users" Association="Хранилище DBcontext.FK_Professors_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Professors" EntitySet="Professors" />
+    </AssociationSet>
     <AssociationSet Name="FK_Students_Groups" Association="Хранилище DBcontext.FK_Students_Groups">
       <End Role="Groups" EntitySet="Groups" />
       <End Role="Students" EntitySet="Students" />
@@ -35,11 +54,25 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Students" EntitySet="Students" />
     </AssociationSet>
-    <AssociationSet Name="FK_Subjects_Chairs" Association="Хранилище DBcontext.FK_Subjects_Chairs">
-      <End Role="Chairs" EntitySet="Chairs" />
+    <AssociationSet Name="FK_Subjects_Professors" Association="Хранилище DBcontext.FK_Subjects_Professors">
+      <End Role="Professors" EntitySet="Professors" />
       <End Role="Subjects" EntitySet="Subjects" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="ADegrees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ATitles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="Chairs">
     <Key>
       <PropertyRef Name="Id" />
@@ -80,6 +113,15 @@
     <Property Name="Job" Type="nvarchar(max)" />
     <Property Name="StudentId" Type="int" />
   </EntityType>
+  <EntityType Name="Professors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ADegree" Type="int" />
+    <Property Name="ATitle" Type="int" />
+    <Property Name="ChairId" Type="int" />
+  </EntityType>
   <EntityType Name="Students">
     <Key>
       <PropertyRef Name="Id" />
@@ -106,8 +148,8 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="ChairId" Type="int" />
     <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="ProfessorId" Type="int" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -189,6 +231,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Professors_ADegrees">
+    <End Role="ADegrees" Type="Хранилище DBcontext.ADegrees" Multiplicity="0..1" />
+    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADegrees">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Professors">
+        <PropertyRef Name="ADegree" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Professors_ATitles">
+    <End Role="ATitles" Type="Хранилище DBcontext.ATitles" Multiplicity="0..1" />
+    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ATitles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Professors">
+        <PropertyRef Name="ATitle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Professors_Chairs">
+    <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="0..1" />
+    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chairs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Professors">
+        <PropertyRef Name="ChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Professors_Users">
+    <End Role="Users" Type="Хранилище DBcontext.Users" Multiplicity="1" />
+    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Professors">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Students_Groups">
     <End Role="Groups" Type="Хранилище DBcontext.Groups" Multiplicity="0..1" />
     <End Role="Students" Type="Хранилище DBcontext.Students" Multiplicity="*" />
@@ -213,15 +303,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Subjects_Chairs">
-    <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="0..1" />
+  <Association Name="FK_Subjects_Professors">
+    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="0..1" />
     <End Role="Subjects" Type="Хранилище DBcontext.Subjects" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Chairs">
+      <Principal Role="Professors">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Subjects">
-        <PropertyRef Name="ChairId" />
+        <PropertyRef Name="ProfessorId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

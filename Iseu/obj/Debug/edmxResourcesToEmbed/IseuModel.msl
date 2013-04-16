@@ -1,6 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Хранилище DBcontextContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="ADegrees">
+      <EntityTypeMapping TypeName="DBcontext.ADegree">
+        <MappingFragment StoreEntitySet="ADegrees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ATitles">
+      <EntityTypeMapping TypeName="DBcontext.ATitle">
+        <MappingFragment StoreEntitySet="ATitles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Chairs">
       <EntityTypeMapping TypeName="DBcontext.Chair">
         <MappingFragment StoreEntitySet="Chairs">
@@ -45,6 +61,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Professors">
+      <EntityTypeMapping TypeName="DBcontext.Professor">
+        <MappingFragment StoreEntitySet="Professors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ADegree" ColumnName="ADegree" />
+          <ScalarProperty Name="ATitle" ColumnName="ATitle" />
+          <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Students">
       <EntityTypeMapping TypeName="DBcontext.Student">
         <MappingFragment StoreEntitySet="Students">
@@ -72,8 +98,8 @@
       <EntityTypeMapping TypeName="DBcontext.Subject">
         <MappingFragment StoreEntitySet="Subjects">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ChairId" ColumnName="ChairId" />
           <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ProfessorId" ColumnName="ProfessorId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

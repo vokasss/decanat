@@ -11,8 +11,6 @@ namespace Iseu
 {
     using System;
     using System.Collections.Generic;
-    using System.Security.Principal;
-    using Iseu.Models;
     
     public partial class User
     {
@@ -33,48 +31,9 @@ namespace Iseu
         public string Salt { get; set; }
         public Nullable<System.DateTime> DateRegistered { get; set; }
         public Nullable<System.DateTime> DateLastVisited { get; set; }
-        
+    
         public virtual Parent Parent { get; set; }
+        public virtual Professor Professor { get; set; }
         public virtual Student Student { get; set; }
-
-        public bool IsAnounymous
-        {
-            get
-            {
-                return Id < 1;
-            }
-        }
-
-        public bool IsStudent
-        {
-            get
-            {
-                return Student != null;
-            }
-        }
-
-        public bool IsBanned
-        {
-            get
-            {
-                return Status == (int)AccountStatus.Banned;
-            }
-        }
-
-        public bool IsAdmin
-        {
-            get
-            {
-                return Role == (int)AccountRole.Admin;
-            }
-        }
-
-        public bool IsDecanat
-        {
-            get
-            {
-                return Role == (int)AccountRole.Decanat;
-            }
-        }
     }
 }

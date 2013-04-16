@@ -25,11 +25,14 @@ namespace Iseu
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<ADegree> ADegrees { get; set; }
+        public DbSet<ATitle> ATitles { get; set; }
         public DbSet<Chair> Chairs { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Parent> Parents { get; set; }
+        public DbSet<Professor> Professors { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentsView> StudentsViews { get; set; }
         public DbSet<Subject> Subjects { get; set; }

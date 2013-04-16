@@ -158,11 +158,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADegree.cs">
+      <DependentUpon>IseuModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ATitle.cs">
+      <DependentUpon>IseuModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Chair.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
@@ -171,6 +177,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Core\User.cs" />
     <Compile Include="Extensions\Entities\UsersExtension.cs" />
     <Compile Include="Extensions\Entities\EntitiesExtension.cs" />
     <Compile Include="Extensions\Routing\RouteCollectionExtension.cs" />
@@ -212,6 +219,9 @@
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Parent.cs">
+      <DependentUpon>IseuModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Professor.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
