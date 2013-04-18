@@ -1,60 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DBcontext" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="iseuModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
-    <EntitySet Name="ADegrees" EntityType="DBcontext.ADegree" />
-    <EntitySet Name="ATitles" EntityType="DBcontext.ATitle" />
-    <EntitySet Name="Chairs" EntityType="DBcontext.Chair" />
-    <EntitySet Name="Faculties" EntityType="DBcontext.Faculty" />
-    <EntitySet Name="Groups" EntityType="DBcontext.Group" />
-    <EntitySet Name="Notes" EntityType="DBcontext.Note" />
-    <EntitySet Name="Parents" EntityType="DBcontext.Parent" />
-    <EntitySet Name="Professors" EntityType="DBcontext.Professor" />
-    <EntitySet Name="Students" EntityType="DBcontext.Student" />
-    <EntitySet Name="StudentsViews" EntityType="DBcontext.StudentsView" />
-    <EntitySet Name="Subjects" EntityType="DBcontext.Subject" />
-    <EntitySet Name="sysdiagrams" EntityType="DBcontext.sysdiagram" />
-    <EntitySet Name="Users" EntityType="DBcontext.User" />
-    <AssociationSet Name="FK_Professors_ADegrees" Association="DBcontext.FK_Professors_ADegrees">
+    <EntitySet Name="ADegrees" EntityType="iseuModel.ADegree" />
+    <EntitySet Name="ATitles" EntityType="iseuModel.ATitle" />
+    <EntitySet Name="Chairs" EntityType="iseuModel.Chair" />
+    <EntitySet Name="Faculties" EntityType="iseuModel.Faculty" />
+    <EntitySet Name="Groups" EntityType="iseuModel.Group" />
+    <EntitySet Name="Notes" EntityType="iseuModel.Note" />
+    <EntitySet Name="Parents" EntityType="iseuModel.Parent" />
+    <EntitySet Name="Professors" EntityType="iseuModel.Professor" />
+    <EntitySet Name="Students" EntityType="iseuModel.Student" />
+    <EntitySet Name="StudentsViews" EntityType="iseuModel.StudentsView" />
+    <EntitySet Name="Subjects" EntityType="iseuModel.Subject" />
+    <EntitySet Name="Syllabuses" EntityType="iseuModel.Syllabus" />
+    <EntitySet Name="sysdiagrams" EntityType="iseuModel.sysdiagram" />
+    <EntitySet Name="Users" EntityType="iseuModel.User" />
+    <AssociationSet Name="FK_Professors_ADegrees" Association="iseuModel.FK_Professors_ADegrees">
       <End Role="ADegrees" EntitySet="ADegrees" />
       <End Role="Professors" EntitySet="Professors" />
     </AssociationSet>
-    <AssociationSet Name="FK_Professors_ATitles" Association="DBcontext.FK_Professors_ATitles">
+    <AssociationSet Name="FK_Professors_ATitles" Association="iseuModel.FK_Professors_ATitles">
       <End Role="ATitles" EntitySet="ATitles" />
       <End Role="Professors" EntitySet="Professors" />
     </AssociationSet>
-    <AssociationSet Name="FK_Chairs_Faculty" Association="DBcontext.FK_Chairs_Faculty">
+    <AssociationSet Name="FK_Chairs_Faculty" Association="iseuModel.FK_Chairs_Faculty">
       <End Role="Faculties" EntitySet="Faculties" />
       <End Role="Chairs" EntitySet="Chairs" />
     </AssociationSet>
-    <AssociationSet Name="FK_Groups_Chairs" Association="DBcontext.FK_Groups_Chairs">
+    <AssociationSet Name="FK_Groups_Chairs" Association="iseuModel.FK_Groups_Chairs">
       <End Role="Chairs" EntitySet="Chairs" />
       <End Role="Groups" EntitySet="Groups" />
     </AssociationSet>
-    <AssociationSet Name="FK_Professors_Chairs" Association="DBcontext.FK_Professors_Chairs">
+    <AssociationSet Name="FK_Professors_Chairs" Association="iseuModel.FK_Professors_Chairs">
       <End Role="Chairs" EntitySet="Chairs" />
       <End Role="Professors" EntitySet="Professors" />
     </AssociationSet>
-    <AssociationSet Name="FK_Students_Groups" Association="DBcontext.FK_Students_Groups">
+    <AssociationSet Name="FK_Groups_Syllabuses" Association="iseuModel.FK_Groups_Syllabuses">
+      <End Role="Syllabuses" EntitySet="Syllabuses" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_Groups" Association="iseuModel.FK_Students_Groups">
       <End Role="Groups" EntitySet="Groups" />
       <End Role="Students" EntitySet="Students" />
     </AssociationSet>
-    <AssociationSet Name="FK_Notes_Subjects" Association="DBcontext.FK_Notes_Subjects">
+    <AssociationSet Name="FK_Notes_Subjects" Association="iseuModel.FK_Notes_Subjects">
       <End Role="Subjects" EntitySet="Subjects" />
       <End Role="Notes" EntitySet="Notes" />
     </AssociationSet>
-    <AssociationSet Name="FK_Parents_Users" Association="DBcontext.FK_Parents_Users">
+    <AssociationSet Name="FK_Parents_Students" Association="iseuModel.FK_Parents_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Parents" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Parents_Users" Association="iseuModel.FK_Parents_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Parents" EntitySet="Parents" />
     </AssociationSet>
-    <AssociationSet Name="FK_Professors_Users" Association="DBcontext.FK_Professors_Users">
+    <AssociationSet Name="FK_Professors_Users" Association="iseuModel.FK_Professors_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Professors" EntitySet="Professors" />
     </AssociationSet>
-    <AssociationSet Name="FK_Subjects_Professors" Association="DBcontext.FK_Subjects_Professors">
+    <AssociationSet Name="FK_Subjects_Professors" Association="iseuModel.FK_Subjects_Professors">
       <End Role="Professors" EntitySet="Professors" />
       <End Role="Subjects" EntitySet="Subjects" />
     </AssociationSet>
-    <AssociationSet Name="FK_Students_Users" Association="DBcontext.FK_Students_Users">
+    <AssociationSet Name="FK_Students_Users" Association="iseuModel.FK_Students_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Students" EntitySet="Students" />
     </AssociationSet>
@@ -65,7 +74,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <NavigationProperty Name="Professors" Relationship="DBcontext.FK_Professors_ADegrees" FromRole="ADegrees" ToRole="Professors" />
+    <NavigationProperty Name="Professors" Relationship="iseuModel.FK_Professors_ADegrees" FromRole="ADegrees" ToRole="Professors" />
   </EntityType>
   <EntityType Name="ATitle">
     <Key>
@@ -73,7 +82,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <NavigationProperty Name="Professors" Relationship="DBcontext.FK_Professors_ATitles" FromRole="ATitles" ToRole="Professors" />
+    <NavigationProperty Name="Professors" Relationship="iseuModel.FK_Professors_ATitles" FromRole="ATitles" ToRole="Professors" />
   </EntityType>
   <EntityType Name="Chair">
     <Key>
@@ -82,9 +91,9 @@
     <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="FacultyId" Type="Int32" />
-    <NavigationProperty Name="Faculty" Relationship="DBcontext.FK_Chairs_Faculty" FromRole="Chairs" ToRole="Faculties" />
-    <NavigationProperty Name="Groups" Relationship="DBcontext.FK_Groups_Chairs" FromRole="Chairs" ToRole="Groups" />
-    <NavigationProperty Name="Professors" Relationship="DBcontext.FK_Professors_Chairs" FromRole="Chairs" ToRole="Professors" />
+    <NavigationProperty Name="Faculty" Relationship="iseuModel.FK_Chairs_Faculty" FromRole="Chairs" ToRole="Faculties" />
+    <NavigationProperty Name="Groups" Relationship="iseuModel.FK_Groups_Chairs" FromRole="Chairs" ToRole="Groups" />
+    <NavigationProperty Name="Professors" Relationship="iseuModel.FK_Professors_Chairs" FromRole="Chairs" ToRole="Professors" />
   </EntityType>
   <EntityType Name="Faculty">
     <Key>
@@ -92,7 +101,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <NavigationProperty Name="Chairs" Relationship="DBcontext.FK_Chairs_Faculty" FromRole="Faculties" ToRole="Chairs" />
+    <NavigationProperty Name="Chairs" Relationship="iseuModel.FK_Chairs_Faculty" FromRole="Faculties" ToRole="Chairs" />
   </EntityType>
   <EntityType Name="Group">
     <Key>
@@ -101,8 +110,10 @@
     <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="ChairId" Type="Int32" />
-    <NavigationProperty Name="Chair" Relationship="DBcontext.FK_Groups_Chairs" FromRole="Groups" ToRole="Chairs" />
-    <NavigationProperty Name="Students" Relationship="DBcontext.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
+    <Property Name="SyllabusId" Type="Int32" />
+    <NavigationProperty Name="Chair" Relationship="iseuModel.FK_Groups_Chairs" FromRole="Groups" ToRole="Chairs" />
+    <NavigationProperty Name="Syllabus" Relationship="iseuModel.FK_Groups_Syllabuses" FromRole="Groups" ToRole="Syllabuses" />
+    <NavigationProperty Name="Students" Relationship="iseuModel.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
   </EntityType>
   <EntityType Name="Note">
     <Key>
@@ -112,7 +123,7 @@
     <Property Name="StudentId" Type="Int32" Nullable="false" />
     <Property Name="SubjectId" Type="Int32" Nullable="false" />
     <Property Name="Note1" Type="Int32" />
-    <NavigationProperty Name="Subject" Relationship="DBcontext.FK_Notes_Subjects" FromRole="Notes" ToRole="Subjects" />
+    <NavigationProperty Name="Subject" Relationship="iseuModel.FK_Notes_Subjects" FromRole="Notes" ToRole="Subjects" />
   </EntityType>
   <EntityType Name="Parent">
     <Key>
@@ -121,7 +132,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Job" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="StudentId" Type="Int32" />
-    <NavigationProperty Name="User" Relationship="DBcontext.FK_Parents_Users" FromRole="Parents" ToRole="Users" />
+    <NavigationProperty Name="Student" Relationship="iseuModel.FK_Parents_Students" FromRole="Parents" ToRole="Students" />
+    <NavigationProperty Name="User" Relationship="iseuModel.FK_Parents_Users" FromRole="Parents" ToRole="Users" />
   </EntityType>
   <EntityType Name="Professor">
     <Key>
@@ -131,11 +143,11 @@
     <Property Name="ADegree" Type="Int32" />
     <Property Name="ATitle" Type="Int32" />
     <Property Name="ChairId" Type="Int32" />
-    <NavigationProperty Name="ADegree1" Relationship="DBcontext.FK_Professors_ADegrees" FromRole="Professors" ToRole="ADegrees" />
-    <NavigationProperty Name="ATitle1" Relationship="DBcontext.FK_Professors_ATitles" FromRole="Professors" ToRole="ATitles" />
-    <NavigationProperty Name="Chair" Relationship="DBcontext.FK_Professors_Chairs" FromRole="Professors" ToRole="Chairs" />
-    <NavigationProperty Name="User" Relationship="DBcontext.FK_Professors_Users" FromRole="Professors" ToRole="Users" />
-    <NavigationProperty Name="Subjects" Relationship="DBcontext.FK_Subjects_Professors" FromRole="Professors" ToRole="Subjects" />
+    <NavigationProperty Name="ADegree1" Relationship="iseuModel.FK_Professors_ADegrees" FromRole="Professors" ToRole="ADegrees" />
+    <NavigationProperty Name="ATitle1" Relationship="iseuModel.FK_Professors_ATitles" FromRole="Professors" ToRole="ATitles" />
+    <NavigationProperty Name="Chair" Relationship="iseuModel.FK_Professors_Chairs" FromRole="Professors" ToRole="Chairs" />
+    <NavigationProperty Name="User" Relationship="iseuModel.FK_Professors_Users" FromRole="Professors" ToRole="Users" />
+    <NavigationProperty Name="Subjects" Relationship="iseuModel.FK_Subjects_Professors" FromRole="Professors" ToRole="Subjects" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -147,8 +159,10 @@
     <Property Name="Status" Type="Int32" />
     <Property Name="Type" Type="Int32" />
     <Property Name="GroupId" Type="Int32" />
-    <NavigationProperty Name="Group" Relationship="DBcontext.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
-    <NavigationProperty Name="User" Relationship="DBcontext.FK_Students_Users" FromRole="Students" ToRole="Users" />
+    <Property Name="Characteristic" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Group" Relationship="iseuModel.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
+    <NavigationProperty Name="Parents" Relationship="iseuModel.FK_Parents_Students" FromRole="Students" ToRole="Parents" />
+    <NavigationProperty Name="User" Relationship="iseuModel.FK_Students_Users" FromRole="Students" ToRole="Users" />
   </EntityType>
   <EntityType Name="StudentsView">
     <Key>
@@ -164,11 +178,19 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="ProfessorId" Type="Int32" />
-    <NavigationProperty Name="Notes" Relationship="DBcontext.FK_Notes_Subjects" FromRole="Subjects" ToRole="Notes" />
-    <NavigationProperty Name="Professor" Relationship="DBcontext.FK_Subjects_Professors" FromRole="Subjects" ToRole="Professors" />
+    <Property Name="ProfessorId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Notes" Relationship="iseuModel.FK_Notes_Subjects" FromRole="Subjects" ToRole="Notes" />
+    <NavigationProperty Name="Professor" Relationship="iseuModel.FK_Subjects_Professors" FromRole="Subjects" ToRole="Professors" />
+  </EntityType>
+  <EntityType Name="Syllabus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Syllabus1" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Groups" Relationship="iseuModel.FK_Groups_Syllabuses" FromRole="Syllabuses" ToRole="Groups" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -201,13 +223,13 @@
     <Property Name="Salt" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="DateRegistered" Type="DateTime" Precision="7" />
     <Property Name="DateLastVisited" Type="DateTime" Precision="7" />
-    <NavigationProperty Name="Parent" Relationship="DBcontext.FK_Parents_Users" FromRole="Users" ToRole="Parents" />
-    <NavigationProperty Name="Professor" Relationship="DBcontext.FK_Professors_Users" FromRole="Users" ToRole="Professors" />
-    <NavigationProperty Name="Student" Relationship="DBcontext.FK_Students_Users" FromRole="Users" ToRole="Students" />
+    <NavigationProperty Name="Parent" Relationship="iseuModel.FK_Parents_Users" FromRole="Users" ToRole="Parents" />
+    <NavigationProperty Name="Professor" Relationship="iseuModel.FK_Professors_Users" FromRole="Users" ToRole="Professors" />
+    <NavigationProperty Name="Student" Relationship="iseuModel.FK_Students_Users" FromRole="Users" ToRole="Students" />
   </EntityType>
   <Association Name="FK_Professors_ADegrees">
-    <End Role="ADegrees" Type="DBcontext.ADegree" Multiplicity="0..1" />
-    <End Role="Professors" Type="DBcontext.Professor" Multiplicity="*" />
+    <End Role="ADegrees" Type="iseuModel.ADegree" Multiplicity="0..1" />
+    <End Role="Professors" Type="iseuModel.Professor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ADegrees">
         <PropertyRef Name="Id" />
@@ -218,8 +240,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Professors_ATitles">
-    <End Role="ATitles" Type="DBcontext.ATitle" Multiplicity="0..1" />
-    <End Role="Professors" Type="DBcontext.Professor" Multiplicity="*" />
+    <End Role="ATitles" Type="iseuModel.ATitle" Multiplicity="0..1" />
+    <End Role="Professors" Type="iseuModel.Professor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ATitles">
         <PropertyRef Name="Id" />
@@ -230,8 +252,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Chairs_Faculty">
-    <End Role="Faculties" Type="DBcontext.Faculty" Multiplicity="0..1" />
-    <End Role="Chairs" Type="DBcontext.Chair" Multiplicity="*" />
+    <End Role="Faculties" Type="iseuModel.Faculty" Multiplicity="0..1" />
+    <End Role="Chairs" Type="iseuModel.Chair" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Faculties">
         <PropertyRef Name="Id" />
@@ -242,8 +264,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Groups_Chairs">
-    <End Role="Chairs" Type="DBcontext.Chair" Multiplicity="0..1" />
-    <End Role="Groups" Type="DBcontext.Group" Multiplicity="*" />
+    <End Role="Chairs" Type="iseuModel.Chair" Multiplicity="0..1" />
+    <End Role="Groups" Type="iseuModel.Group" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Chairs">
         <PropertyRef Name="Id" />
@@ -254,8 +276,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Professors_Chairs">
-    <End Role="Chairs" Type="DBcontext.Chair" Multiplicity="0..1" />
-    <End Role="Professors" Type="DBcontext.Professor" Multiplicity="*" />
+    <End Role="Chairs" Type="iseuModel.Chair" Multiplicity="0..1" />
+    <End Role="Professors" Type="iseuModel.Professor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Chairs">
         <PropertyRef Name="Id" />
@@ -265,9 +287,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Groups_Syllabuses">
+    <End Role="Syllabuses" Type="iseuModel.Syllabus" Multiplicity="0..1" />
+    <End Role="Groups" Type="iseuModel.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Syllabuses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="SyllabusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Students_Groups">
-    <End Role="Groups" Type="DBcontext.Group" Multiplicity="0..1" />
-    <End Role="Students" Type="DBcontext.Student" Multiplicity="*" />
+    <End Role="Groups" Type="iseuModel.Group" Multiplicity="0..1" />
+    <End Role="Students" Type="iseuModel.Student" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Groups">
         <PropertyRef Name="Id" />
@@ -278,8 +312,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Notes_Subjects">
-    <End Role="Subjects" Type="DBcontext.Subject" Multiplicity="1" />
-    <End Role="Notes" Type="DBcontext.Note" Multiplicity="*" />
+    <End Role="Subjects" Type="iseuModel.Subject" Multiplicity="1" />
+    <End Role="Notes" Type="iseuModel.Note" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subjects">
         <PropertyRef Name="Id" />
@@ -289,9 +323,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Parents_Students">
+    <End Role="Students" Type="iseuModel.Student" Multiplicity="0..1" />
+    <End Role="Parents" Type="iseuModel.Parent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parents">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Parents_Users">
-    <End Role="Users" Type="DBcontext.User" Multiplicity="1" />
-    <End Role="Parents" Type="DBcontext.Parent" Multiplicity="0..1" />
+    <End Role="Users" Type="iseuModel.User" Multiplicity="1" />
+    <End Role="Parents" Type="iseuModel.Parent" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -302,8 +348,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Professors_Users">
-    <End Role="Users" Type="DBcontext.User" Multiplicity="1" />
-    <End Role="Professors" Type="DBcontext.Professor" Multiplicity="0..1" />
+    <End Role="Users" Type="iseuModel.User" Multiplicity="1" />
+    <End Role="Professors" Type="iseuModel.Professor" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -314,8 +360,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Subjects_Professors">
-    <End Role="Professors" Type="DBcontext.Professor" Multiplicity="0..1" />
-    <End Role="Subjects" Type="DBcontext.Subject" Multiplicity="*" />
+    <End Role="Professors" Type="iseuModel.Professor" Multiplicity="1" />
+    <End Role="Subjects" Type="iseuModel.Subject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Professors">
         <PropertyRef Name="Id" />
@@ -326,8 +372,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Students_Users">
-    <End Role="Users" Type="DBcontext.User" Multiplicity="1" />
-    <End Role="Students" Type="DBcontext.Student" Multiplicity="0..1" />
+    <End Role="Users" Type="iseuModel.User" Multiplicity="1" />
+    <End Role="Students" Type="iseuModel.Student" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />

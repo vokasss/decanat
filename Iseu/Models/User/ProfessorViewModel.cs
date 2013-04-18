@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Web;
+
+namespace Iseu.Models
+{
+    public class ProfessorViewModel : UserViewModel
+    {
+        public Chair Chair { get; set; }
+
+        public ADegree AcademicDegree { get; set; }
+
+        public ATitle AcademicTitle { get; set; }
+
+        public List<Subject> Subjects { get; set; }
+    }
+}

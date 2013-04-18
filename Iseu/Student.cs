@@ -14,14 +14,21 @@ namespace Iseu
     
     public partial class Student
     {
+        public Student()
+        {
+            this.Parents = new HashSet<Parent>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> EntryYear { get; set; }
         public Nullable<int> GraduationYear { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<int> Type { get; set; }
         public Nullable<int> GroupId { get; set; }
+        public string Characteristic { get; set; }
     
         public virtual Group Group { get; set; }
+        public virtual ICollection<Parent> Parents { get; set; }
         public virtual User User { get; set; }
     }
 }

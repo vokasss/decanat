@@ -11,9 +11,50 @@ namespace Iseu.Controllers
 {
     public class UserController : BaseIseuController
     {
+        #region Add
         [HttpGet]
-        public ActionResult Index(int id)
+        public ActionResult Add()
         {
+            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
+                return Error("Действие не доступно");
+
+            return View("~/views/user/add.cshtml", new UserViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult Add(UserViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                 return View("~/Views/User/add.cshtml", model);
+            }
+
+            User user = DBcontext.Users.Add(new User());
+            
+            user.Address = model.Address;
+            user.BirthDate = model.BirthDate;
+            user.CityId = 1;
+            user.Email = model.Email;
+            user.FirstName = model.FirstName;
+            user.Gender = model.Gender;
+            user.LastName = model.LastName;
+            user.MiddleName = model.MiddleName;
+            user.Phone = model.Phone;
+            user.Role = (int)AccountRole.Decanat;
+            user.Status = (int)AccountStatus.Normal;
+            user.DateRegistered = DateTime.Now;
+
+            DBcontext.SaveChanges();
+            return RedirectToRoute(UserRoutes.Index, new { id = user.Id });
+        }
+        #endregion
+
+        #region Edit
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
+                return Error("Действие не доступно");
             User user = null;
             if (!DBcontext.Users.Any(u => u.Id == id))
             {
@@ -21,80 +62,54 @@ namespace Iseu.Controllers
             }
             else
             {
-               user = DBcontext.Users.Single(u => u.Id == id);
+                user = DBcontext.Users.Single(u => u.Id == id);
             }
-            if (user.IsStudent)
-            {
-                StudentViewModel model = new StudentViewModel()
-                {
-                    Id = user.Id,
-                    GraduationYear = user.Student.GraduationYear,
-                    EntryYear = user.Student.EntryYear,
-                    Address = user.Address,
-                    BirthDate = user.BirthDate,
-                    CityId = 1,
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    Gender = user.Gender,
-                    LastName = user.LastName,
-                    MiddleName = user.MiddleName,
-                    Phone = user.Phone,
-                    Role = user.Role,
-                    Group = user.Student.Group.Title,
-                    Type = user.Student.Type,
-                    isGuest = CurrentUser.Id != user.Id,
-                    GuestIsAdmin = CurrentUser.IsAdmin,
-                    GuestIsDecanat = CurrentUser.IsDecanat
-                };
-                return View("~/Views/User/student.cshtml", model);
-            }
-            return View("~/Views/User/user.cshtml", user);
-        }
 
-        [HttpGet]
-        public ActionResult Add()
-        {
-            return View("~/Views/User/add.cshtml", new StudentViewModel());
+            UserViewModel model = new UserViewModel()
+            {
+                Id = user.Id,
+                Address = user.Address,
+                BirthDate = user.BirthDate,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                Gender = user.Gender,
+                LastName = user.LastName,
+                MiddleName = user.MiddleName,
+                Phone = user.Phone
+            };
+            return View("~/views/user/edit.cshtml", model);
         }
 
         [HttpPost]
-        public ActionResult Add(StudentViewModel model)
+        public ActionResult Edit(UserViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                 return View("~/Views/User/add.cshtml");
+                return View("~/views/user/edit.cshtml");
             }
 
-            Student newStudent = DBcontext.Students.Add(new Student());
+            User user = DBcontext.Users.Single(s => s.Id == model.Id);
+            user.Address = model.Address;
+            user.BirthDate = model.BirthDate;
+            user.CityId = 1;
+            user.Email = model.Email;
+            user.FirstName = model.FirstName;
+            user.Gender = model.Gender;
+            user.LastName = model.LastName;
+            user.MiddleName = model.MiddleName;
+            user.Phone = model.Phone;
+            Password pass = Password.Create(model.Password);
+            user.Password = pass.Hash;
+            user.Salt = pass.Salt;
 
-            newStudent.GraduationYear = model.GraduationYear;
-            newStudent.EntryYear = model.EntryYear;
-            newStudent.User.Address = model.Address;
-            newStudent.User.BirthDate = model.BirthDate;
-            newStudent.User.CityId = 1;
-            newStudent.User.Email = model.Email;
-            newStudent.User.FirstName = model.FirstName;
-            newStudent.User.Gender = model.Gender;
-            newStudent.User.LastName = model.LastName;
-            newStudent.User.MiddleName = model.MiddleName;
-            newStudent.User.Phone = model.Phone;
-            newStudent.User.Role = model.Role;
-            newStudent.Status = (int)StudyStatus.Active;
-            newStudent.User.Status = (int)AccountStatus.Normal;
-            newStudent.Type = model.Type;
-            //#TODO Parents
-            /*
-            foreach (var p in model.Parent)
-            {
-                p.StudentId = newStudent.Id;
-                DBcontext.Parents.Add(p);
-            }*/
             DBcontext.SaveChanges();
-            return RedirectToRoute(UserRoutes.Index, new { id = newStudent.Id });
+            return RedirectToRoute(UserRoutes.Index, new { id = model.Id });
         }
+        #endregion
 
+        #region Index
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Index(int id)
         {
             User user = null;
             if (!DBcontext.Users.Any(u => u.Id == id))
@@ -107,14 +122,39 @@ namespace Iseu.Controllers
             }
             if (user.IsStudent)
             {
-                StudentViewModel model = new StudentViewModel()
+                StudentViewModel studentModel = new StudentViewModel()
                 {
                     Id = user.Id,
-                    GraduationYear = user.Student.GraduationYear,
+                    Characteristic = user.Student.Characteristic,
+                    StudyStatus = user.Student.Status,
                     EntryYear = user.Student.EntryYear,
+                    GraduationYear = user.Student.GraduationYear,
                     Address = user.Address,
                     BirthDate = user.BirthDate,
-                    CityId = 1,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    Gender = user.Gender,
+                    LastName = user.LastName,
+                    MiddleName = user.MiddleName,
+                    LoginName = user.LoginName,
+                    Phone = user.Phone,
+                    Role = user.Role,
+                    Group = user.Student.Group,
+                    Parents = user.Student.Parents.ToList(),
+                    Type = user.Student.Type,
+                    isGuest = CurrentUser.Id != user.Id,
+                    GuestIsAdmin = CurrentUser.IsAdmin,
+                    GuestIsDecanat = CurrentUser.IsDecanat
+                };
+                return View("~/views/student/student.cshtml", studentModel);
+            }
+            if (user.IsProfessor)
+            {
+                ProfessorViewModel professorModel = new ProfessorViewModel()
+                {
+                    Id = user.Id,
+                    Address = user.Address,
+                    BirthDate = user.BirthDate,
                     Email = user.Email,
                     FirstName = user.FirstName,
                     Gender = user.Gender,
@@ -122,49 +162,34 @@ namespace Iseu.Controllers
                     MiddleName = user.MiddleName,
                     Phone = user.Phone,
                     Role = user.Role,
-                    Group = user.Student.Group.Title,
-                    Type = user.Student.Type,
+                    AcademicDegree = user.Professor.ADegree1,
+                    AcademicTitle = user.Professor.ATitle1,
+                    Chair = user.Professor.Chair,
+                    Subjects = user.Professor.Subjects.ToList(),
                     isGuest = CurrentUser.Id != user.Id,
                     GuestIsAdmin = CurrentUser.IsAdmin,
                     GuestIsDecanat = CurrentUser.IsDecanat
                 };
-                return View("~/Views/User/edit-student.cshtml", model);
+                return View("~/views/professor/professor.cshtml", professorModel);
             }
-            return View("~/Views/User/edit-user.cshtml", user);
-        }
-
-        [HttpPost]
-        public ActionResult Edit(StudentViewModel model)
-        {
-            if (!ModelState.IsValid)
+            UserViewModel userModel = new UserViewModel()
             {
-                return View("~/Views/User/add.cshtml");
-            }
-
-            Student student = DBcontext.Students.Single(s => s.Id == model.Id);
-            student.User.Address = model.Address;
-            student.User.BirthDate = model.BirthDate;
-            student.User.CityId = 1;
-            student.User.Email = model.Email;
-            student.User.FirstName = model.FirstName;
-            student.User.Gender = model.Gender;
-            student.User.LastName = model.LastName;
-            student.User.MiddleName = model.MiddleName;
-            student.User.Phone = model.Phone;
-            student.User.Status = (int)AccountStatus.Normal;
-            student.GraduationYear = model.GraduationYear;
-            student.EntryYear = model.EntryYear;
-            student.Status = (int)StudyStatus.Active;
-            student.Type = model.Type;
-            //#TODO Parents
-            /*foreach (var p in model.Parent)
-            {
-                Parent parent = DBcontext.Parents.Single(par => par.Id == p.Id);
-                parent.Job = p.Job;
-            }*/
-            DBcontext.SaveChanges();
-            return RedirectToRoute(UserRoutes.Index, new { id = model.Id });
+                Id = user.Id,
+                Address = user.Address,
+                BirthDate = user.BirthDate,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                Gender = user.Gender,
+                LastName = user.LastName,
+                MiddleName = user.MiddleName,
+                Phone = user.Phone,
+                Role = user.Role,
+                isGuest = CurrentUser.Id != user.Id,
+                GuestIsAdmin = CurrentUser.IsAdmin,
+                GuestIsDecanat = CurrentUser.IsDecanat
+            };
+            return View("~/views/user/user.cshtml", userModel);
         }
-
+        #endregion
     }
 }

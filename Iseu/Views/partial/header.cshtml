@@ -1,5 +1,5 @@
 ﻿@model HeaderModel
-
+ <a href="@Url.RouteUrl(HomeRoutes.Home)">Вернуться на главную</a>
 @if(Model.User.IsAnounymous)
 {
 <form action="@Url.RouteUrl(HomeRoutes.Login)" method="post">
@@ -17,11 +17,14 @@
         <p>@ViewBag.Message</p>
     }
     <a href="@Url.RouteUrl(HomeRoutes.Register)">Регистрация</a>
-</form>
+    </form>
 }
 else
 {
-<a href="@Url.RouteUrl(UserRoutes.Edit, new { id = Model.User.Id })">Настройки аккаунта</a>
-<a href="@Url.RouteUrl(HomeRoutes.Logout)">Выйти</a>
+    @Model.User.FullName
+    if (Model.User.IsAdmin || Model.User.IsDecanat)
+    {
+        <a href="@Url.RouteUrl(UserRoutes.Edit, new { id = Model.User.Id })">Настройки аккаунта</a>
+    }
+    <a href="@Url.RouteUrl(HomeRoutes.Logout)">Выйти</a>
 }
- 

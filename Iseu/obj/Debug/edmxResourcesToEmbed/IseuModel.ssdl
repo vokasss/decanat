@@ -1,60 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Хранилище DBcontext" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="Хранилище DBcontextContainer">
-    <EntitySet Name="ADegrees" EntityType="Хранилище DBcontext.ADegrees" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ATitles" EntityType="Хранилище DBcontext.ATitles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Chairs" EntityType="Хранилище DBcontext.Chairs" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Faculties" EntityType="Хранилище DBcontext.Faculties" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Groups" EntityType="Хранилище DBcontext.Groups" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Notes" EntityType="Хранилище DBcontext.Notes" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Parents" EntityType="Хранилище DBcontext.Parents" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Professors" EntityType="Хранилище DBcontext.Professors" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Students" EntityType="Хранилище DBcontext.Students" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="StudentsViews" EntityType="Хранилище DBcontext.StudentsViews" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Subjects" EntityType="Хранилище DBcontext.Subjects" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="sysdiagrams" EntityType="Хранилище DBcontext.sysdiagrams" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Users" EntityType="Хранилище DBcontext.Users" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Chairs_Faculty" Association="Хранилище DBcontext.FK_Chairs_Faculty">
+<Schema Namespace="Хранилище iseuModel" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Хранилище iseuModelContainer">
+    <EntitySet Name="ADegrees" EntityType="Хранилище iseuModel.ADegrees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ATitles" EntityType="Хранилище iseuModel.ATitles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Chairs" EntityType="Хранилище iseuModel.Chairs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Faculties" EntityType="Хранилище iseuModel.Faculties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Groups" EntityType="Хранилище iseuModel.Groups" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Notes" EntityType="Хранилище iseuModel.Notes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Parents" EntityType="Хранилище iseuModel.Parents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Professors" EntityType="Хранилище iseuModel.Professors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Students" EntityType="Хранилище iseuModel.Students" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudentsViews" EntityType="Хранилище iseuModel.StudentsViews" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Subjects" EntityType="Хранилище iseuModel.Subjects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Syllabuses" EntityType="Хранилище iseuModel.Syllabuses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="Хранилище iseuModel.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="Хранилище iseuModel.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Chairs_Faculty" Association="Хранилище iseuModel.FK_Chairs_Faculty">
       <End Role="Faculties" EntitySet="Faculties" />
       <End Role="Chairs" EntitySet="Chairs" />
     </AssociationSet>
-    <AssociationSet Name="FK_Groups_Chairs" Association="Хранилище DBcontext.FK_Groups_Chairs">
+    <AssociationSet Name="FK_Groups_Chairs" Association="Хранилище iseuModel.FK_Groups_Chairs">
       <End Role="Chairs" EntitySet="Chairs" />
       <End Role="Groups" EntitySet="Groups" />
     </AssociationSet>
-    <AssociationSet Name="FK_Notes_Subjects" Association="Хранилище DBcontext.FK_Notes_Subjects">
+    <AssociationSet Name="FK_Groups_Syllabuses" Association="Хранилище iseuModel.FK_Groups_Syllabuses">
+      <End Role="Syllabuses" EntitySet="Syllabuses" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notes_Subjects" Association="Хранилище iseuModel.FK_Notes_Subjects">
       <End Role="Subjects" EntitySet="Subjects" />
       <End Role="Notes" EntitySet="Notes" />
     </AssociationSet>
-    <AssociationSet Name="FK_Parents_Users" Association="Хранилище DBcontext.FK_Parents_Users">
+    <AssociationSet Name="FK_Parents_Students" Association="Хранилище iseuModel.FK_Parents_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Parents" EntitySet="Parents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Parents_Users" Association="Хранилище iseuModel.FK_Parents_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Parents" EntitySet="Parents" />
     </AssociationSet>
-    <AssociationSet Name="FK_Professors_ADegrees" Association="Хранилище DBcontext.FK_Professors_ADegrees">
+    <AssociationSet Name="FK_Professors_ADegrees" Association="Хранилище iseuModel.FK_Professors_ADegrees">
       <End Role="ADegrees" EntitySet="ADegrees" />
       <End Role="Professors" EntitySet="Professors" />
     </AssociationSet>
-    <AssociationSet Name="FK_Professors_ATitles" Association="Хранилище DBcontext.FK_Professors_ATitles">
+    <AssociationSet Name="FK_Professors_ATitles" Association="Хранилище iseuModel.FK_Professors_ATitles">
       <End Role="ATitles" EntitySet="ATitles" />
       <End Role="Professors" EntitySet="Professors" />
     </AssociationSet>
-    <AssociationSet Name="FK_Professors_Chairs" Association="Хранилище DBcontext.FK_Professors_Chairs">
+    <AssociationSet Name="FK_Professors_Chairs" Association="Хранилище iseuModel.FK_Professors_Chairs">
       <End Role="Chairs" EntitySet="Chairs" />
       <End Role="Professors" EntitySet="Professors" />
     </AssociationSet>
-    <AssociationSet Name="FK_Professors_Users" Association="Хранилище DBcontext.FK_Professors_Users">
+    <AssociationSet Name="FK_Professors_Users" Association="Хранилище iseuModel.FK_Professors_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Professors" EntitySet="Professors" />
     </AssociationSet>
-    <AssociationSet Name="FK_Students_Groups" Association="Хранилище DBcontext.FK_Students_Groups">
+    <AssociationSet Name="FK_Students_Groups" Association="Хранилище iseuModel.FK_Students_Groups">
       <End Role="Groups" EntitySet="Groups" />
       <End Role="Students" EntitySet="Students" />
     </AssociationSet>
-    <AssociationSet Name="FK_Students_Users" Association="Хранилище DBcontext.FK_Students_Users">
+    <AssociationSet Name="FK_Students_Users" Association="Хранилище iseuModel.FK_Students_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Students" EntitySet="Students" />
     </AssociationSet>
-    <AssociationSet Name="FK_Subjects_Professors" Association="Хранилище DBcontext.FK_Subjects_Professors">
+    <AssociationSet Name="FK_Subjects_Professors" Association="Хранилище iseuModel.FK_Subjects_Professors">
       <End Role="Professors" EntitySet="Professors" />
       <End Role="Subjects" EntitySet="Subjects" />
     </AssociationSet>
@@ -95,6 +104,7 @@
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="nvarchar(max)" />
     <Property Name="ChairId" Type="int" />
+    <Property Name="SyllabusId" Type="int" />
   </EntityType>
   <EntityType Name="Notes">
     <Key>
@@ -132,6 +142,7 @@
     <Property Name="Status" Type="int" />
     <Property Name="Type" Type="int" />
     <Property Name="GroupId" Type="int" />
+    <Property Name="Characteristic" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="StudentsViews">
     <Key>
@@ -147,9 +158,16 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Title" Type="nvarchar(max)" />
-    <Property Name="ProfessorId" Type="int" />
+    <Property Name="ProfessorId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Syllabuses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Syllabus" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -184,8 +202,8 @@
     <Property Name="DateLastVisited" Type="datetime2" />
   </EntityType>
   <Association Name="FK_Chairs_Faculty">
-    <End Role="Faculties" Type="Хранилище DBcontext.Faculties" Multiplicity="0..1" />
-    <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="*" />
+    <End Role="Faculties" Type="Хранилище iseuModel.Faculties" Multiplicity="0..1" />
+    <End Role="Chairs" Type="Хранилище iseuModel.Chairs" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Faculties">
         <PropertyRef Name="Id" />
@@ -196,8 +214,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Groups_Chairs">
-    <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="0..1" />
-    <End Role="Groups" Type="Хранилище DBcontext.Groups" Multiplicity="*" />
+    <End Role="Chairs" Type="Хранилище iseuModel.Chairs" Multiplicity="0..1" />
+    <End Role="Groups" Type="Хранилище iseuModel.Groups" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Chairs">
         <PropertyRef Name="Id" />
@@ -207,9 +225,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Groups_Syllabuses">
+    <End Role="Syllabuses" Type="Хранилище iseuModel.Syllabuses" Multiplicity="0..1" />
+    <End Role="Groups" Type="Хранилище iseuModel.Groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Syllabuses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="SyllabusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Notes_Subjects">
-    <End Role="Subjects" Type="Хранилище DBcontext.Subjects" Multiplicity="1" />
-    <End Role="Notes" Type="Хранилище DBcontext.Notes" Multiplicity="*" />
+    <End Role="Subjects" Type="Хранилище iseuModel.Subjects" Multiplicity="1" />
+    <End Role="Notes" Type="Хранилище iseuModel.Notes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subjects">
         <PropertyRef Name="Id" />
@@ -219,9 +249,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Parents_Students">
+    <End Role="Students" Type="Хранилище iseuModel.Students" Multiplicity="0..1" />
+    <End Role="Parents" Type="Хранилище iseuModel.Parents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parents">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Parents_Users">
-    <End Role="Users" Type="Хранилище DBcontext.Users" Multiplicity="1" />
-    <End Role="Parents" Type="Хранилище DBcontext.Parents" Multiplicity="0..1" />
+    <End Role="Users" Type="Хранилище iseuModel.Users" Multiplicity="1" />
+    <End Role="Parents" Type="Хранилище iseuModel.Parents" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -232,8 +274,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Professors_ADegrees">
-    <End Role="ADegrees" Type="Хранилище DBcontext.ADegrees" Multiplicity="0..1" />
-    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="*" />
+    <End Role="ADegrees" Type="Хранилище iseuModel.ADegrees" Multiplicity="0..1" />
+    <End Role="Professors" Type="Хранилище iseuModel.Professors" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ADegrees">
         <PropertyRef Name="Id" />
@@ -244,8 +286,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Professors_ATitles">
-    <End Role="ATitles" Type="Хранилище DBcontext.ATitles" Multiplicity="0..1" />
-    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="*" />
+    <End Role="ATitles" Type="Хранилище iseuModel.ATitles" Multiplicity="0..1" />
+    <End Role="Professors" Type="Хранилище iseuModel.Professors" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ATitles">
         <PropertyRef Name="Id" />
@@ -256,8 +298,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Professors_Chairs">
-    <End Role="Chairs" Type="Хранилище DBcontext.Chairs" Multiplicity="0..1" />
-    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="*" />
+    <End Role="Chairs" Type="Хранилище iseuModel.Chairs" Multiplicity="0..1" />
+    <End Role="Professors" Type="Хранилище iseuModel.Professors" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Chairs">
         <PropertyRef Name="Id" />
@@ -268,8 +310,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Professors_Users">
-    <End Role="Users" Type="Хранилище DBcontext.Users" Multiplicity="1" />
-    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="0..1" />
+    <End Role="Users" Type="Хранилище iseuModel.Users" Multiplicity="1" />
+    <End Role="Professors" Type="Хранилище iseuModel.Professors" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -280,8 +322,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Students_Groups">
-    <End Role="Groups" Type="Хранилище DBcontext.Groups" Multiplicity="0..1" />
-    <End Role="Students" Type="Хранилище DBcontext.Students" Multiplicity="*" />
+    <End Role="Groups" Type="Хранилище iseuModel.Groups" Multiplicity="0..1" />
+    <End Role="Students" Type="Хранилище iseuModel.Students" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Groups">
         <PropertyRef Name="Id" />
@@ -292,8 +334,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Students_Users">
-    <End Role="Users" Type="Хранилище DBcontext.Users" Multiplicity="1" />
-    <End Role="Students" Type="Хранилище DBcontext.Students" Multiplicity="0..1" />
+    <End Role="Users" Type="Хранилище iseuModel.Users" Multiplicity="1" />
+    <End Role="Students" Type="Хранилище iseuModel.Students" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Users">
         <PropertyRef Name="Id" />
@@ -304,8 +346,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Subjects_Professors">
-    <End Role="Professors" Type="Хранилище DBcontext.Professors" Multiplicity="0..1" />
-    <End Role="Subjects" Type="Хранилище DBcontext.Subjects" Multiplicity="*" />
+    <End Role="Professors" Type="Хранилище iseuModel.Professors" Multiplicity="1" />
+    <End Role="Subjects" Type="Хранилище iseuModel.Subjects" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Professors">
         <PropertyRef Name="Id" />

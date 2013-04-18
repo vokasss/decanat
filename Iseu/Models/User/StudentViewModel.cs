@@ -8,28 +8,29 @@ using System.Web;
 
 namespace Iseu.Models
 {
-    public class StudentViewModel : GuestableModel
+    public class StudentViewModel : UserViewModel
     {
-        public int Id { get; set; }
+        [Display(Name = "Группа")]
+        public string GroupTitle { get; set; }
+
+        public Group Group { get; set; }
+
+        public Nullable<int> StudyStatus { get; set; }
+
+        [Display(Name = "Год поступления")]
         public Nullable<int> EntryYear { get; set; }
+
         public Nullable<int> GraduationYear { get; set; }
+
         public Nullable<int> Type { get; set; }
-        public int Role { get; set; }
-        public string Group { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public Nullable<int> Gender { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string MiddleName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public Nullable<int> CityId { get; set; }
-        public string Address { get; set; }
-        public List<Parent> Parent { get; set; }
-        public bool isNew { get; set; }
-        public StudentViewModel()
-        {
-            isNew = true;
-        }
+
+        public List<Parent> Parents { get; set; }
+
+        [Display(Name = "Характеристика")]
+        public string Characteristic { get; set; }
+
+        [Display(Name = "Номер зачетки")]
+        public string LoginName { get; set; }
+       
     }
 }

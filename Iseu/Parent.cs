@@ -18,6 +18,7 @@ namespace Iseu
         public string Job { get; set; }
         public Nullable<int> StudentId { get; set; }
     
+        public virtual Student Student { get; set; }
         public virtual User User { get; set; }
     }
 }

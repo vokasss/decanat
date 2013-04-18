@@ -36,6 +36,7 @@ namespace Iseu
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentsView> StudentsViews { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Syllabus> Syllabuses { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
     }

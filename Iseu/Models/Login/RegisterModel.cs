@@ -25,7 +25,6 @@ namespace Iseu.Models
 
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Электронная почта")]
-        [Compare("Email", ErrorMessage = "Не правильный Email")]
         public string Email { get; set; }
 
         [Required]

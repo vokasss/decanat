@@ -177,7 +177,12 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\ProfessorController.cs" />
+    <Compile Include="Controllers\SyllabusController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Core\User.cs" />
+    <Compile Include="Core\Core.cs" />
     <Compile Include="Extensions\Entities\UsersExtension.cs" />
     <Compile Include="Extensions\Entities\EntitiesExtension.cs" />
     <Compile Include="Extensions\Routing\RouteCollectionExtension.cs" />
@@ -209,12 +214,13 @@
     <Compile Include="Models\Login\RegisterModel.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Login\Password.cs" />
-    <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\Partial\HeaderModel.cs" />
     <Compile Include="Models\Partial\GuestableModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
     <Compile Include="Models\User\StudentViewModel.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />
+    <Compile Include="Models\User\NotesViewModel.cs" />
+    <Compile Include="Models\User\ProfessorViewModel.cs" />
     <Compile Include="Note.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
@@ -232,6 +238,9 @@
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Subject.cs">
+      <DependentUpon>IseuModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Syllabus.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
@@ -296,7 +305,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="favicon.jpg" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="IseuModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -315,21 +324,22 @@
       <DependentUpon>IseuModel.edmx</DependentUpon>
       <LastGenOutput>IseuModel.cs</LastGenOutput>
     </Content>
-    <None Include="Scripts\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.1.0.debug.js" />
-    <Content Include="Scripts\knockout-2.1.0.js" />
-    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <None Include="Resources\Scripts\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Resources\Scripts\jquery-1.7.1.js" />
+    <Content Include="Resources\Scripts\jquery-1.7.1.min.js" />
+    <None Include="Resources\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Resources\Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Resources\Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Resources\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Resources\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Resources\Scripts\jquery.validate.js" />
+    <Content Include="Resources\Scripts\jquery.validate.min.js" />
+    <Content Include="Resources\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Resources\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Resources\Scripts\knockout-2.1.0.debug.js" />
+    <Content Include="Resources\Scripts\knockout-2.1.0.js" />
+    <Content Include="Resources\Scripts\modernizr-2.5.3.js" />
+    <Content Include="Resources\Styles\index.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -338,30 +348,20 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\_references.js" />
-    <Content Include="Images\accent.png" />
-    <Content Include="Images\bullet.png" />
-    <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Resources\Scripts\_references.js" />
+    <Content Include="Resources\Images\accent.png" />
+    <Content Include="Resources\Images\bullet.png" />
+    <Content Include="Resources\Images\heroAccent.png" />
+    <Content Include="Resources\Images\orderedList0.png" />
+    <Content Include="Resources\Images\orderedList1.png" />
+    <Content Include="Resources\Images\orderedList2.png" />
+    <Content Include="Resources\Images\orderedList3.png" />
+    <Content Include="Resources\Images\orderedList4.png" />
+    <Content Include="Resources\Images\orderedList5.png" />
+    <Content Include="Resources\Images\orderedList6.png" />
+    <Content Include="Resources\Images\orderedList7.png" />
+    <Content Include="Resources\Images\orderedList8.png" />
+    <Content Include="Resources\Images\orderedList9.png" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -371,10 +371,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\register.cshtml" />
     <Content Include="Views\Login\login.cshtml" />
-    <Content Include="Views\User\add.cshtml" />
-    <Content Include="Views\User\student.cshtml" />
     <Content Include="Views\Home\search.cshtml" />
-    <Content Include="Views\User\list-students.cshtml" />
     <Content Include="Views\partial\header.cshtml" />
     <Content Include="Views\partial\footer.cshtml" />
     <Content Include="Views\partial\sidebar.cshtml" />
@@ -382,13 +379,27 @@
     <Content Include="Views\Errors\404.cshtml" />
     <Content Include="Views\Errors\Error.cshtml" />
     <Content Include="Views\User\user.cshtml" />
-    <Content Include="Views\User\edit-user.cshtml" />
-    <Content Include="Views\User\edit-student.cshtml" />
+    <Content Include="Views\User\edit.cshtml" />
+    <Content Include="Views\Shared\_Layout1.cshtml" />
+    <Content Include="Views\Student\add.cshtml" />
+    <Content Include="Views\Student\edit.cshtml" />
+    <Content Include="Views\Student\list-students.cshtml" />
+    <Content Include="Views\Student\notes.cshtml" />
+    <Content Include="Views\Student\student.cshtml" />
+    <Content Include="Views\Professor\add.cshtml" />
+    <Content Include="Views\Professor\edit.cshtml" />
+    <Content Include="Views\Professor\professor.cshtml" />
+    <Content Include="Views\Syllabus\add.cshtml" />
+    <Content Include="Views\Syllabus\edit.cshtml" />
+    <Content Include="Views\Subject\subject.cshtml" />
+    <Content Include="Views\Subject\add.cshtml" />
+    <Content Include="Views\Subject\edit.cshtml" />
+    <Content Include="Views\User\add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Attributes\" />
     <Folder Include="Filters\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>

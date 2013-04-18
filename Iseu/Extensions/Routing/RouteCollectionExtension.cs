@@ -13,7 +13,7 @@ namespace Iseu.Routing
         {
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional });
 
-            routes.MapRoute(HomeRoutes.Home, "Home/Index");
+            routes.MapRoute(HomeRoutes.Home, String.Empty);
             routes.MapRoute(HomeRoutes.Login, "Home/Login");
             routes.MapRoute(HomeRoutes.Register, "Home/Register");
             routes.MapRoute(HomeRoutes.Logout, "Home/Logout");
@@ -29,7 +29,23 @@ namespace Iseu.Routing
             routes.MapRoute(AdminRoutes.Ban, "Admin/Ban/{id}");
             routes.MapRoute(AdminRoutes.Unban, "Admin/Unban/{id}");
 
-           
+            routes.MapRoute(StudentRoutes.Add, "Student/Add");
+            routes.MapRoute(StudentRoutes.Edit, "Student/Edit/{id}");
+            routes.MapRoute(StudentRoutes.Notes, "Student/Notes/{id}");
+            routes.MapRoute(StudentRoutes.Activate, "Student/Activate/{id}");
+            routes.MapRoute(StudentRoutes.Graduate, "Student/Graduate/{id}");
+            routes.MapRoute(StudentRoutes.Expelle, "Student/Expelle/{id}");
+
+            routes.MapRoute(ProfessorRoutes.Add, "Professor/Add");
+            routes.MapRoute(ProfessorRoutes.Edit, "Professor/Edit/{id}");
+
+            routes.MapRoute(SyllabusRoutes.Index, "Syllabus/{id}");
+            routes.MapRoute(SyllabusRoutes.Add, "Syllabus/Add");
+            routes.MapRoute(SyllabusRoutes.Edit, "Syllabus/Edit/{id}");
+
+            routes.MapRoute(SubjectRoutes.Subject, "Subject/{id}");
+            routes.MapRoute(SubjectRoutes.Add, "Subject/Add");
+            routes.MapRoute(SubjectRoutes.Edit, "Subject/Edit/{id}");
         }
     }
 
@@ -41,23 +57,53 @@ namespace Iseu.Routing
         public const string Logout = "iseu.home-logout";
     }
 
+    public class AdminRoutes
+    {
+        public const string Ban = "iseu.admin-ban";
+        public const string Unban = "iseu.admin-unban";
+        public const string SetRole = "iseu.admin-set";
+    }
+
+    public class SyllabusRoutes
+    {
+        public const string Index = "iseu.syllabus";
+        public const string Add = "iseu.syllabus-add";
+        public const string Edit = "iseu.syllabus-edit";
+    }
+
     public class SearchRoutes
     {
-        public static string Index = "iseu.search";
-        public static string Group = "iseu.search-group";
+        public const string Index = "iseu.search";
+        public const string Group = "iseu.search-group";
     }
 
     public class UserRoutes
     {
-        public static string Index = "iseu.index";
-        public static string Edit = "iseu.user-edit";
-        public static string Add = "iseu.user-add";
+        public const string Index = "iseu.index";
+        public const string Add = "iseu.user-add";
+        public const string Edit = "iseu.user-edit";
     }
 
-    public class AdminRoutes
+    public class StudentRoutes
     {
-        public static string Ban = "iseu.admin-ban";
-        public static string Unban = "iseu.admin-unban";
-        public static string SetRole = "iseu.admin-set";
+        public const string Add = "iseu.student-add";
+        public const string Edit = "iseu.student-edit";
+        public const string Notes = "iseu.student-notes";
+        public const string Graduate = "iseu.student-graduate";
+        public const string Expelle = "iseu.student-expelle";
+        public const string Activate = "iseu.student-activate";
+    }
+
+    public class ProfessorRoutes
+    {
+        public const string Add = "iseu.professor-add";
+        public const string Edit = "iseu.professor-edit";
+    }
+
+    public class SubjectRoutes
+    {
+        public const string Subject = "iseu.subject";
+        public const string Add = "iseu.subject-add";
+        public const string Edit = "iseu.subject-edit";
     }
 }

@@ -1,0 +1,16 @@
+﻿@model ProfessorViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>ФИО: @Model.FullName</div>
+<div>Дата рождения: @Model.BirthDate</div>
+<div>Степень: @Model.AcademicDegree.Title</div>
+<div>Звание: @Model.AcademicTitle.Title</div>
+<div>
+    @foreach (var disc in Model.Subjects)
+    { <br /><a href="@Url.RouteUrl(SubjectRoutes.Subject, new { id = disc.Id })">@disc.Title</a>}
+</div>
+@if(Model.GuestIsDecanat || Model.GuestIsAdmin)
+{
+<a href="@Url.RouteUrl(ProfessorRoutes.Edit, new { id = Model.Id })">Редактировать</a>
+}

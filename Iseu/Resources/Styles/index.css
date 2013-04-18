@@ -1,0 +1,138 @@
+/* content */
+.text-header {
+	font-size: 12pt;
+	font-family: Tahoma;
+	color: #000000;
+	font-weight: bold;
+}
+.icon
+{
+	padding: 5px;
+}
+.iconleft
+{
+	padding-right: 5px;
+}
+.iconfoot
+{
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.pageContent {
+	padding-bottom: 10px;
+	color: #626262;
+	font-size: 8pt;
+	font-family: Tahoma;
+}
+.pageContent a { 
+    font-size: 8pt;
+	color: #767676;
+	font-family: Tahoma;
+	}
+/* top elements */
+.company {
+	font-size: 14pt;
+	font-family: Arial; 
+	color: #FFFFFF;
+	font-family: Arial;
+}
+.slogan {
+	font-size: 10pt;
+	font-family: Tahoma; 
+	color: #ffffff;
+}
+.copyright {
+	font-size: 8pt;
+	font-family: Tahoma;
+	color: #4C4C4C;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+.logo{
+	font-size: 8pt;
+	padding-right: 10px;
+	padding-left: 10px;
+	font-family: Arial;
+	color: #ffffff;
+	font-weight: bold;
+}
+.logoword{
+	font-size: 12pt;
+	padding-right: 436px;
+	padding-left: 130px;
+	font-weight: bold;
+	color: #245281;
+	font-family: Arial;
+}
+/*main menu*/
+.menu {
+	font-size: 8pt;
+	font-family: Arial;
+	color: #2B2C2E;
+	text-decoration: none;
+	text-align: center;
+	padding-bottom: 2px;
+	padding-top: 2px;
+	font-weight: bold;
+}
+.amenu {
+	font-size: 8pt;
+	font-family: Arial;
+	color: #2B2C2E;
+	text-align: center;
+	padding-bottom: 2px;
+	padding-top: 2px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+/*submenu*/
+.submenutable{
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.asubmenu {
+	font-size: 8pt;
+	color: #000000;
+	font-family: Tahoma;
+	text-decoration: underline;
+}
+.submenu {
+	font-size: 8pt;
+	color: #000000;
+	font-family: Tahoma;
+	text-decoration: none;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.bot_menu {
+	font-size: 8pt;
+	font-family: Tahoma;
+	color: #ffffff;
+	text-decoration: none;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+.bmenu {
+	font-size: 8pt;
+	font-family: Tahoma;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: bold;
+}
+.abmenu {
+	font-size: 8pt;
+	font-family: Tahoma;
+	color: #ffffff;
+	text-decoration: underline;
+	font-weight: bold;
+}
+.menuline {
+	color: #D6D6D6;
+	text-decoration: none;
+	background-color: #D6D6D6;
+	width: 1px;
+	background-repeat: repeat-y;
+	background-position: center top;
+}

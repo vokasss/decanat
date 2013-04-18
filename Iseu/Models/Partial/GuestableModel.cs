@@ -11,7 +11,10 @@ namespace Iseu.Models
     public class GuestableModel {
 
         public bool isGuest { get; set; }
+
         public bool GuestIsAdmin { get; set; }
+
         public bool GuestIsDecanat { get; set; }
+        
     }
 }

@@ -21,7 +21,7 @@ namespace Iseu
     
         public int Id { get; set; }
         public string Title { get; set; }
-        public Nullable<int> ProfessorId { get; set; }
+        public int ProfessorId { get; set; }
     
         public virtual ICollection<Note> Notes { get; set; }
         public virtual Professor Professor { get; set; }

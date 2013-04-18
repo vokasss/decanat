@@ -14,7 +14,7 @@ namespace Iseu.Controllers
     {
         public ActionResult Index()
         {
-            return View("~/Views/Home/Index.cshtml", new IndexModel() { User = CurrentUser });
+            return View("~/Views/Home/Index.cshtml");
         }
 
         public ActionResult Header()
@@ -35,14 +35,24 @@ namespace Iseu.Controllers
             User user = null;
 
             if (DBcontext.Users.Any(u => u.LoginName == model.LoginName && u.Status != (int)AccountStatus.Banned))
-                user = DBcontext.Users.Single(u => u.LoginName == model.LoginName);
+            {
+                user = DBcontext.Users.Single(u => u.LoginName == model.LoginName); 
+            }
             else
             {
                 ViewBag.Failed = 1;
                 ViewBag.Message = "Пользователя с таким логином не существует";
                 return RedirectToRoute(HomeRoutes.Home);
             }
-            if(user.Password != Password.CalculateHash(user.Salt, model.Password))
+
+            if (String.IsNullOrEmpty(user.Password))
+            {
+                var pass = Password.Create(model.Password);
+                user.Password = pass.Hash;
+                user.Salt = pass.Salt;
+                DBcontext.SaveChanges();
+            }
+            else if (user.Password != Password.CalculateHash(user.Salt, model.Password))
             {
                 ViewBag.Failed = 1;
                 ViewBag.Message = "Неверный пароль";
@@ -80,6 +90,9 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
+            CurrentUser.DateLastVisited = DateTime.Now;
+            DBcontext.SaveChanges();
+
             FormsAuthentication.SignOut();
 
             return RedirectToRoute(HomeRoutes.Home);

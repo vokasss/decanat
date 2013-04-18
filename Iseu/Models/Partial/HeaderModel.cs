@@ -11,5 +11,6 @@ namespace Iseu.Models
     public class HeaderModel {
 
         public User User { get; set; }
+
     }
 }

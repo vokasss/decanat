@@ -1,0 +1,38 @@
+﻿@model StudentViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form action="@(Url.RouteUrl(UserRoutes.Add))" method="post">
+    @Html.TextBoxFor(m=>m.LastName)
+    @Html.TextBoxFor(m=>m.FirstName)
+    @Html.TextBoxFor(m=>m.MiddleName)
+    @Html.TextBoxFor(m=>m.BirthDate)
+    @Html.DropDownListFor(m=>m.Gender, UsersExtension.GetGenders())
+    @Html.TextBoxFor(m=>m.Phone)
+    @Html.TextBoxFor(m=>m.Address)
+    @Html.TextBoxFor(m=>m.Email)
+    @Html.TextBoxFor(m=>m.Group)
+    @Html.TextBoxFor(m=>m.EntryYear)
+    @Html.TextBoxFor(m=>m.GraduationYear)
+    
+    Отец
+    @Html.TextBoxFor(m=>m.Parents[0].User.LastName)
+    @Html.TextBoxFor(m=>m.Parents[0].User.FirstName)
+    @Html.TextBoxFor(m=>m.Parents[0].User.MiddleName)
+    @Html.TextBoxFor(m=>m.Parents[0].User.BirthDate)
+    @Html.DropDownListFor(m=>m.Parents[0].User.Gender, UsersExtension.GetGenders())
+    @Html.TextBoxFor(m=>m.Parents[0].User.Phone)
+    @Html.TextBoxFor(m=>m.Parents[0].User.Address)
+    @Html.TextBoxFor(m=>m.Parents[0].User.Email)
+
+    Мать
+    @Html.TextBoxFor(m=>m.Parents[1].User.LastName)
+    @Html.TextBoxFor(m=>m.Parents[1].User.FirstName)
+    @Html.TextBoxFor(m=>m.Parents[1].User.MiddleName)
+    @Html.TextBoxFor(m=>m.Parents[1].User.BirthDate)
+    @Html.DropDownListFor(m=>m.Parents[1].User.Gender, UsersExtension.GetGenders())
+    @Html.TextBoxFor(m=>m.Parents[1].User.Phone)
+    @Html.TextBoxFor(m=>m.Parents[1].User.Address)
+    @Html.TextBoxFor(m=>m.Parents[1].User.Email)
+    <input type="submit" value="Сохранить"/>
+</form>

@@ -13,7 +13,7 @@ namespace Iseu.Models
 
     public enum AccountRole 
     { 
-        Normal,
+        Student,
         Professor,
         Decanat,
         Admin

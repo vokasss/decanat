@@ -1,0 +1,7 @@
+﻿@model SyllabusModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form action="@Url.RouteUrl(SyllabusRoutes.Edit, new { id = Model.Id })" method="post">
+    <input type="submit" value="Сохранить"/>
+</form>

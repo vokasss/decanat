@@ -4,31 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="83dcfab65c6147b29ccf0c607100157e" Name="Диаграмма1">
-        <EntityTypeShape EntityType="DBcontext.ADegree" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.ATitle" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.Chair" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.Faculty" Width="1.5" PointX="1.5" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.Group" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.Note" Width="1.5" PointX="7.5" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.Parent" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.Professor" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.Student" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.StudentsView" Width="1.5" PointX="5.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.Subject" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.sysdiagram" Width="1.5" PointX="7.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBcontext.User" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
-        <AssociationConnector Association="DBcontext.FK_Professors_ADegrees" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Professors_ATitles" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Chairs_Faculty" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Groups_Chairs" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Professors_Chairs" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Students_Groups" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Notes_Subjects" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Parents_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Professors_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Subjects_Professors" ManuallyRouted="false" />
-        <AssociationConnector Association="DBcontext.FK_Students_Users" ManuallyRouted="false" />
+      <Diagram DiagramId="b5e1853adc814d3f856185aeb50e9bed" Name="Диаграмма1">
+        <EntityTypeShape EntityType="iseuModel.ADegree" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.ATitle" Width="1.5" PointX="3.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Chair" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Faculty" Width="1.5" PointX="1.5" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Group" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Note" Width="1.5" PointX="10.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Parent" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Professor" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Student" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.StudentsView" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Subject" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Syllabus" Width="1.5" PointX="1.5" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.User" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="iseuModel.FK_Professors_ADegrees" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Professors_ATitles" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Chairs_Faculty" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Groups_Chairs" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Professors_Chairs" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Groups_Syllabuses" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Students_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Notes_Subjects" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Parents_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Parents_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Professors_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Subjects_Professors" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Students_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

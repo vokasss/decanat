@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Хранилище DBcontextContainer" CdmEntityContainer="Entities">
+  <EntityContainerMapping StorageEntityContainer="Хранилище iseuModelContainer" CdmEntityContainer="Entities">
     <EntitySetMapping Name="ADegrees">
-      <EntityTypeMapping TypeName="DBcontext.ADegree">
+      <EntityTypeMapping TypeName="iseuModel.ADegree">
         <MappingFragment StoreEntitySet="ADegrees">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -10,7 +10,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ATitles">
-      <EntityTypeMapping TypeName="DBcontext.ATitle">
+      <EntityTypeMapping TypeName="iseuModel.ATitle">
         <MappingFragment StoreEntitySet="ATitles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -18,7 +18,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Chairs">
-      <EntityTypeMapping TypeName="DBcontext.Chair">
+      <EntityTypeMapping TypeName="iseuModel.Chair">
         <MappingFragment StoreEntitySet="Chairs">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -27,7 +27,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Faculties">
-      <EntityTypeMapping TypeName="DBcontext.Faculty">
+      <EntityTypeMapping TypeName="iseuModel.Faculty">
         <MappingFragment StoreEntitySet="Faculties">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -35,16 +35,17 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Groups">
-      <EntityTypeMapping TypeName="DBcontext.Group">
+      <EntityTypeMapping TypeName="iseuModel.Group">
         <MappingFragment StoreEntitySet="Groups">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+          <ScalarProperty Name="SyllabusId" ColumnName="SyllabusId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Notes">
-      <EntityTypeMapping TypeName="DBcontext.Note">
+      <EntityTypeMapping TypeName="iseuModel.Note">
         <MappingFragment StoreEntitySet="Notes">
           <ScalarProperty Name="StudentId" ColumnName="StudentId" />
           <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
@@ -53,7 +54,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Parents">
-      <EntityTypeMapping TypeName="DBcontext.Parent">
+      <EntityTypeMapping TypeName="iseuModel.Parent">
         <MappingFragment StoreEntitySet="Parents">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Job" ColumnName="Job" />
@@ -62,7 +63,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Professors">
-      <EntityTypeMapping TypeName="DBcontext.Professor">
+      <EntityTypeMapping TypeName="iseuModel.Professor">
         <MappingFragment StoreEntitySet="Professors">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ADegree" ColumnName="ADegree" />
@@ -72,7 +73,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Students">
-      <EntityTypeMapping TypeName="DBcontext.Student">
+      <EntityTypeMapping TypeName="iseuModel.Student">
         <MappingFragment StoreEntitySet="Students">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="EntryYear" ColumnName="EntryYear" />
@@ -80,11 +81,12 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="StudentsViews">
-      <EntityTypeMapping TypeName="DBcontext.StudentsView">
+      <EntityTypeMapping TypeName="iseuModel.StudentsView">
         <MappingFragment StoreEntitySet="StudentsViews">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="EntryYear" ColumnName="EntryYear" />
@@ -95,7 +97,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Subjects">
-      <EntityTypeMapping TypeName="DBcontext.Subject">
+      <EntityTypeMapping TypeName="iseuModel.Subject">
         <MappingFragment StoreEntitySet="Subjects">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -103,8 +105,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Syllabuses">
+      <EntityTypeMapping TypeName="iseuModel.Syllabus">
+        <MappingFragment StoreEntitySet="Syllabuses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Syllabus1" ColumnName="Syllabus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="DBcontext.sysdiagram">
+      <EntityTypeMapping TypeName="iseuModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -115,7 +125,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="DBcontext.User">
+      <EntityTypeMapping TypeName="iseuModel.User">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
