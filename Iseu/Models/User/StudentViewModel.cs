@@ -15,6 +15,10 @@ namespace Iseu.Models
 
         public Group Group { get; set; }
 
+        [Display(Name = "Форма обучения")]
+        public Nullable<int> PaymentStatus { get; set; }
+
+        [Display(Name = "Статус")]
         public Nullable<int> StudyStatus { get; set; }
 
         [Display(Name = "Год поступления")]
@@ -22,13 +26,12 @@ namespace Iseu.Models
 
         public Nullable<int> GraduationYear { get; set; }
 
-        public Nullable<int> Type { get; set; }
-
         public List<Parent> Parents { get; set; }
 
         [Display(Name = "Характеристика")]
         public string Characteristic { get; set; }
 
+        [Required]
         [Display(Name = "Номер зачетки")]
         public string LoginName { get; set; }
        

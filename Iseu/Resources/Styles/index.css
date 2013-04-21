@@ -1,138 +1,66 @@
-/* content */
-.text-header {
-	font-size: 12pt;
-	font-family: Tahoma;
-	color: #000000;
-	font-weight: bold;
+body{
+    margin: 0 auto;
+	max-width:1680px;
+    font-family:TimesNewRoman, Verdana, Arial, Helvetica, sans-serif;
+    font-size:14px;
+    font-weight:bolder;
+	background:url("../Images/background.jpg") repeat-y;
 }
-.icon
-{
-	padding: 5px;
+.main-container {
+margin: 0 auto;
+padding: 0 40px;
 }
-.iconleft
-{
-	padding-right: 5px;
+i{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:12px;
 }
-.iconfoot
-{
-	padding-right: 5px;
-	padding-left: 5px;
+h1{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:17px;
 }
-.pageContent {
-	padding-bottom: 10px;
-	color: #626262;
-	font-size: 8pt;
-	font-family: Tahoma;
+h2{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size:15px;
 }
-.pageContent a { 
-    font-size: 8pt;
-	color: #767676;
-	font-family: Tahoma;
-	}
-/* top elements */
-.company {
-	font-size: 14pt;
-	font-family: Arial; 
-	color: #FFFFFF;
-	font-family: Arial;
+
+.title{
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-size:26px;
+    text-indent:0px;
+	margin-bottom:40px;
+    color:rgba(3, 26, 0, 0.72);
+    text-align:center;
 }
-.slogan {
-	font-size: 10pt;
-	font-family: Tahoma; 
-	color: #ffffff;
+a{color:#000000; text-decoration: underline;font-family: Verdana, Arial, Helvetica, sans-serif; font-size:14px;}
+a:hover{color:#083b00; text-decoration: none}
+
+input[type="text"],input[type="password"]{
+	padding:0 5px;
+    border: solid #054900 1px;
+	height:20px;
+    font-size:14px;
+    font-weight:bolder;
+    color:#000000;
+	background: rgba(244, 255, 208, 0.55);
 }
-.copyright {
-	font-size: 8pt;
-	font-family: Tahoma;
-	color: #4C4C4C;
-	padding-right: 20px;
-	padding-bottom: 20px;
-	padding-left: 20px;
-	padding-top: 20px;
+button{
+    border: solid #054900 1px;
+    font-size:14px;
+    font-weight:bold;
+    color:#000000;
+    cursor:pointer;
+	background: rgba(244, 255, 208, 0.55);
 }
-.logo{
-	font-size: 8pt;
-	padding-right: 10px;
-	padding-left: 10px;
-	font-family: Arial;
-	color: #ffffff;
-	font-weight: bold;
+.search_b{
+	width:125px;
+	height:75px;
+    font-size:22px;
 }
-.logoword{
-	font-size: 12pt;
-	padding-right: 436px;
-	padding-left: 130px;
-	font-weight: bold;
-	color: #245281;
-	font-family: Arial;
+#search_t{
+	padding:0 25px;
+	width:500px;
+	height:71px;
+	font-size:22px;
+	margin-top: 150px;
 }
-/*main menu*/
-.menu {
-	font-size: 8pt;
-	font-family: Arial;
-	color: #2B2C2E;
-	text-decoration: none;
-	text-align: center;
-	padding-bottom: 2px;
-	padding-top: 2px;
-	font-weight: bold;
-}
-.amenu {
-	font-size: 8pt;
-	font-family: Arial;
-	color: #2B2C2E;
-	text-align: center;
-	padding-bottom: 2px;
-	padding-top: 2px;
-	font-weight: bold;
-	text-decoration: underline;
-}
-/*submenu*/
-.submenutable{
-	padding-top: 30px;
-	padding-bottom: 30px;
-}
-.asubmenu {
-	font-size: 8pt;
-	color: #000000;
-	font-family: Tahoma;
-	text-decoration: underline;
-}
-.submenu {
-	font-size: 8pt;
-	color: #000000;
-	font-family: Tahoma;
-	text-decoration: none;
-	padding-top: 2px;
-	padding-bottom: 2px;
-}
-.bot_menu {
-	font-size: 8pt;
-	font-family: Tahoma;
-	color: #ffffff;
-	text-decoration: none;
-	padding-right: 10px;
-	padding-left: 10px;
-}
-.bmenu {
-	font-size: 8pt;
-	font-family: Tahoma;
-	color: #ffffff;
-	text-decoration: none;
-	font-weight: bold;
-}
-.abmenu {
-	font-size: 8pt;
-	font-family: Tahoma;
-	color: #ffffff;
-	text-decoration: underline;
-	font-weight: bold;
-}
-.menuline {
-	color: #D6D6D6;
-	text-decoration: none;
-	background-color: #D6D6D6;
-	width: 1px;
-	background-repeat: repeat-y;
-	background-position: center top;
-}
+

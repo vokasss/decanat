@@ -11,10 +11,13 @@ namespace Iseu.Models
     {
         public static User New(RegisterModel model)
         {
-            Password pass = Password.Create(model.Password);
             User ret = new User();
-            ret.FirstName = ret.LoginName = model.LoginName;
+            ret.FirstName = model.FirstName;
+            ret.LastName = model.LastName;
+            ret.LoginName = model.LoginName;
+            ret.BirthDate = model.BirthDate;
             ret.DateLastVisited = ret.DateRegistered = DateTime.Now;
+            Password pass = Password.Create(model.Password);
             ret.Password = pass.Hash;
             ret.Salt = pass.Salt;
             ret.Email = model.Email;
@@ -47,39 +50,90 @@ namespace Iseu.Models
             return items;
         }
 
-        public static List<SelectListItem> GetAcademicTitles()
+        public static List<SelectListItem> GetPayments()
         {
             var items = new List<SelectListItem>();
             var listItem = new SelectListItem
             {
-                Value = ((int)Models.Gender.Male).ToString(),
-                Text = "М"
+                Value = ((int)Models.PaymentStatus.Free).ToString(),
+                Text = "Бесплатно"
             };
             items.Add(listItem);
             listItem = new SelectListItem
             {
-                Value = ((int)Models.Gender.Female).ToString(),
-                Text = "Ж"
+                Value = ((int)Models.PaymentStatus.Paid).ToString(),
+                Text = "Платно"
             };
             items.Add(listItem);
+            return items;
+        }
+
+        public static List<SelectListItem> GetStudyStatus()
+        {
+            var items = new List<SelectListItem>();
+            var listItem = new SelectListItem
+            {
+                Value = ((int)Models.StudyStatus.Active).ToString(),
+                Text = "Учится"
+            };
+            items.Add(listItem);
+            listItem = new SelectListItem
+            {
+                Value = ((int)Models.StudyStatus.Expelled).ToString(),
+                Text = "Отчислен"
+            };
+            items.Add(listItem);
+            listItem = new SelectListItem
+            {
+                Value = ((int)Models.StudyStatus.Graduated).ToString(),
+                Text = "Окончил"
+            };
+            items.Add(listItem);
+            return items;
+        }
+
+        public static List<SelectListItem> GetAcademicTitles()
+        {
+            var items = new List<SelectListItem>();
+            var DBcontext = new Entities();
+            foreach (var item in DBcontext.ATitles)
+            {
+                items.Add(new SelectListItem
+            {
+                Value = (item.Id).ToString(),
+                Text = item.Title
+            });
+            }
             return items;
         }
 
         public static List<SelectListItem> GetAcademicDegrees()
         {
             var items = new List<SelectListItem>();
-            var listItem = new SelectListItem
+            var DBcontext = new Entities();
+            foreach (var item in DBcontext.ADegrees)
             {
-                Value = ((int)Models.Gender.Male).ToString(),
-                Text = "М"
-            };
-            items.Add(listItem);
-            listItem = new SelectListItem
+                items.Add(new SelectListItem
+                {
+                    Value = (item.Id).ToString(),
+                    Text = item.Title
+                });
+            }
+            return items;
+        }
+
+        public static List<SelectListItem> GetChairs()
+        {
+            var items = new List<SelectListItem>();
+            var DBcontext = new Entities();
+            foreach (var item in DBcontext.Chairs)
             {
-                Value = ((int)Models.Gender.Female).ToString(),
-                Text = "Ж"
-            };
-            items.Add(listItem);
+                items.Add(new SelectListItem
+                {
+                    Value = (item.Id).ToString(),
+                    Text = item.Title
+                });
+            }
             return items;
         }
     }

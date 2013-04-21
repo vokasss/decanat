@@ -2,6 +2,38 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<form action="@(Url.RouteUrl(UserRoutes.Add))" method="post">
-    <input type="submit" value="Сохранить"/>
+<form action="@(Url.RouteUrl(UserRoutes.Add))" method="post" id="add">
+   <div class="title">Добавление пользователя</div>
+        <div id="user">
+            @Html.LabelFor(m => m.LastName)
+            @Html.TextBoxFor(m => m.LastName)
+            @Html.ValidationMessageFor(m => m.LastName)
+
+            @Html.LabelFor(m => m.FirstName)
+            @Html.TextBoxFor(m => m.FirstName)
+            @Html.ValidationMessageFor(m => m.FirstName)
+
+            @Html.LabelFor(m => m.MiddleName)
+            @Html.TextBoxFor(m => m.MiddleName)
+
+            @Html.LabelFor(m => m.BirthDate)
+            @Html.TextBoxFor(m => m.BirthDate)
+            @Html.ValidationMessageFor(m => m.BirthDate)
+
+            @Html.LabelFor(m => m.Gender)
+            @Html.DropDownListFor(m => m.Gender, UsersExtension.GetGenders())
+
+            @Html.LabelFor(m => m.Phone)
+            @Html.TextBoxFor(m => m.Phone)
+            @Html.ValidationMessageFor(m => m.Phone)
+
+            @Html.LabelFor(m => m.Address)
+            @Html.TextBoxFor(m => m.Address)
+            @Html.ValidationMessageFor(m => m.Address)
+
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
+            <button type="submit">Сохранить</button>
+        </div>
 </form>

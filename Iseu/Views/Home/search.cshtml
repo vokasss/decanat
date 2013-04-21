@@ -5,11 +5,18 @@
 }
 
 @section main{
-
-<form action="@Url.RouteUrl(SearchRoutes.Index)" method="get">
-    <input type="text" name="Pattern" value="@Model.Pattern"/>
-    <button type="submit">Найти</button>
-</form>
-@Html.Partial("~/views/student/list-students.cshtml", Model.Result)
-
+    <div class="main-container">
+        <form action="@Url.RouteUrl(SearchRoutes.Index)" method="get" style="margin:0 25%">
+            <input id="search_t" type="text" name="Pattern" value="@Model.Pattern" placeholder="Поиск студентов . . ." />
+            <button class="search_b" type="submit">Найти</button>
+        </form>
+        @if (Model.Result.Count > 0)
+        {
+            @Html.Partial("~/views/student/list-students.cshtml", Model.Result)
+        }
+        else
+        {
+            <div>По данному запросу ничего не найдено, попробуйте еще раз</div>
+        }
+    </div>
 }

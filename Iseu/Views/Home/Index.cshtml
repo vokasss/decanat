@@ -1,9 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h5>Поиск студентов:</h5>
-<form action="@Url.RouteUrl(SearchRoutes.Index)" method="get">
-    <input type="text" name="Pattern"/>
-    <button type="submit">Найти</button>
-</form>
-
+<div class="main-container">
+    <form action="@Url.RouteUrl(SearchRoutes.Index)" method="get" style="margin:0 25%">
+        <input id="search_t" type="text" name="Pattern" placeholder="Поиск студентов . . ." />
+        <button class="search_b" type="submit">Найти</button>
+    </form>
+</div>

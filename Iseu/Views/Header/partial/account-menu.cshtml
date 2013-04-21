@@ -1,0 +1,11 @@
+﻿@model User
+<div class="header-account">
+    <ul class="inline">
+        <li>
+            <a class="item_menu" href="@Url.RouteUrl(UserRoutes.Index, new { id = Model.Id })">Личный кабинет</a></li>
+        <li>
+            <a class="item_menu" href="@Url.RouteUrl(HomeRoutes.Logout)">Выйти</a></li>
+         <li>
+            <a class="item_menu fullname" href="@Url.RouteUrl(UserRoutes.Index, new { id = Model.Id })">@Model.FullName</a></li>
+    </ul>
+</div>

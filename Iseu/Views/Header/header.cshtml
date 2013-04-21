@@ -1,0 +1,25 @@
+﻿@model HeaderModel
+<div class="header">
+    <a style="float:left" class="item_menu" href="@Url.RouteUrl(HomeRoutes.Home)">Главная</a>
+    @if (Model.User.IsAnounymous)
+    {
+       
+        <form action="@Url.RouteUrl(HomeRoutes.Login)" method="post" class="header-login-form">
+            <label for="login-name">Логин</label>
+            <input id="login-name" type="text" name="LoginName" />
+            <label for="login-pass">Пароль</label>
+            <input id="login-pass" type="password" name="Password" />
+            <button id="login-enter" type="submit">Войти</button>
+            @if (ViewBag.Failed == 1)
+            {
+                <p>@ViewBag.Message</p>
+            }
+            <a class="b-modal" href="@Url.RouteUrl(HomeRoutes.Register)">Регистрация</a>
+        </form>
+    
+    }
+    else
+    {
+        @Html.Partial("~/Views/Header/partial/account-menu.cshtml", Model.User)
+    }
+</div>

@@ -14,19 +14,19 @@ namespace Iseu.Controllers
     {
         public ActionResult Index()
         {
-            return View("~/Views/Home/Index.cshtml");
+            return View("~/views/home/index.cshtml");
         }
 
         public ActionResult Header()
         {
-            return PartialView("~/Views/partial/header.cshtml", new HeaderModel() { User = CurrentUser });
+            return PartialView("~/views/header/header.cshtml", new HeaderModel() { User = CurrentUser });
         }
 
         #region Registration and Login
         [HttpGet]
         public ActionResult Login()
         {
-            return View("~/Views/Login/login.cshtml");
+            return View("~/views/login/login.cshtml");
         }
 
         [HttpPost]
@@ -60,7 +60,7 @@ namespace Iseu.Controllers
             }
             if (ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(model.LoginName, model.RememberMe);
+                FormsAuthentication.SetAuthCookie(model.LoginName, true);
             }
             ViewBag.Failed = 0;
             return RedirectToRoute(HomeRoutes.Home);
@@ -69,15 +69,22 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View("~/Views/Login/register.cshtml");
+            if (Request.IsAjaxRequest())
+            {
+                return JsonGet(new { view = RenderString("~/Views/Login/register.cshtml", new RegisterModel()) });
+            }
+            return View("~/Views/Login/register.cshtml", new RegisterModel());
         }
 
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
-            if(model.Password != model.ConfirmPassword || !ModelState.IsValid)
+            if(model.Password != model.ConfirmPassword || !ModelState.IsValid || DBcontext.Users.Any(u=>u.LoginName == model.LoginName))
             {
-                ViewBag.Failed = 1;
+                if (Request.IsAjaxRequest())
+                {
+                    return JsonGet(new { view = RenderString("~/Views/Login/register.cshtml", model), success = 0 });
+                }
                 return View("~/Views/Login/register.cshtml", model);
             }
             var user = (UsersExtension.New(model));

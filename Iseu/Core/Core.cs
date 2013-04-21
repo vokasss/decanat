@@ -15,7 +15,11 @@ namespace Iseu
         { 
             get
             {
-                return !String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name) ? new Entities().Users.Single(u => u.LoginName == HttpContext.Current.User.Identity.Name) : UsersExtension.Fictive;
+                return !String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name) ? 
+                    new Entities().Users.Any(u => u.LoginName == HttpContext.Current.User.Identity.Name) ?
+                    new Entities().Users.Single(u => u.LoginName == HttpContext.Current.User.Identity.Name) : 
+                    UsersExtension.Fictive :
+                    UsersExtension.Fictive;
             }
         }
     }

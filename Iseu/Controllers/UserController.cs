@@ -33,7 +33,6 @@ namespace Iseu.Controllers
             
             user.Address = model.Address;
             user.BirthDate = model.BirthDate;
-            user.CityId = 1;
             user.Email = model.Email;
             user.FirstName = model.FirstName;
             user.Gender = model.Gender;
@@ -91,7 +90,6 @@ namespace Iseu.Controllers
             User user = DBcontext.Users.Single(s => s.Id == model.Id);
             user.Address = model.Address;
             user.BirthDate = model.BirthDate;
-            user.CityId = 1;
             user.Email = model.Email;
             user.FirstName = model.FirstName;
             user.Gender = model.Gender;
@@ -141,7 +139,7 @@ namespace Iseu.Controllers
                     Role = user.Role,
                     Group = user.Student.Group,
                     Parents = user.Student.Parents.ToList(),
-                    Type = user.Student.Type,
+                    PaymentStatus = user.Student.Type,
                     isGuest = CurrentUser.Id != user.Id,
                     GuestIsAdmin = CurrentUser.IsAdmin,
                     GuestIsDecanat = CurrentUser.IsDecanat

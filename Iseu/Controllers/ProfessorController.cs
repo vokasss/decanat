@@ -29,23 +29,25 @@ namespace Iseu.Controllers
             {
                 return View("~/views/professor/add.cshtml", model);
             }
-
+            User newUser = DBcontext.Users.Add(new User());
             Professor professor = DBcontext.Professors.Add(new Professor());
-            professor.User.CityId = 1;
-            professor.User.Email = model.Email;
-            professor.User.BirthDate = model.BirthDate;
-            professor.User.Gender = model.Gender;
-            professor.User.FirstName = model.FirstName;
-            professor.User.LastName = model.LastName;
-            professor.User.MiddleName = model.MiddleName;
-            professor.User.Phone = model.Phone;
-            professor.User.Address = model.Address;
-            professor.ChairId = model.Chair.Id;
-            professor.ADegree = model.AcademicDegree.Id;
-            professor.ATitle = model.AcademicTitle.Id;
-            professor.User.Role = (int)AccountRole.Professor;
-            professor.User.Status = (int)AccountStatus.Normal;
-            professor.User.DateRegistered = DateTime.Now;
+
+            professor.ChairId = model.ChairId;
+            professor.ADegree = model.AcademicDegreeId;
+            professor.ATitle = model.AcademicTitleId;
+            newUser.CityId = 1;
+            newUser.Email = model.Email;
+            newUser.BirthDate = model.BirthDate;
+            newUser.Gender = model.Gender;
+            newUser.FirstName = model.FirstName;
+            newUser.LastName = model.LastName;
+            newUser.MiddleName = model.MiddleName;
+            newUser.Phone = model.Phone;
+            newUser.Address = model.Address;
+            newUser.Role = (int)AccountRole.Professor;
+            newUser.Status = (int)AccountStatus.Normal;
+            newUser.DateRegistered = DateTime.Now;
+            professor.User = newUser;
 
             DBcontext.SaveChanges();
             return RedirectToRoute(UserRoutes.Index, new { id = professor.Id });
@@ -79,9 +81,9 @@ namespace Iseu.Controllers
                 Address = professor.User.Address,
                 Email = professor.User.Email,
                 Phone = professor.User.Phone,
-                AcademicDegree = professor.ADegree1,
-                AcademicTitle = professor.ATitle1,
-                Chair = professor.Chair
+                AcademicDegreeId = professor.ADegree.Value,
+                AcademicTitleId = professor.ATitle.Value,
+                ChairId = professor.Chair.Id
             };
 
             return View("~/views/professor/edit.cshtml", model);
@@ -105,9 +107,9 @@ namespace Iseu.Controllers
             professor.User.MiddleName = model.MiddleName;
             professor.User.Phone = model.Phone;
             professor.User.Address = model.Address;
-            professor.ChairId = model.Chair.Id;
-            professor.ADegree = model.AcademicDegree.Id;
-            professor.ATitle = model.AcademicTitle.Id;
+            professor.ChairId = model.ChairId;
+            professor.ADegree = model.AcademicDegreeId;
+            professor.ATitle = model.AcademicTitleId;
 
             DBcontext.SaveChanges();
             return RedirectToRoute(UserRoutes.Index, new { id = model.Id });

@@ -1,23 +1,42 @@
 ﻿@model RegisterModel
-@if (ViewBag.Failed == 1)
-{
-    <div>Укажите обязательные поля</div> 
-}
-<form action="@Url.RouteUrl(HomeRoutes.Register)" method="post">
-    @Html.LabelFor(m => m.LoginName)
-    @Html.TextBoxFor(m => m.LoginName)
-    @Html.ValidationMessageFor(m=>m.LoginName)
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email)
-    @Html.ValidationMessageFor(m=>m.Email)
-    @Html.LabelFor(m => m.Password)
-    @Html.TextBoxFor(m => m.Password, new { type="password" })
-    @Html.ValidationMessageFor(m=>m.Password)
-    @Html.LabelFor(m => m.ConfirmPassword)
-    @Html.TextBoxFor(m => m.ConfirmPassword, new { type="password" })
-    @Html.ValidationMessageFor(m=>m.ConfirmPassword)
-    <br />
-    <br />
-    <button type="submit">Зарегистрироваться</button>
-    <a href="@Url.RouteUrl(Iseu.Routing.HomeRoutes.Home)">Отмена</a>
-</form>
+    <form action="@Url.RouteUrl(HomeRoutes.Register)" method="post" id="register-form">
+        <p>Регистрация</p>
+        @Html.LabelFor(m => m.LastName)
+        <br />
+        @Html.TextBoxFor(m => m.LastName)
+        @Html.ValidationMessageFor(m => m.LastName)
+        <br />
+        @Html.LabelFor(m => m.FirstName)
+        <br />
+        @Html.TextBoxFor(m => m.FirstName)
+        @Html.ValidationMessageFor(m => m.FirstName)
+         <br />
+        @Html.LabelFor(m => m.Email)
+        <br />
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+        <br />
+        @Html.LabelFor(m => m.BirthDate)
+        <br />
+        @Html.TextBoxFor(m => m.BirthDate)
+        @Html.ValidationMessageFor(m => m.BirthDate)
+        <br />
+        @Html.LabelFor(m => m.LoginName)
+        <br />
+        @Html.TextBoxFor(m => m.LoginName)
+        @Html.ValidationMessageFor(m => m.LoginName)
+        <br />
+        @Html.LabelFor(m => m.Password)
+        <br />
+        @Html.TextBoxFor(m => m.Password, new { type = "password" })
+        @Html.ValidationMessageFor(m => m.Password)
+        <br />
+        @Html.LabelFor(m => m.ConfirmPassword)
+        <br />
+        @Html.TextBoxFor(m => m.ConfirmPassword, new { type = "password" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        <br />
+        <br />
+        <button id="register-submit" type="submit">Регистрация</button>
+        <button class="b-modal_close arcticmodal-close">Отмена</button>
+    </form>

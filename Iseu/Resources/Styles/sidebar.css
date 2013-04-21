@@ -1,0 +1,18 @@
+.sidebar-menu {
+	width: 13%;
+	top: 80px;
+	position: fixed;
+	border: solid #054900 1px;
+	background: rgba(244, 255, 208, 0.55);
+	padding:5px;
+}
+	.sidebar-menu a {
+		text-decoration: none;
+	}
+
+	.sidebar-menu li {
+		
+	margin-left:-35px;
+	margin-top:20px;
+	list-style-type:none;
+	}

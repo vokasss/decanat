@@ -29,26 +29,28 @@ namespace Iseu.Controllers
             {
                 return View("~/views/student/add.cshtml", model);
             }
-
+            User newUser = DBcontext.Users.Add(new User());
             Student newStudent = DBcontext.Students.Add(new Student());
-            var group = DBcontext.Groups.Single(g=>g.Title == model.GroupTitle);
+            var group = DBcontext.Groups.Any(g=>g.Title == model.GroupTitle) ? DBcontext.Groups.Single(g=>g.Title == model.GroupTitle):DBcontext.Groups.Create();
             newStudent.Group = group;
-            newStudent.User.CityId = 1;
-            newStudent.User.Email = model.Email;
-            newStudent.User.BirthDate = model.BirthDate;
-            newStudent.User.Gender = model.Gender;
-            newStudent.User.FirstName = model.FirstName;
-            newStudent.User.LastName = model.LastName;
-            newStudent.User.MiddleName = model.MiddleName;
-            newStudent.User.LoginName = model.LoginName;
-            newStudent.User.Phone = model.Phone;
-            newStudent.User.Address = model.Address;
             newStudent.EntryYear = model.EntryYear;
-            newStudent.User.Role = (int)AccountRole.Student;
-            newStudent.User.Status = (int)AccountStatus.Normal;
             newStudent.Status = (int)StudyStatus.Active;
-            newStudent.Type = model.Type;
-            newStudent.User.DateRegistered = DateTime.Now;
+            newStudent.Type = model.PaymentStatus;
+            newStudent.Characteristic = model.Characteristic;
+            newStudent.User = newUser;
+            newUser.Email = model.Email;
+            newUser.BirthDate = model.BirthDate;
+            newUser.Gender = model.Gender;
+            newUser.FirstName = model.FirstName;
+            newUser.LastName = model.LastName;
+            newUser.MiddleName = model.MiddleName;
+            newUser.LoginName = model.LoginName;
+            newUser.Phone = model.Phone;
+            newUser.Address = model.Address;
+            newUser.Role = (int)AccountRole.Student;
+            newUser.Status = (int)AccountStatus.Normal;
+            newUser.DateRegistered = DateTime.Now;
+            newStudent.User = newUser;
             foreach (var p in model.Parents)
             {
                 p.StudentId = newStudent.Id;
@@ -90,7 +92,7 @@ namespace Iseu.Controllers
                 Phone = student.User.Phone,
                 GroupTitle = student.User.Student.Group.Title,
                 EntryYear = student.EntryYear,
-                Type = student.User.Student.Type,
+                PaymentStatus = student.User.Student.Type,
                 Characteristic = student.Characteristic,
                 Parents = student.Parents.ToList()
             };
@@ -107,9 +109,8 @@ namespace Iseu.Controllers
             }
 
             Student newStudent = DBcontext.Students.Single(s => s.Id == model.Id);
-            var group = DBcontext.Groups.Single(g => g.Title == model.GroupTitle);
+            var group = DBcontext.Groups.Any(g => g.Title == model.GroupTitle) ? DBcontext.Groups.Single(g => g.Title == model.GroupTitle) : DBcontext.Groups.Create();
             newStudent.Group = group;
-            newStudent.User.CityId = 1;
             newStudent.User.Email = model.Email;
             newStudent.User.BirthDate = model.BirthDate;
             newStudent.User.Gender = model.Gender;
@@ -120,7 +121,7 @@ namespace Iseu.Controllers
             newStudent.User.Phone = model.Phone;
             newStudent.User.Address = model.Address;
             newStudent.EntryYear = model.EntryYear;
-            newStudent.Type = model.Type;
+            newStudent.Type = model.PaymentStatus;
             newStudent.Parents = model.Parents;
 
             DBcontext.SaveChanges();

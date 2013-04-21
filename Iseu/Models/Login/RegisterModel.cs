@@ -9,11 +9,23 @@ namespace Iseu.Models
     public class RegisterModel
     {
         [Required]
+        [Display(Name = "Имя")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Фамилия")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Дата рождения")]
+        public DateTime BirthDate { get; set; }
+
+        [Required]
         [Display(Name = "Логин")]
         public string LoginName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Значение \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Значение \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 4)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
@@ -26,23 +38,5 @@ namespace Iseu.Models
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Электронная почта")]
         public string Email { get; set; }
-
-        [Required]
-        [Display(Name = "Имя")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [Display(Name = "Фамилия")]
-        public string LastName { get; set; }
-
-        [Display(Name = "Отчество")]
-        public string MiddleName { get; set; }
-
-        [Display(Name = "Дата рождения")]
-        public DateTime BirthDate { get; set; }
-
-        [Required]
-        [Display(Name = "Телефон")]
-        public string Phone { get; set; }
     }
 }

@@ -1,0 +1,83 @@
+div.sdmenu {
+	width: 189px;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	/*padding-bottom: 10px;*/
+	/*background: url(bottom.gif) no-repeat  right bottom;*/
+	color: #fff;
+}
+div.sdmenu div {
+    /*background-color:black;*/
+	/*background: url(title.gif) repeat-x;*/
+	overflow: hidden;
+}
+div.sdmenu div:first-child {
+	/*background: url(toptitle.gif) no-repeat;*/
+}
+div.sdmenu div.collapsed {
+	/*height: auto;*/
+	/*height: 40px;*/
+
+}
+div.sdmenu div span {
+	display: block;
+	/*padding: 5px 25px;*/
+	font-weight: bold;
+	color: #3b3b3b;
+	/*background: url(expanded.gif) no-repeat 10px center;*/
+	cursor: pointer;
+	border-bottom: 1px solid #ddd;
+    /*margin:0 3 0 7px;*/
+    background:url('iseu7_79.gif') repeat-x bottom #dbefff;
+    padding:0 2px 0 5px;
+}
+div.sdmenu div.collapsed span {
+    background:url('http://www.iseu.by/online/layouts/40/images/ot3/2.gif') no-repeat right center white;
+    /*background:none white;*/
+	/*background-image: url(collapsed.gif);*/
+}
+div.sdmenu div a {
+	/*padding: 5px 10px;*/
+	/*background: #eee;*/
+	display: block;
+	border-bottom: 1px solid #0e9a00;
+	/*color: #066;*/
+}
+div.sdmenu div a.current {
+	/*background : #ccc;*/
+}
+
+
+
+div.sdmenu div a:link{
+    color: #333333;
+    text-decoration: none;
+    font-weight:normal;
+    font-size:11px;
+    font-family:Tahoma,Arial,Verdana,Helvetica,sans-serif;
+    /*margin:0 3 0 15px;*/
+    padding: 0 2px 0 10px;
+}
+
+div.sdmenu div a:visited{
+    color: #333333;
+    text-decoration: none;
+    font-weight:normal;
+    font-size:11px;
+    font-family:Tahoma,Arial,Verdana,Helvetica,sans-serif;
+    /*margin:0 3 0 15px;*/
+    padding: 0 2px 0 10px;
+}
+
+div.sdmenu div a:hover {
+	/*background : #066 url(linkarrow.gif) no-repeat right center;*/
+	/*color: #3b3b3b;*/
+    color: #0e9300;
+    text-decoration: none;
+    font-weight:normal;
+    font-size:11px;
+    font-family:Tahoma,Arial,Verdana,Helvetica,sans-serif;
+    /*margin:0 3 0 15px*/
+    padding: 0 2px 0 10px;
+}
+
