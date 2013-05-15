@@ -9,6 +9,7 @@
     <EntitySet Name="Notes" EntityType="iseuModel.Note" />
     <EntitySet Name="Parents" EntityType="iseuModel.Parent" />
     <EntitySet Name="Professors" EntityType="iseuModel.Professor" />
+    <EntitySet Name="Specialities" EntityType="iseuModel.Speciality" />
     <EntitySet Name="Students" EntityType="iseuModel.Student" />
     <EntitySet Name="StudentsViews" EntityType="iseuModel.StudentsView" />
     <EntitySet Name="Subjects" EntityType="iseuModel.Subject" />
@@ -27,16 +28,16 @@
       <End Role="Faculties" EntitySet="Faculties" />
       <End Role="Chairs" EntitySet="Chairs" />
     </AssociationSet>
-    <AssociationSet Name="FK_Groups_Chairs" Association="iseuModel.FK_Groups_Chairs">
-      <End Role="Chairs" EntitySet="Chairs" />
-      <End Role="Groups" EntitySet="Groups" />
-    </AssociationSet>
     <AssociationSet Name="FK_Professors_Chairs" Association="iseuModel.FK_Professors_Chairs">
       <End Role="Chairs" EntitySet="Chairs" />
       <End Role="Professors" EntitySet="Professors" />
     </AssociationSet>
-    <AssociationSet Name="FK_Groups_Syllabuses" Association="iseuModel.FK_Groups_Syllabuses">
-      <End Role="Syllabuses" EntitySet="Syllabuses" />
+    <AssociationSet Name="FK_Specialities_Chairs" Association="iseuModel.FK_Specialities_Chairs">
+      <End Role="Chairs" EntitySet="Chairs" />
+      <End Role="Specialities" EntitySet="Specialities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Groups_Specialities" Association="iseuModel.FK_Groups_Specialities">
+      <End Role="Specialities" EntitySet="Specialities" />
       <End Role="Groups" EntitySet="Groups" />
     </AssociationSet>
     <AssociationSet Name="FK_Students_Groups" Association="iseuModel.FK_Students_Groups">
@@ -62,6 +63,10 @@
     <AssociationSet Name="FK_Subjects_Professors" Association="iseuModel.FK_Subjects_Professors">
       <End Role="Professors" EntitySet="Professors" />
       <End Role="Subjects" EntitySet="Subjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Specialities_Syllabuses" Association="iseuModel.FK_Specialities_Syllabuses">
+      <End Role="Syllabuses" EntitySet="Syllabuses" />
+      <End Role="Specialities" EntitySet="Specialities" />
     </AssociationSet>
     <AssociationSet Name="FK_Students_Users" Association="iseuModel.FK_Students_Users">
       <End Role="Users" EntitySet="Users" />
@@ -92,8 +97,8 @@
     <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="FacultyId" Type="Int32" />
     <NavigationProperty Name="Faculty" Relationship="iseuModel.FK_Chairs_Faculty" FromRole="Chairs" ToRole="Faculties" />
-    <NavigationProperty Name="Groups" Relationship="iseuModel.FK_Groups_Chairs" FromRole="Chairs" ToRole="Groups" />
     <NavigationProperty Name="Professors" Relationship="iseuModel.FK_Professors_Chairs" FromRole="Chairs" ToRole="Professors" />
+    <NavigationProperty Name="Specialities" Relationship="iseuModel.FK_Specialities_Chairs" FromRole="Chairs" ToRole="Specialities" />
   </EntityType>
   <EntityType Name="Faculty">
     <Key>
@@ -109,10 +114,8 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="ChairId" Type="Int32" />
-    <Property Name="SyllabusId" Type="Int32" />
-    <NavigationProperty Name="Chair" Relationship="iseuModel.FK_Groups_Chairs" FromRole="Groups" ToRole="Chairs" />
-    <NavigationProperty Name="Syllabus" Relationship="iseuModel.FK_Groups_Syllabuses" FromRole="Groups" ToRole="Syllabuses" />
+    <Property Name="SpecialityId" Type="Int32" />
+    <NavigationProperty Name="Speciality" Relationship="iseuModel.FK_Groups_Specialities" FromRole="Groups" ToRole="Specialities" />
     <NavigationProperty Name="Students" Relationship="iseuModel.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
   </EntityType>
   <EntityType Name="Note">
@@ -130,7 +133,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Job" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="StudentId" Type="Int32" />
     <NavigationProperty Name="Student" Relationship="iseuModel.FK_Parents_Students" FromRole="Parents" ToRole="Students" />
     <NavigationProperty Name="User" Relationship="iseuModel.FK_Parents_Users" FromRole="Parents" ToRole="Users" />
@@ -149,6 +151,18 @@
     <NavigationProperty Name="User" Relationship="iseuModel.FK_Professors_Users" FromRole="Professors" ToRole="Users" />
     <NavigationProperty Name="Subjects" Relationship="iseuModel.FK_Subjects_Professors" FromRole="Professors" ToRole="Subjects" />
   </EntityType>
+  <EntityType Name="Speciality">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ChairId" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="SyllabusId" Type="Int32" />
+    <NavigationProperty Name="Chair" Relationship="iseuModel.FK_Specialities_Chairs" FromRole="Specialities" ToRole="Chairs" />
+    <NavigationProperty Name="Groups" Relationship="iseuModel.FK_Groups_Specialities" FromRole="Specialities" ToRole="Groups" />
+    <NavigationProperty Name="Syllabus" Relationship="iseuModel.FK_Specialities_Syllabuses" FromRole="Specialities" ToRole="Syllabuses" />
+  </EntityType>
   <EntityType Name="Student">
     <Key>
       <PropertyRef Name="Id" />
@@ -160,6 +174,24 @@
     <Property Name="Type" Type="Int32" />
     <Property Name="GroupId" Type="Int32" />
     <Property Name="Characteristic" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="DateClaim" Type="DateTime" Precision="7" />
+    <Property Name="PersonalNumber" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Competition" Type="Int32" />
+    <Property Name="EduGraduationYear" Type="Int32" />
+    <Property Name="EduType" Type="Int32" />
+    <Property Name="Concessions" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PreUniversityCourses" Type="Int32" />
+    <Property Name="Hostel" Type="Int32" />
+    <Property Name="CountClaim" Type="Int32" />
+    <Property Name="Language" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="CertificatePoints" Type="Int32" />
+    <Property Name="LanguagePoints" Type="Int32" />
+    <Property Name="PhysicsPoints" Type="Int32" />
+    <Property Name="MathematicaPoints" Type="Int32" />
+    <Property Name="ChemistryPoints" Type="Int32" />
+    <Property Name="BiologyPoints" Type="Int32" />
+    <Property Name="InfoFrom" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="PrioritySpecialities" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Group" Relationship="iseuModel.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
     <NavigationProperty Name="Parents" Relationship="iseuModel.FK_Parents_Students" FromRole="Students" ToRole="Parents" />
     <NavigationProperty Name="User" Relationship="iseuModel.FK_Students_Users" FromRole="Students" ToRole="Users" />
@@ -188,9 +220,9 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="Syllabus1" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <NavigationProperty Name="Groups" Relationship="iseuModel.FK_Groups_Syllabuses" FromRole="Syllabuses" ToRole="Groups" />
+    <NavigationProperty Name="Specialities" Relationship="iseuModel.FK_Specialities_Syllabuses" FromRole="Syllabuses" ToRole="Specialities" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -214,15 +246,24 @@
     <Property Name="MiddleName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
     <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-    <Property Name="CityId" Type="Int32" />
+    <Property Name="City" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
     <Property Name="Address" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-    <Property Name="Role" Type="Int32" Nullable="false" />
+    <Property Name="Role" Type="Int32" />
     <Property Name="Status" Type="Int32" Nullable="false" />
     <Property Name="LoginName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="Password" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="Salt" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="DateRegistered" Type="DateTime" Precision="7" />
     <Property Name="DateLastVisited" Type="DateTime" Precision="7" />
+    <Property Name="Nationality" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Passport" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="PassportIssuing" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Region" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Country" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Area" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Index" Type="Int32" />
+    <Property Name="HomePhone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Job" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="Parent" Relationship="iseuModel.FK_Parents_Users" FromRole="Users" ToRole="Parents" />
     <NavigationProperty Name="Professor" Relationship="iseuModel.FK_Professors_Users" FromRole="Users" ToRole="Professors" />
     <NavigationProperty Name="Student" Relationship="iseuModel.FK_Students_Users" FromRole="Users" ToRole="Students" />
@@ -263,18 +304,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Groups_Chairs">
-    <End Role="Chairs" Type="iseuModel.Chair" Multiplicity="0..1" />
-    <End Role="Groups" Type="iseuModel.Group" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Chairs">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Groups">
-        <PropertyRef Name="ChairId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Professors_Chairs">
     <End Role="Chairs" Type="iseuModel.Chair" Multiplicity="0..1" />
     <End Role="Professors" Type="iseuModel.Professor" Multiplicity="*" />
@@ -287,15 +316,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Groups_Syllabuses">
-    <End Role="Syllabuses" Type="iseuModel.Syllabus" Multiplicity="0..1" />
+  <Association Name="FK_Specialities_Chairs">
+    <End Role="Chairs" Type="iseuModel.Chair" Multiplicity="0..1" />
+    <End Role="Specialities" Type="iseuModel.Speciality" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chairs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Specialities">
+        <PropertyRef Name="ChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Groups_Specialities">
+    <End Role="Specialities" Type="iseuModel.Speciality" Multiplicity="0..1" />
     <End Role="Groups" Type="iseuModel.Group" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Syllabuses">
+      <Principal Role="Specialities">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Groups">
-        <PropertyRef Name="SyllabusId" />
+        <PropertyRef Name="SpecialityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -368,6 +409,18 @@
       </Principal>
       <Dependent Role="Subjects">
         <PropertyRef Name="ProfessorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Specialities_Syllabuses">
+    <End Role="Syllabuses" Type="iseuModel.Syllabus" Multiplicity="0..1" />
+    <End Role="Specialities" Type="iseuModel.Speciality" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Syllabuses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Specialities">
+        <PropertyRef Name="SyllabusId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -15,10 +15,10 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
-                return Error("Действие не доступно");
+            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly)
+                return Error("Недостаточный уровень доступа");
 
-            return View("~/views/user/add.cshtml", new UserViewModel());
+            return View("~/views/user/user.cshtml", new UserViewModel() { isAdd = true });
         }
 
         [HttpPost]
@@ -26,10 +26,10 @@ namespace Iseu.Controllers
         {
             if(!ModelState.IsValid)
             {
-                 return View("~/Views/User/add.cshtml", model);
+                return View("~/views/user/user.cshtml", model);
             }
 
-            User user = DBcontext.Users.Add(new User());
+            User user = new User();
             
             user.Address = model.Address;
             user.BirthDate = model.BirthDate;
@@ -43,7 +43,9 @@ namespace Iseu.Controllers
             user.Status = (int)AccountStatus.Normal;
             user.DateRegistered = DateTime.Now;
 
+            DBcontext.Users.Add(user);
             DBcontext.SaveChanges();
+
             return RedirectToRoute(UserRoutes.Index, new { id = user.Id });
         }
         #endregion
@@ -52,8 +54,8 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
-                return Error("Действие не доступно");
+            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly)
+                return Error("Недостаточный уровень доступа");
             User user = null;
             if (!DBcontext.Users.Any(u => u.Id == id))
             {
@@ -74,9 +76,10 @@ namespace Iseu.Controllers
                 Gender = user.Gender,
                 LastName = user.LastName,
                 MiddleName = user.MiddleName,
-                Phone = user.Phone
+                Phone = user.Phone,
+                isEdit = true
             };
-            return View("~/views/user/edit.cshtml", model);
+            return View("~/views/user/user.cshtml", model);
         }
 
         [HttpPost]
@@ -84,7 +87,8 @@ namespace Iseu.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("~/views/user/edit.cshtml");
+                model.isEdit = true;
+                return View("~/views/user/user.cshtml", model);
             }
 
             User user = DBcontext.Users.Single(s => s.Id == model.Id);
@@ -101,6 +105,7 @@ namespace Iseu.Controllers
             user.Salt = pass.Salt;
 
             DBcontext.SaveChanges();
+
             return RedirectToRoute(UserRoutes.Index, new { id = model.Id });
         }
         #endregion
@@ -109,6 +114,9 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Index(int id)
         {
+            if(CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly || (CurrentUser.IsStudent && CurrentUser.Id != id))
+                return Error("Недостаточный уровень доступа");
+
             User user = null;
             if (!DBcontext.Users.Any(u => u.Id == id))
             {
@@ -136,15 +144,13 @@ namespace Iseu.Controllers
                     MiddleName = user.MiddleName,
                     LoginName = user.LoginName,
                     Phone = user.Phone,
-                    Role = user.Role,
+                    Role = (AccountRole)user.Role,
                     Group = user.Student.Group,
                     Parents = user.Student.Parents.ToList(),
                     PaymentStatus = user.Student.Type,
-                    isGuest = CurrentUser.Id != user.Id,
-                    GuestIsAdmin = CurrentUser.IsAdmin,
-                    GuestIsDecanat = CurrentUser.IsDecanat
+                    isVisit = true
                 };
-                return View("~/views/student/student.cshtml", studentModel);
+                return View("~/views/user/student.cshtml", studentModel);
             }
             if (user.IsProfessor)
             {
@@ -159,16 +165,14 @@ namespace Iseu.Controllers
                     LastName = user.LastName,
                     MiddleName = user.MiddleName,
                     Phone = user.Phone,
-                    Role = user.Role,
+                    Role = (AccountRole)user.Role,
                     AcademicDegree = user.Professor.ADegree1,
                     AcademicTitle = user.Professor.ATitle1,
                     Chair = user.Professor.Chair,
                     Subjects = user.Professor.Subjects.ToList(),
-                    isGuest = CurrentUser.Id != user.Id,
-                    GuestIsAdmin = CurrentUser.IsAdmin,
-                    GuestIsDecanat = CurrentUser.IsDecanat
+                    isVisit = true
                 };
-                return View("~/views/professor/professor.cshtml", professorModel);
+                return View("~/views/user/professor.cshtml", professorModel);
             }
             UserViewModel userModel = new UserViewModel()
             {
@@ -181,10 +185,8 @@ namespace Iseu.Controllers
                 LastName = user.LastName,
                 MiddleName = user.MiddleName,
                 Phone = user.Phone,
-                Role = user.Role,
-                isGuest = CurrentUser.Id != user.Id,
-                GuestIsAdmin = CurrentUser.IsAdmin,
-                GuestIsDecanat = CurrentUser.IsDecanat
+                Role = (AccountRole)user.Role,
+                isVisit = true
             };
             return View("~/views/user/user.cshtml", userModel);
         }

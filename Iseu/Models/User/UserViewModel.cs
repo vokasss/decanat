@@ -8,10 +8,8 @@ using System.Web;
 
 namespace Iseu.Models
 {
-    public class UserViewModel : GuestableModel
+    public class UserViewModel : EditableViewModel
     {
-        public int Id { get; set; }
-
         [Required]
         [Display(Name = "Дата рождения")]
         [DataType(DataType.Date)]
@@ -49,10 +47,13 @@ namespace Iseu.Models
 
         public string Password { get; set; }
 
-        public int Role { get; set; }
+        [Display(Name = "Установить уровень доступа")]
+        public AccountRole Role { get; set; }
 
-        public int AccountStatus { get; set; }
+        [Display(Name="Установить статус аккаунта")]
+        public AccountStatus AccountStatus { get; set; }
 
+        [Display(Name = "ФИО")]
         public string FullName
         {
             get
@@ -60,5 +61,7 @@ namespace Iseu.Models
                 return String.Format("{0} {1} {2}", LastName, FirstName, MiddleName);
             }
         }
+
+        
     }
 }

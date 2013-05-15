@@ -2,8 +2,15 @@
     <ul>
         <li><a href="@Url.RouteUrl(StudentRoutes.Add)">Добавить студента</a></li>
         <li><a href="@Url.RouteUrl(ProfessorRoutes.Add)">Добавить преподавателя</a></li>
-        <li><a href="@Url.RouteUrl(SyllabusRoutes.Add)">Добавить учебный план</a></li>
+        <li><a href="@Url.RouteUrl(SyllabusRoutes.GetCourses)" class="modal">Добавить учебный план</a></li>
         <li><a href="@Url.RouteUrl(UserRoutes.Add)">Добавить юзера</a></li>
         <li><a href="@Url.RouteUrl(SubjectRoutes.Add)">Добавить дисциплину</a></li>
+        @if(Core.CurrentUser.IsAdmin)
+        {
+        <li><a href="@Url.RouteUrl(AdminRoutes.AddGroup)">Добавить группу</a></li>
+        <li><a href="@Url.RouteUrl(AdminRoutes.AddSpeciality)">Добавить специальность</a></li>
+        <li><a href="@Url.RouteUrl(AdminRoutes.AddChair)">Добавить кафедру</a></li>
+        <li><a href="@Url.RouteUrl(AdminRoutes.AddFaculty)">Добавить факультет</a></li>
+        }
     </ul>
 </div>

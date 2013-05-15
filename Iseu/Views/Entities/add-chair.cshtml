@@ -1,0 +1,30 @@
+﻿@model ChairViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    @if (Model.isVisit)
+    {
+        <div class="title">Кафедра</div>
+        @Html.LabelFor(m => m.Title)
+        <div>
+            @Model.Chair.Title
+        </div>
+    }
+    @if (Model.isAdd)
+    {
+        <div class="add">
+            <form action="@(Url.RouteUrl(AdminRoutes.AddChair))" method="post" id="add">
+                <div class="title">Добавление кафедры</div>
+
+                @Html.LabelFor(m => m.Title)
+                @Html.TextBoxFor(m => m.Title)
+
+                @Html.LabelFor(m => m.FacultyId)
+                @Html.DropDownListFor(m => m.FacultyId, UsersExtension.GetFaculties())
+
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    }
+</div>

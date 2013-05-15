@@ -1,0 +1,30 @@
+﻿@model GroupViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    @if (Model.isVisit)
+    {
+        <div class="title">Группа</div>
+        @Html.LabelFor(m => m.Title)
+        <div>
+            @Model.Group.Title
+        </div>
+    }
+    @if (Model.isAdd)
+    {
+        <div class="add">
+            <form action="@(Url.RouteUrl(AdminRoutes.AddGroup))" method="post" id="add">
+                <div class="title">Добавление группы</div>
+
+                @Html.LabelFor(m => m.Title)
+                @Html.TextBoxFor(m => m.Title)
+
+                @Html.LabelFor(m => m.SpecialityId)
+                @Html.DropDownListFor(m => m.SpecialityId, UsersExtension.GetSpecialities())
+
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    }
+</div>

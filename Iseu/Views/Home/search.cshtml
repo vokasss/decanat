@@ -1,22 +1,74 @@
 ﻿@model SearchModel
 
 @{
-    Layout = "~/Views/Shared/_Main.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section main{
     <div class="main-container">
-        <form action="@Url.RouteUrl(SearchRoutes.Index)" method="get" style="margin:0 25%">
-            <input id="search_t" type="text" name="Pattern" value="@Model.Pattern" placeholder="Поиск студентов . . ." />
+        <form action="@Url.RouteUrl(SearchRoutes.Index)" method="get" id="search-form">
+            <input id="search_t" type="text" name="Pattern" value="@Model.Pattern" placeholder="Найти . . ." />
             <button class="search_b" type="submit">Найти</button>
+            <div class="entity-filter">
+            <input type="radio" value="@((int)SearchEntity.Student)"  name="entity" @(Model.Entity == SearchEntity.Student? "checked" : "")/>Студенты
+            <input type="radio" value="@((int)SearchEntity.Professor)" name="entity" @(Model.Entity == SearchEntity.Professor? "checked" : "")/>Преподаватели
+            <input type="radio" value="@((int)SearchEntity.Group)" name="entity" @(Model.Entity == SearchEntity.Group? "checked" : "")/>Группы
+            <input type="radio" value="@((int)SearchEntity.Subject)" name="entity" @(Model.Entity == SearchEntity.Subject? "checked" : "")/>Дисциплины
+            <input type="radio" value="@((int)SearchEntity.User)" name="entity" @(Model.Entity == SearchEntity.User? "checked" : "")/>Пользователи
+        </div>
+            <div class="search-result">
+            @switch (Model.Entity)
+        {
+            case SearchEntity.Student:
+                if ((Model.Result as List<Student>).Count > 0)
+                {
+                     @Html.Partial("~/views/entities/list-students.cshtml", Model.Result)
+                }
+                else
+                {
+                     <div>По данному запросу ничего не найдено, попробуйте еще раз</div>
+                }
+                break;
+            case SearchEntity.Subject:
+                if ((Model.Result as List<Subject>).Count > 0)
+                {
+                     @Html.Partial("~/views/entities/list-subjects.cshtml", Model.Result)
+                }
+                else
+                {
+                     <div>По данному запросу ничего не найдено, попробуйте еще раз</div>
+                }
+                break;
+            case SearchEntity.Professor:
+                if ((Model.Result as List<Professor>).Count > 0)
+                {
+                     @Html.Partial("~/views/entities/list-professors.cshtml", Model.Result)
+                }
+                else
+                {
+                     <div>По данному запросу ничего не найдено, попробуйте еще раз</div>
+                }
+                break;
+            case SearchEntity.Group:
+                if ((Model.Result as List<Group>).Count > 0)
+                {
+                     @Html.Partial("~/views/entities/list-groups.cshtml", Model.Result)
+                }
+                else
+                {
+                     <div>По данному запросу ничего не найдено, попробуйте еще раз</div>
+                }
+                break;
+            case SearchEntity.User:
+                if ((Model.Result as List<User>).Count > 0)
+                {
+                     @Html.Partial("~/views/entities/list-users.cshtml", Model.Result)
+                }
+                else
+                {
+                     <div>По данному запросу ничего не найдено, попробуйте еще раз</div>
+                }
+                break;
+        }
+                </div>
         </form>
-        @if (Model.Result.Count > 0)
-        {
-            @Html.Partial("~/views/student/list-students.cshtml", Model.Result)
-        }
-        else
-        {
-            <div>По данному запросу ничего не найдено, попробуйте еще раз</div>
-        }
     </div>
-}

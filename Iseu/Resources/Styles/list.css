@@ -1,0 +1,15 @@
+.search-result {
+margin-top:50px;
+width:100%;
+left:-100px;
+position:relative;
+text-align:center;
+}
+	.search-result table{
+	border:1px solid black;
+	border-collapse:collapse;
+	}
+	.search-result .fio {
+	width:300px;
+	
+	}

@@ -1,0 +1,23 @@
+﻿@model List<Professor>
+<table  border="1" cellpadding="5" >
+    <caption>Преподаватели</caption>
+        <tr>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th>Факультет</th>
+            <th>Кафедра</th>
+            <th>Ученая степень</th>
+            <th>Звание</th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td class="fio"><a href="@Url.RouteUrl(UserRoutes.Index, new { id = i.Id })">@i.User.FullName</a></td>
+                <td>@i.User.BirthDate.Value.ToShortDateString()</td>
+                <td>@i.Chair.Faculty.Title</td>
+                <td>@i.Chair.Title</td>
+                <td>@i.ADegree1.Title</td>
+                <td>@i.ATitle1.Title</td>
+            </tr> 
+        }
+</table>

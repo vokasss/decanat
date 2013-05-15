@@ -39,8 +39,7 @@
         <MappingFragment StoreEntitySet="Groups">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="ChairId" ColumnName="ChairId" />
-          <ScalarProperty Name="SyllabusId" ColumnName="SyllabusId" />
+          <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -57,7 +56,6 @@
       <EntityTypeMapping TypeName="iseuModel.Parent">
         <MappingFragment StoreEntitySet="Parents">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Job" ColumnName="Job" />
           <ScalarProperty Name="StudentId" ColumnName="StudentId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -72,6 +70,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Specialities">
+      <EntityTypeMapping TypeName="iseuModel.Speciality">
+        <MappingFragment StoreEntitySet="Specialities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ChairId" ColumnName="ChairId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="SyllabusId" ColumnName="SyllabusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Students">
       <EntityTypeMapping TypeName="iseuModel.Student">
         <MappingFragment StoreEntitySet="Students">
@@ -82,6 +90,24 @@
           <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
+          <ScalarProperty Name="DateClaim" ColumnName="DateClaim" />
+          <ScalarProperty Name="PersonalNumber" ColumnName="PersonalNumber" />
+          <ScalarProperty Name="Competition" ColumnName="Competition" />
+          <ScalarProperty Name="EduGraduationYear" ColumnName="EduGraduationYear" />
+          <ScalarProperty Name="EduType" ColumnName="EduType" />
+          <ScalarProperty Name="Concessions" ColumnName="Concessions" />
+          <ScalarProperty Name="PreUniversityCourses" ColumnName="PreUniversityCourses" />
+          <ScalarProperty Name="Hostel" ColumnName="Hostel" />
+          <ScalarProperty Name="CountClaim" ColumnName="CountClaim" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="CertificatePoints" ColumnName="CertificatePoints" />
+          <ScalarProperty Name="LanguagePoints" ColumnName="LanguagePoints" />
+          <ScalarProperty Name="PhysicsPoints" ColumnName="PhysicsPoints" />
+          <ScalarProperty Name="MathematicaPoints" ColumnName="MathematicaPoints" />
+          <ScalarProperty Name="ChemistryPoints" ColumnName="ChemistryPoints" />
+          <ScalarProperty Name="BiologyPoints" ColumnName="BiologyPoints" />
+          <ScalarProperty Name="InfoFrom" ColumnName="InfoFrom" />
+          <ScalarProperty Name="PrioritySpecialities" ColumnName="PrioritySpecialities" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -135,7 +161,7 @@
           <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="Status" ColumnName="Status" />
@@ -144,6 +170,15 @@
           <ScalarProperty Name="Salt" ColumnName="Salt" />
           <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
           <ScalarProperty Name="DateLastVisited" ColumnName="DateLastVisited" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+          <ScalarProperty Name="PassportIssuing" ColumnName="PassportIssuing" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Index" ColumnName="Index" />
+          <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+          <ScalarProperty Name="Job" ColumnName="Job" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

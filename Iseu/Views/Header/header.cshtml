@@ -14,12 +14,21 @@
             {
                 <p>@ViewBag.Message</p>
             }
+
             <a class="b-modal" href="@Url.RouteUrl(HomeRoutes.Register)">Регистрация</a>
         </form>
     
     }
     else
     {
-        @Html.Partial("~/Views/Header/partial/account-menu.cshtml", Model.User)
+        <div class="header-account">
+            <ul class="inline">
+                <li>
+                    <a class="item_menu" href="@Url.RouteUrl(UserRoutes.Index, new { id = Model.User.Id })">Личный кабинет</a></li>
+                <li>
+                    <a class="item_menu" href="@Url.RouteUrl(HomeRoutes.Logout)">Выйти</a></li>
+            </ul>
+        </div>
+        <div style="float:right" class="item_menu">@Model.User.FullName</div>
     }
 </div>

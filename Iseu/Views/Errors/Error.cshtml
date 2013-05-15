@@ -1,4 +1,5 @@
 ﻿@model string
-<h6>ОШИБКА</h6>
-<p>@Model</p>
-
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<input id="modal" type="hidden" value="@Model" />

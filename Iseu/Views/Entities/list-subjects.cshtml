@@ -1,0 +1,17 @@
+﻿@model List<Subject>
+<table border="1" cellpadding="5" >
+    <caption>Дисциплины</caption>
+        <tr>
+            <th>Дисциплина</th>
+            <th>Кафедра</th>
+            <th>Преподаватель</th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td class="fio"><a href="@Url.RouteUrl(SubjectRoutes.Subject, new { id = i.Id })">@i.Title</a></td>
+                <td>@i.Professor.Chair.Title</td>
+                <td><a href="@Url.RouteUrl(UserRoutes.Index, new { id = i.Professor.Id })">@i.Professor.User.ShortFullName</a></td>
+            </tr> 
+        }
+</table>

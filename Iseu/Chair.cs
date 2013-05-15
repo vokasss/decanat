@@ -16,8 +16,8 @@ namespace Iseu
     {
         public Chair()
         {
-            this.Groups = new HashSet<Group>();
             this.Professors = new HashSet<Professor>();
+            this.Specialities = new HashSet<Speciality>();
         }
     
         public int Id { get; set; }
@@ -25,7 +25,7 @@ namespace Iseu
         public Nullable<int> FacultyId { get; set; }
     
         public virtual Faculty Faculty { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Professor> Professors { get; set; }
+        public virtual ICollection<Speciality> Specialities { get; set; }
     }
 }

@@ -7,9 +7,17 @@ using System.Text;
 using System.Web;
 
 namespace Iseu.Models
-{
+{ 
+    public enum SearchEntity{
+        User,
+        Student,
+        Professor,
+        Subject,
+        Group
+    }
     public class SearchModel {
+        public SearchEntity Entity { get; set; }
         public string Pattern { get; set; }
-        public List<Student> Result { get;set; }
+        public object Result { get;set; }
     }
 }

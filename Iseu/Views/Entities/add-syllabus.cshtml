@@ -1,0 +1,59 @@
+﻿@model SyllabusViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    @if (Model.isAdd)
+    {
+        <div class="add" data-action="@(Url.RouteUrl(SyllabusRoutes.Add))">
+                <div class="title">Добавление учебного плана</div>
+                @for (int i = 1; i <= Model.Semesters; i++)
+                {
+                    <div class="semester" id="semester-@i">
+                        <p>@i Семестр</p>
+                        <div class="inline">
+                            <label>Дисциплина</label>
+                            <select class="disc">
+                                @{
+                                  var subjs = UsersExtension.GetSubjects();
+                                  foreach (var item in subjs)
+                                  {
+                                    <option value="@item.Value">@item.Text</option> 
+                                  }
+                                }
+                            </select>
+                        </div>
+                        <div class="inline">
+                            <label>Преподаватель</label>
+                            <select class="professor">
+                                @{
+                                  var profs = UsersExtension.GetProfessors();
+                                  foreach (var item in profs)
+                                  {
+                                    <option value="@item.Value">@item.Text</option> 
+                                  }
+                                }
+                            </select>
+                        </div>
+                        <button class="add-subject">+Добавить</button>
+                    </div> 
+                }
+            <div>
+                <div class="inline">
+                    <p>Специальности</p>
+                    <select class="specs" style="width:605px">
+                        @{
+                         var specs = UsersExtension.GetSpecialities();
+                         foreach (var item in specs)
+                         {
+                            <option value="@item.Value">@item.Text</option> 
+                         }
+                        }
+                    </select>
+                </div>
+                <button class="add-specs">+Добавить</button>
+            </div>
+                <button id="add-button">Сохранить</button>
+        </div>
+    }
+</div>

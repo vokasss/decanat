@@ -28,13 +28,15 @@ namespace Iseu.Routing
             routes.MapRoute(AdminRoutes.SetRole, "Admin/SetRole/{id}");
             routes.MapRoute(AdminRoutes.Ban, "Admin/Ban/{id}");
             routes.MapRoute(AdminRoutes.Unban, "Admin/Unban/{id}");
+            routes.MapRoute(AdminRoutes.AddChair, "Admin/AddChair");
+            routes.MapRoute(AdminRoutes.AddFaculty, "Admin/AddFaculty");
+            routes.MapRoute(AdminRoutes.AddGroup, "Admin/AddGroup");
+            routes.MapRoute(AdminRoutes.AddSpeciality, "Admin/AddSpeciality");
 
             routes.MapRoute(StudentRoutes.Add, "Student/Add");
             routes.MapRoute(StudentRoutes.Edit, "Student/Edit/{id}");
             routes.MapRoute(StudentRoutes.Notes, "Student/Notes/{id}");
-            routes.MapRoute(StudentRoutes.Activate, "Student/Activate/{id}");
-            routes.MapRoute(StudentRoutes.Graduate, "Student/Graduate/{id}");
-            routes.MapRoute(StudentRoutes.Expelle, "Student/Expelle/{id}");
+            routes.MapRoute(StudentRoutes.StudentStatus, "Student/StudentStatus/{id}/{status}");
 
             routes.MapRoute(ProfessorRoutes.Add, "Professor/Add");
             routes.MapRoute(ProfessorRoutes.Edit, "Professor/Edit/{id}");
@@ -42,6 +44,8 @@ namespace Iseu.Routing
             routes.MapRoute(SyllabusRoutes.Index, "Syllabus/{id}");
             routes.MapRoute(SyllabusRoutes.Add, "Syllabus/Add");
             routes.MapRoute(SyllabusRoutes.Edit, "Syllabus/Edit/{id}");
+            routes.MapRoute(SyllabusRoutes.GetCourses, "Syllabus/GetCourses");
+            routes.MapRoute(SyllabusRoutes.GetSubject, "Syllabus/GetSubject");
 
             routes.MapRoute(SubjectRoutes.Subject, "Subject/{id}");
             routes.MapRoute(SubjectRoutes.Add, "Subject/Add");
@@ -62,6 +66,10 @@ namespace Iseu.Routing
         public const string Ban = "iseu.admin-ban";
         public const string Unban = "iseu.admin-unban";
         public const string SetRole = "iseu.admin-set";
+        public const string AddFaculty = "iseu.add-faculty";
+        public const string AddChair = "iseu.add-chair";
+        public const string AddSpeciality = "iseu.add-speciality";
+        public const string AddGroup = "iseu.add-group";
     }
 
     public class SyllabusRoutes
@@ -69,6 +77,8 @@ namespace Iseu.Routing
         public const string Index = "iseu.syllabus";
         public const string Add = "iseu.syllabus-add";
         public const string Edit = "iseu.syllabus-edit";
+        public const string GetCourses = "iseu.syllabus-get-courses";
+        public const string GetSubject = "iseu.syllabus-get-subject";
     }
 
     public class SearchRoutes
@@ -89,9 +99,7 @@ namespace Iseu.Routing
         public const string Add = "iseu.student-add";
         public const string Edit = "iseu.student-edit";
         public const string Notes = "iseu.student-notes";
-        public const string Graduate = "iseu.student-graduate";
-        public const string Expelle = "iseu.student-expelle";
-        public const string Activate = "iseu.student-activate";
+        public const string StudentStatus = "iseu.study-status";
     }
 
     public class ProfessorRoutes

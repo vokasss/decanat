@@ -15,7 +15,6 @@ namespace Iseu
     public partial class Parent
     {
         public int Id { get; set; }
-        public string Job { get; set; }
         public Nullable<int> StudentId { get; set; }
     
         public virtual Student Student { get; set; }

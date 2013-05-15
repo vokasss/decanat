@@ -19,11 +19,19 @@ namespace Iseu
             }
         }
 
+        public bool IsRegisterOnly
+        {
+            get
+            {
+                return Role == (int)AccountRole.User;
+            }
+        }
+
         public bool IsStudent
         {
             get
             {
-                return Student != null;
+                return Role == (int)AccountRole.Student;
             }
         }
 
@@ -31,7 +39,7 @@ namespace Iseu
         {
             get
             {
-                return Professor != null;
+                return Role == (int)AccountRole.Professor;
             }
         }
 
@@ -73,5 +81,14 @@ namespace Iseu
                 return String.Format("{0} {1}. {2}.", LastName, FirstName[0], MiddleName[0]);
             }
         }
+        public bool IsIdOnly
+        {
+            get
+            {
+                return Id > 0 && (String.IsNullOrEmpty(FullName) || String.IsNullOrWhiteSpace(FullName));
+            }
+        }
+
+        
     }
 }

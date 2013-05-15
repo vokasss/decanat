@@ -15,22 +15,21 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
-                return Error("Действие не доступно");
+            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly)
+                return Error("Недостаточный уровень доступа");
 
-            return View("~/views/syllabus/add.cshtml", new SyllabusModel());
+            return View("~/views/entities/subject.cshtml", new SubjectViewModel());
         }
 
         [HttpPost]
-        public ActionResult Add(SyllabusModel model)
+        public ActionResult Add(SubjectViewModel model)
         {
             if(!ModelState.IsValid)
             {
-                return View("~/views/syllabus/add.cshtml", model);
+                return View("~/views/entities/subject.cshtml", model);
             }
-
             DBcontext.SaveChanges();
-            return RedirectToRoute(SyllabusRoutes.Index, new { id = model.Id });
+            return RedirectToRoute(SubjectRoutes.Subject, new { id = model.SubjectId });
         }
         #endregion
 
@@ -38,22 +37,22 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
-                return Error("Действие не доступно");
+            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly)
+                return Error("Недостаточный уровень доступа");
 
-            return View("~/views/syllabus/edit.cshtml");
+            return View("~/views/entities/subject.cshtml");
         }
 
         [HttpPost]
-        public ActionResult Edit(SyllabusModel model)
+        public ActionResult Edit(SubjectViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View("~/views/syllabus/edit.cshtml");
+                return View("~/views/entities/subject.cshtml");
             }
             
             DBcontext.SaveChanges();
-            return RedirectToRoute(SyllabusRoutes.Index, new { id = model.Id });
+            return RedirectToRoute(SubjectRoutes.Subject, new { id = model.SubjectId });
         }
         #endregion
 
@@ -61,7 +60,7 @@ namespace Iseu.Controllers
         public ActionResult Subject(int id)
         {
             var subject = DBcontext.Subjects.Single(s => s.Id == id);
-            return View("~/views/subject/subject.cshtml", subject);
+            return View("~/views/entities/subject.cshtml", subject);
         }
     }
 }

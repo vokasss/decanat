@@ -9,6 +9,7 @@
     <EntitySet Name="Notes" EntityType="Хранилище iseuModel.Notes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Parents" EntityType="Хранилище iseuModel.Parents" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Professors" EntityType="Хранилище iseuModel.Professors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Specialities" EntityType="Хранилище iseuModel.Specialities" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Students" EntityType="Хранилище iseuModel.Students" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StudentsViews" EntityType="Хранилище iseuModel.StudentsViews" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Subjects" EntityType="Хранилище iseuModel.Subjects" store:Type="Tables" Schema="dbo" />
@@ -19,12 +20,8 @@
       <End Role="Faculties" EntitySet="Faculties" />
       <End Role="Chairs" EntitySet="Chairs" />
     </AssociationSet>
-    <AssociationSet Name="FK_Groups_Chairs" Association="Хранилище iseuModel.FK_Groups_Chairs">
-      <End Role="Chairs" EntitySet="Chairs" />
-      <End Role="Groups" EntitySet="Groups" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Groups_Syllabuses" Association="Хранилище iseuModel.FK_Groups_Syllabuses">
-      <End Role="Syllabuses" EntitySet="Syllabuses" />
+    <AssociationSet Name="FK_Groups_Specialities" Association="Хранилище iseuModel.FK_Groups_Specialities">
+      <End Role="Specialities" EntitySet="Specialities" />
       <End Role="Groups" EntitySet="Groups" />
     </AssociationSet>
     <AssociationSet Name="FK_Notes_Subjects" Association="Хранилище iseuModel.FK_Notes_Subjects">
@@ -54,6 +51,14 @@
     <AssociationSet Name="FK_Professors_Users" Association="Хранилище iseuModel.FK_Professors_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="Professors" EntitySet="Professors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Specialities_Chairs" Association="Хранилище iseuModel.FK_Specialities_Chairs">
+      <End Role="Chairs" EntitySet="Chairs" />
+      <End Role="Specialities" EntitySet="Specialities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Specialities_Syllabuses" Association="Хранилище iseuModel.FK_Specialities_Syllabuses">
+      <End Role="Syllabuses" EntitySet="Syllabuses" />
+      <End Role="Specialities" EntitySet="Specialities" />
     </AssociationSet>
     <AssociationSet Name="FK_Students_Groups" Association="Хранилище iseuModel.FK_Students_Groups">
       <End Role="Groups" EntitySet="Groups" />
@@ -103,8 +108,7 @@
     </Key>
     <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="nvarchar(max)" />
-    <Property Name="ChairId" Type="int" />
-    <Property Name="SyllabusId" Type="int" />
+    <Property Name="SpecialityId" Type="int" />
   </EntityType>
   <EntityType Name="Notes">
     <Key>
@@ -120,7 +124,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Job" Type="nvarchar(max)" />
     <Property Name="StudentId" Type="int" />
   </EntityType>
   <EntityType Name="Professors">
@@ -131,6 +134,15 @@
     <Property Name="ADegree" Type="int" />
     <Property Name="ATitle" Type="int" />
     <Property Name="ChairId" Type="int" />
+  </EntityType>
+  <EntityType Name="Specialities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ChairId" Type="int" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="SyllabusId" Type="int" />
   </EntityType>
   <EntityType Name="Students">
     <Key>
@@ -143,6 +155,24 @@
     <Property Name="Type" Type="int" />
     <Property Name="GroupId" Type="int" />
     <Property Name="Characteristic" Type="nvarchar(max)" />
+    <Property Name="DateClaim" Type="datetime2" />
+    <Property Name="PersonalNumber" Type="nvarchar(max)" />
+    <Property Name="Competition" Type="int" />
+    <Property Name="EduGraduationYear" Type="int" />
+    <Property Name="EduType" Type="int" />
+    <Property Name="Concessions" Type="nvarchar" MaxLength="50" />
+    <Property Name="PreUniversityCourses" Type="int" />
+    <Property Name="Hostel" Type="int" />
+    <Property Name="CountClaim" Type="int" />
+    <Property Name="Language" Type="nvarchar(max)" />
+    <Property Name="CertificatePoints" Type="int" />
+    <Property Name="LanguagePoints" Type="int" />
+    <Property Name="PhysicsPoints" Type="int" />
+    <Property Name="MathematicaPoints" Type="int" />
+    <Property Name="ChemistryPoints" Type="int" />
+    <Property Name="BiologyPoints" Type="int" />
+    <Property Name="InfoFrom" Type="nvarchar(max)" />
+    <Property Name="PrioritySpecialities" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="StudentsViews">
     <Key>
@@ -166,7 +196,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Syllabus" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -191,15 +221,24 @@
     <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-    <Property Name="CityId" Type="int" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar(max)" />
-    <Property Name="Role" Type="int" Nullable="false" />
+    <Property Name="Role" Type="int" />
     <Property Name="Status" Type="int" Nullable="false" />
     <Property Name="LoginName" Type="nvarchar(max)" />
     <Property Name="Password" Type="nvarchar(max)" />
     <Property Name="Salt" Type="nvarchar(max)" />
     <Property Name="DateRegistered" Type="datetime2" />
     <Property Name="DateLastVisited" Type="datetime2" />
+    <Property Name="Nationality" Type="nvarchar" MaxLength="50" />
+    <Property Name="Passport" Type="nvarchar" MaxLength="100" />
+    <Property Name="PassportIssuing" Type="nvarchar(max)" />
+    <Property Name="Region" Type="nvarchar" MaxLength="50" />
+    <Property Name="Country" Type="nvarchar" MaxLength="50" />
+    <Property Name="Area" Type="nvarchar" MaxLength="100" />
+    <Property Name="Index" Type="int" />
+    <Property Name="HomePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Job" Type="nvarchar(max)" />
   </EntityType>
   <Association Name="FK_Chairs_Faculty">
     <End Role="Faculties" Type="Хранилище iseuModel.Faculties" Multiplicity="0..1" />
@@ -213,27 +252,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Groups_Chairs">
-    <End Role="Chairs" Type="Хранилище iseuModel.Chairs" Multiplicity="0..1" />
+  <Association Name="FK_Groups_Specialities">
+    <End Role="Specialities" Type="Хранилище iseuModel.Specialities" Multiplicity="0..1" />
     <End Role="Groups" Type="Хранилище iseuModel.Groups" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Chairs">
+      <Principal Role="Specialities">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Groups">
-        <PropertyRef Name="ChairId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Groups_Syllabuses">
-    <End Role="Syllabuses" Type="Хранилище iseuModel.Syllabuses" Multiplicity="0..1" />
-    <End Role="Groups" Type="Хранилище iseuModel.Groups" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Syllabuses">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Groups">
-        <PropertyRef Name="SyllabusId" />
+        <PropertyRef Name="SpecialityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -318,6 +345,30 @@
       </Principal>
       <Dependent Role="Professors">
         <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Specialities_Chairs">
+    <End Role="Chairs" Type="Хранилище iseuModel.Chairs" Multiplicity="0..1" />
+    <End Role="Specialities" Type="Хранилище iseuModel.Specialities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chairs">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Specialities">
+        <PropertyRef Name="ChairId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Specialities_Syllabuses">
+    <End Role="Syllabuses" Type="Хранилище iseuModel.Syllabuses" Multiplicity="0..1" />
+    <End Role="Specialities" Type="Хранилище iseuModel.Specialities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Syllabuses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Specialities">
+        <PropertyRef Name="SyllabusId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

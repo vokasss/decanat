@@ -16,12 +16,12 @@ namespace Iseu
     {
         public Syllabus()
         {
-            this.Groups = new HashSet<Group>();
+            this.Specialities = new HashSet<Speciality>();
         }
     
         public int Id { get; set; }
         public string Syllabus1 { get; set; }
     
-        public virtual ICollection<Group> Groups { get; set; }
+        public virtual ICollection<Speciality> Specialities { get; set; }
     }
 }

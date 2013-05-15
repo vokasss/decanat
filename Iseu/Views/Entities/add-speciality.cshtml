@@ -1,0 +1,30 @@
+﻿@model SpecialityViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    @if (Model.isVisit)
+    {
+        <div class="title">Специальность</div>
+        @Html.LabelFor(m => m.Title)
+        <div>
+            @Model.Speciality.Title
+        </div>
+    }
+    @if (Model.isAdd)
+    {
+        <div class="add">
+            <form action="@(Url.RouteUrl(AdminRoutes.AddSpeciality))" method="post" id="add">
+                <div class="title">Добавление специальности</div>
+
+                @Html.LabelFor(m => m.Title)
+                @Html.TextBoxFor(m => m.Title)
+
+                @Html.LabelFor(m => m.ChairId)
+                @Html.DropDownListFor(m => m.ChairId, UsersExtension.GetChairs())
+
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    }
+</div>

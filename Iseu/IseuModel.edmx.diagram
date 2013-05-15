@@ -4,33 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b5e1853adc814d3f856185aeb50e9bed" Name="Диаграмма1">
-        <EntityTypeShape EntityType="iseuModel.ADegree" Width="1.5" PointX="3.75" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.ATitle" Width="1.5" PointX="3.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.Chair" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.Faculty" Width="1.5" PointX="1.5" PointY="18.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.Group" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.Note" Width="1.5" PointX="10.5" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.Parent" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.Professor" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.Student" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.StudentsView" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.Subject" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.Syllabus" Width="1.5" PointX="1.5" PointY="21.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.sysdiagram" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="iseuModel.User" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="f8eec5bda44a4a8680d4953b3dc64ae9" Name="Диаграмма1">
+        <EntityTypeShape EntityType="iseuModel.ADegree" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.ATitle" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Chair" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Faculty" Width="1.5" PointX="1.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Group" Width="1.5" PointX="3.75" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Note" Width="1.5" PointX="7.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Parent" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Professor" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Speciality" Width="1.5" PointX="1.5" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Student" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.StudentsView" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Subject" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.Syllabus" Width="1.5" PointX="1.5" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.sysdiagram" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="iseuModel.User" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
         <AssociationConnector Association="iseuModel.FK_Professors_ADegrees" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Professors_ATitles" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Chairs_Faculty" ManuallyRouted="false" />
-        <AssociationConnector Association="iseuModel.FK_Groups_Chairs" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Professors_Chairs" ManuallyRouted="false" />
-        <AssociationConnector Association="iseuModel.FK_Groups_Syllabuses" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Specialities_Chairs" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Groups_Specialities" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Students_Groups" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Notes_Subjects" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Parents_Students" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Parents_Users" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Professors_Users" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Subjects_Professors" ManuallyRouted="false" />
+        <AssociationConnector Association="iseuModel.FK_Specialities_Syllabuses" ManuallyRouted="false" />
         <AssociationConnector Association="iseuModel.FK_Students_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

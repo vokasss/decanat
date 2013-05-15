@@ -210,16 +210,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IseuModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\SubjectViewModel.cs" />
+    <Compile Include="Models\Entities\SpecialityViewModel.cs" />
+    <Compile Include="Models\Entities\FacultyViewModel.cs" />
+    <Compile Include="Models\Entities\ChairViewModel.cs" />
+    <Compile Include="Models\Entities\GroupViewModel.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Login\RegisterModel.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Login\Password.cs" />
     <Compile Include="Models\Partial\HeaderModel.cs" />
-    <Compile Include="Models\Partial\GuestableModel.cs" />
+    <Compile Include="Models\Partial\IGuestableModel.cs" />
+    <Compile Include="Models\Partial\EditableViewModel.cs" />
+    <Compile Include="Models\Partial\FooterModel.cs" />
     <Compile Include="Models\Search\SearchModel.cs" />
     <Compile Include="Models\User\StudentViewModel.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />
-    <Compile Include="Models\User\NotesViewModel.cs" />
+    <Compile Include="Models\Entities\NotesViewModel.cs" />
     <Compile Include="Models\User\ProfessorViewModel.cs" />
     <Compile Include="Note.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
@@ -231,12 +238,9 @@
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Resources\Plugins\arcticModal\jquery.arcticmodal-0.3.css" />
-    <Content Include="Resources\Plugins\arcticModal\jquery.arcticmodal.js" />
-    <Content Include="Resources\Plugins\arcticModal\loading.gif" />
-    <Content Include="Resources\Plugins\arcticModal\themes\dark.css" />
-    <Content Include="Resources\Plugins\arcticModal\themes\simple.css" />
-    <Content Include="Resources\Plugins\jqModal\jqModal.js" />
+    <Compile Include="Speciality.cs">
+      <DependentUpon>IseuModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Student.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
@@ -255,62 +259,13 @@
     <Compile Include="User.cs">
       <DependentUpon>IseuModel.tt</DependentUpon>
     </Compile>
+    <Content Include="Resources\Plugins\arcticModal\jquery.arcticmodal-0.3.css" />
+    <Content Include="Resources\Plugins\arcticModal\jquery.arcticmodal.js" />
+    <Content Include="Resources\Plugins\arcticModal\loading.gif" />
+    <Content Include="Resources\Plugins\arcticModal\themes\dark.css" />
+    <Content Include="Resources\Plugins\arcticModal\themes\simple.css" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\jquery-ui.css" />
-    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
-    <Content Include="Content\themes\base\jquery.ui.all.css" />
-    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
-    <Content Include="Content\themes\base\jquery.ui.base.css" />
-    <Content Include="Content\themes\base\jquery.ui.button.css" />
-    <Content Include="Content\themes\base\jquery.ui.core.css" />
-    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
-    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
-    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
-    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
-    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
-    <Content Include="Content\themes\base\jquery.ui.slider.css" />
-    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
-    <Content Include="Content\themes\base\jquery.ui.theme.css" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.jpg" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="IseuModel.edmx">
@@ -331,40 +286,7 @@
       <LastGenOutput>IseuModel.cs</LastGenOutput>
     </Content>
     <None Include="Resources\Scripts\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Resources\Images\12_10022.png" />
-    <Content Include="Resources\Images\backgrou.jpg" />
     <Content Include="Resources\Images\background.jpg" />
-    <Content Include="Resources\Images\common_w.js" />
-    <Content Include="Resources\Images\feed-ico.png" />
-    <Content Include="Resources\Images\getpr000.gif" />
-    <Content Include="Resources\Images\iseu7_01.gif" />
-    <Content Include="Resources\Images\iseu7_02.gif" />
-    <Content Include="Resources\Images\iseu7_03.gif" />
-    <Content Include="Resources\Images\iseu7_10.gif" />
-    <Content Include="Resources\Images\iseu7_12.gif" />
-    <Content Include="Resources\Images\iseu7_24.gif" />
-    <Content Include="Resources\Images\iseu7_27.gif" />
-    <Content Include="Resources\Images\iseu7_32.gif" />
-    <Content Include="Resources\Images\iseu7_38.gif" />
-    <Content Include="Resources\Images\iseu7_54.gif" />
-    <Content Include="Resources\Images\iseu7_79.gif" />
-    <Content Include="Resources\Images\iseu7_90.gif" />
-    <Content Include="Resources\Images\iseu_490.gif" />
-    <Content Include="Resources\Images\iseu_520.gif" />
-    <Content Include="Resources\Images\iseu_560.gif" />
-    <Content Include="Resources\Images\iseu_640.gif" />
-    <Content Include="Resources\Images\iseu_660.gif" />
-    <Content Include="Resources\Images\jquery-1.js" />
-    <Content Include="Resources\Images\jquery-u.css" />
-    <Content Include="Resources\Images\jquery-u.js" />
-    <Content Include="Resources\Images\online_e.js" />
-    <Content Include="Resources\Images\rating00.gif" />
-    <Content Include="Resources\Images\sdmenu00.css" />
-    <Content Include="Resources\Images\sdmenu00.js" />
-    <Content Include="Resources\Images\style000.css" />
-    <Content Include="Resources\Images\top10000.js" />
-    <Content Include="Resources\Scripts\123.js" />
-    <Content Include="Resources\Scripts\1233.js" />
     <None Include="Resources\Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Resources\Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Resources\Scripts\jquery-ui-1.8.20.min.js" />
@@ -380,6 +302,8 @@
     <Content Include="Resources\Scripts\main.js" />
     <Content Include="Resources\Scripts\jquery-1.8.2.js" />
     <Content Include="Resources\Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Resources\Scripts\admin.js" />
+    <Content Include="Resources\Scripts\syllabus.js" />
     <Content Include="Resources\Styles\index.css" />
     <Content Include="Resources\Styles\header.css" />
     <Content Include="Resources\Styles\sidebar.css" />
@@ -388,6 +312,7 @@
     <Content Include="Resources\Styles\table.css" />
     <Content Include="Resources\Styles\register.css" />
     <Content Include="Resources\Styles\add.css" />
+    <Content Include="Resources\Styles\profile.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -395,25 +320,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Resources\Scripts\_references.js" />
-    <Content Include="Resources\Images\accent.png" />
-    <Content Include="Resources\Images\bullet.png" />
-    <Content Include="Resources\Images\heroAccent.png" />
-    <Content Include="Resources\Images\orderedList0.png" />
-    <Content Include="Resources\Images\orderedList1.png" />
-    <Content Include="Resources\Images\orderedList2.png" />
-    <Content Include="Resources\Images\orderedList3.png" />
-    <Content Include="Resources\Images\orderedList4.png" />
-    <Content Include="Resources\Images\orderedList5.png" />
-    <Content Include="Resources\Images\orderedList6.png" />
-    <Content Include="Resources\Images\orderedList7.png" />
-    <Content Include="Resources\Images\orderedList8.png" />
-    <Content Include="Resources\Images\orderedList9.png" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -421,34 +328,30 @@
     <Content Include="Views\Login\login.cshtml" />
     <Content Include="Views\Home\search.cshtml" />
     <Content Include="Views\Header\header.cshtml" />
-    <Content Include="Views\partial\footer.cshtml" />
+    <Content Include="Views\partial\sidebar2.cshtml" />
     <Content Include="Views\partial\sidebar.cshtml" />
-    <Content Include="Views\Shared\_Main.cshtml" />
     <Content Include="Views\Errors\404.cshtml" />
     <Content Include="Views\Errors\Error.cshtml" />
     <Content Include="Views\User\user.cshtml" />
-    <Content Include="Views\User\edit.cshtml" />
-    <Content Include="Views\Student\add.cshtml" />
-    <Content Include="Views\Student\edit.cshtml" />
-    <Content Include="Views\Student\list-students.cshtml" />
-    <Content Include="Views\Student\notes.cshtml" />
-    <Content Include="Views\Student\student.cshtml" />
-    <Content Include="Views\Professor\add.cshtml" />
-    <Content Include="Views\Professor\edit.cshtml" />
-    <Content Include="Views\Professor\professor.cshtml" />
-    <Content Include="Views\Syllabus\add.cshtml" />
-    <Content Include="Views\Syllabus\edit.cshtml" />
-    <Content Include="Views\Subject\subject.cshtml" />
-    <Content Include="Views\Subject\add.cshtml" />
-    <Content Include="Views\Subject\edit.cshtml" />
-    <Content Include="Views\User\add.cshtml" />
-    <Content Include="Views\Header\partial\account-menu.cshtml" />
+    <Content Include="Views\Entities\list-students.cshtml" />
+    <Content Include="Views\Entities\notes.cshtml" />
+    <Content Include="Views\User\student.cshtml" />
+    <Content Include="Views\User\professor.cshtml" />
+    <Content Include="Views\Entities\subject.cshtml" />
+    <Content Include="Views\Entities\list-groups.cshtml" />
+    <Content Include="Views\Entities\list-subjects.cshtml" />
+    <Content Include="Views\Entities\list-professors.cshtml" />
+    <Content Include="Views\Entities\list-users.cshtml" />
+    <Content Include="Views\Entities\add-chair.cshtml" />
+    <Content Include="Views\Entities\add-faculty.cshtml" />
+    <Content Include="Views\Entities\add-speciality.cshtml" />
+    <Content Include="Views\Entities\add-group.cshtml" />
+    <Content Include="Views\Entities\add-syllabus.cshtml" />
+    <Content Include="Views\Entities\get-courses.cshtml" />
+    <Content Include="Views\Blanks\distribution.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Attributes\" />
-    <Folder Include="Filters\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

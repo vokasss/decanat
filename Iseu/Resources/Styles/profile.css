@@ -1,0 +1,48 @@
+#profile {
+	position:relative;
+	left:17%;
+	width:80%;
+	padding:20px;
+	font-size:16px;
+	color:#000000;
+}
+	#profile input {
+		width:300px;
+		height:40px;	
+		font-size:16px;
+		display:block;
+	}
+
+	#profile button {
+		margin-top:5px;
+		width:200px;
+		height:50px;
+		font-size:22px;
+	}
+
+	#profile select {
+	display:block;
+	margin-bottom:20px;
+	border: solid #054900 1px;
+    font-size:16px;
+	width:300px;
+	height:50px;
+    font-weight:bold;
+    color:#000000;
+	background: rgba(244, 255, 208, 0.55);
+	}
+
+#student, #mother, #father {
+	width:30%;
+	float:left;
+}
+#profile label {
+	font:bold 14px arial, verdana;
+	margin-top:15px;
+	display:block;
+}
+
+#admin-actions {
+	display:inline;
+	float:right;
+}

@@ -1,0 +1,25 @@
+﻿@model List<User>
+<table border="1" cellpadding="5" >
+    <caption>Пользователи</caption>
+        <tr>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th>Телефон</th>
+            <th>Адрес</th>
+            <th>E-mail</th>
+            <th>Роль</th>
+            <th>Статус</th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td class="fio"><a href="@Url.RouteUrl(UserRoutes.Index, new { id = i.Id })">@i.FullName</a></td>
+                <td>@i.BirthDate.Value.ToShortDateString()</td>
+                <td>@i.Phone</td>
+                <td>@i.Address</td>
+                <td>@i.Email</td>
+                <td>@i.Role</td>
+                <td>@(i.Status == (int)AccountStatus.Banned ? "Banned" : "Normal")</td>
+            </tr> 
+        }
+</table>

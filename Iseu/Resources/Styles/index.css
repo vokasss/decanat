@@ -1,14 +1,16 @@
 body{
     margin: 0 auto;
-	max-width:1680px;
+	min-width:1000px;
     font-family:TimesNewRoman, Verdana, Arial, Helvetica, sans-serif;
     font-size:14px;
     font-weight:bolder;
 	background:url("../Images/background.jpg") repeat-y;
+	background-size: 100%;
 }
+
 .main-container {
-margin: 0 auto;
-padding: 0 40px;
+	margin: 0 auto;
+	padding: 0 40px;
 }
 i{
     font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -53,9 +55,20 @@ button{
 }
 .search_b{
 	width:125px;
-	height:75px;
+	height:73px;
     font-size:22px;
+	display:inline;
 }
+
+#search-form {
+position:absolute;
+left:400px;
+}
+
+#search-entities li {
+display:inline;
+}
+
 #search_t{
 	padding:0 25px;
 	width:500px;
@@ -63,4 +76,25 @@ button{
 	font-size:22px;
 	margin-top: 150px;
 }
+.field-validation-error {
+	color:red;
+}
+	#modal a {
+		color: azure;
+	}
 
+	#modal .black {
+		color: black;
+	}
+.inline {
+display:inline-block;
+}
+#myId {
+color:azure;
+border:1px solid azure;
+padding:30px;
+}
+	#myId input,#myId button {
+	height:26px;
+	width: 100px;
+	}

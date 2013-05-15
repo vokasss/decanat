@@ -2,8 +2,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="main-container">
-    <form action="@Url.RouteUrl(SearchRoutes.Index)" method="get" style="margin:0 25%">
-        <input id="search_t" type="text" name="Pattern" placeholder="Поиск студентов . . ." />
+    <form action="@Url.RouteUrl(SearchRoutes.Index)" method="get" id="search-form">
+        <input id="search_t" type="text" name="Pattern" placeholder="Найти . . ." />
         <button class="search_b" type="submit">Найти</button>
+        <ul id="search-entities">
+            <li>
+                <input type="radio" value="@((int)SearchEntity.Student)"  name="entity"/>Студенты</li>
+            <li>
+                <input type="radio" value="@((int)SearchEntity.Professor)" name="entity"/>Преподаватели</li>
+            <li>
+                <input type="radio" value="@((int)SearchEntity.Group)" name="entity"/>Группы</li>
+            <li>
+                <input type="radio" value="@((int)SearchEntity.Subject)" name="entity"/>Дисциплины</li>
+            <li>
+                <input type="radio" value="@((int)SearchEntity.User)" name="entity"/>Пользователи</li>
+        </ul>
+        
     </form>
 </div>

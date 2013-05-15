@@ -1,0 +1,151 @@
+﻿@model ProfessorViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.isVisit)
+{
+    <div id="profile">
+        <div class="title">@(Model.isGuest ? "Профиль преподавателя" : "Ваш профиль")</div>
+        @Html.LabelFor(m => m.FullName)
+        @Html.DisplayTextFor(m => m.FullName)
+
+        @Html.Label(Model.BirthDate.Value.ToShortDateString(), "Дата рождения")
+        @Model.BirthDate.Value.ToShortDateString()
+
+        @Html.LabelFor(m => m.Gender)
+        @(Model.Gender == (int)Gender.Male ? "М" : "Ж")
+
+        @Html.LabelFor(m => m.AcademicDegreeId)
+        @Html.DisplayTextFor(m => m.AcademicDegree.Title)
+
+        @Html.LabelFor(m => m.AcademicTitleId)
+        @Html.DisplayTextFor(m => m.AcademicTitle.Title)
+
+        @Html.LabelFor(m => m.Address)
+        @Html.DisplayTextFor(m => m.Address)
+
+        @Html.LabelFor(m => m.Phone)
+        @Html.DisplayTextFor(m => m.Phone)
+
+        @Html.LabelFor(m => m.Email)
+        @Html.DisplayTextFor(m => m.Email)
+
+        <label>Дисциплины:</label>
+        <ul>
+            @foreach (var disc in Model.Subjects)
+            { 
+                <li class="profile-info"><a href="@Url.RouteUrl(SubjectRoutes.Subject, new { id = disc.Id })">@disc.Title</a></li>
+            }
+        </ul>
+    </div>
+            if (Model.GuestIsDecanat || Model.GuestIsAdmin || !Model.isGuest)
+            {
+                if (Model.GuestIsAdmin)
+                {
+    @Html.Partial("~/Views/partial/sidebar2.cshtml", new FooterModel() { UserId = Model.Id, Role = AccountRole.Admin })
+                }
+                else
+                {
+    @Html.Partial("~/Views/partial/sidebar2.cshtml", new FooterModel() { UserId = Model.Id, Role = AccountRole.Decanat })
+                }
+            }
+}
+@if (Model.isAdd)
+{
+    <div class="add">
+        <form action="@(Url.RouteUrl(ProfessorRoutes.Add))" method="post" id="add">
+            <div class="title">Добавление преподавателя</div>
+            <div id="professor">
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+                @Html.ValidationMessageFor(m => m.LastName)
+
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+                @Html.ValidationMessageFor(m => m.FirstName)
+
+                @Html.LabelFor(m => m.MiddleName)
+                @Html.TextBoxFor(m => m.MiddleName)
+
+                @Html.LabelFor(m => m.BirthDate)
+                @Html.TextBoxFor(m => m.BirthDate)
+                @Html.ValidationMessageFor(m => m.BirthDate)
+
+                @Html.LabelFor(m => m.Gender)
+                @Html.DropDownListFor(m => m.Gender, UsersExtension.GetGenders())
+
+                @Html.LabelFor(m => m.ChairId)
+                @Html.DropDownListFor(m => m.ChairId, UsersExtension.GetChairs())
+
+                @Html.LabelFor(m => m.AcademicDegreeId)
+                @Html.DropDownListFor(m => m.AcademicDegreeId, UsersExtension.GetAcademicDegrees())
+
+                @Html.LabelFor(m => m.AcademicTitleId)
+                @Html.DropDownListFor(m => m.AcademicTitleId, UsersExtension.GetAcademicTitles())
+
+                @Html.LabelFor(m => m.Phone)
+                @Html.TextBoxFor(m => m.Phone)
+                @Html.ValidationMessageFor(m => m.Phone)
+
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address)
+                @Html.ValidationMessageFor(m => m.Address)
+
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <button type="submit">Сохранить</button>
+        </form>
+    </div> 
+}
+
+@if (Model.isEdit)
+{
+    <div class="add">
+        <form action="@Url.RouteUrl(ProfessorRoutes.Edit, new { id = Model.Id })" method="post">
+            <div class="title">Редактирование преподавателя</div>
+            <div id="professor">
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+                @Html.ValidationMessageFor(m => m.LastName)
+
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+                @Html.ValidationMessageFor(m => m.FirstName)
+
+                @Html.LabelFor(m => m.MiddleName)
+                @Html.TextBoxFor(m => m.MiddleName)
+
+                @Html.LabelFor(m => m.BirthDate)
+                @Html.TextBoxFor(m => m.BirthDate)
+                @Html.ValidationMessageFor(m => m.BirthDate)
+
+                @Html.LabelFor(m => m.Gender)
+                @Html.DropDownListFor(m => m.Gender, UsersExtension.GetGenders())
+
+                @Html.LabelFor(m => m.ChairId)
+                @Html.DropDownListFor(m => m.ChairId, UsersExtension.GetChairs())
+
+                @Html.LabelFor(m => m.AcademicDegreeId)
+                @Html.DropDownListFor(m => m.AcademicDegreeId, UsersExtension.GetAcademicDegrees())
+
+                @Html.LabelFor(m => m.AcademicTitleId)
+                @Html.DropDownListFor(m => m.AcademicTitleId, UsersExtension.GetAcademicTitles())
+
+                @Html.LabelFor(m => m.Phone)
+                @Html.TextBoxFor(m => m.Phone)
+                @Html.ValidationMessageFor(m => m.Phone)
+
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address)
+                @Html.ValidationMessageFor(m => m.Address)
+
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <button type="submit">Сохранить</button>
+        </form>
+    </div>
+}

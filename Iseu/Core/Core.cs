@@ -22,5 +22,13 @@ namespace Iseu
                     UsersExtension.Fictive;
             }
         }
+
+        public static Entities DBcontext
+        {
+            get 
+            {
+                return new Entities();
+            }
+        }
     }
 }

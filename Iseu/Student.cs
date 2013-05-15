@@ -26,6 +26,24 @@ namespace Iseu
         public Nullable<int> Type { get; set; }
         public Nullable<int> GroupId { get; set; }
         public string Characteristic { get; set; }
+        public Nullable<System.DateTime> DateClaim { get; set; }
+        public string PersonalNumber { get; set; }
+        public Nullable<int> Competition { get; set; }
+        public Nullable<int> EduGraduationYear { get; set; }
+        public Nullable<int> EduType { get; set; }
+        public string Concessions { get; set; }
+        public Nullable<int> PreUniversityCourses { get; set; }
+        public Nullable<int> Hostel { get; set; }
+        public Nullable<int> CountClaim { get; set; }
+        public string Language { get; set; }
+        public Nullable<int> CertificatePoints { get; set; }
+        public Nullable<int> LanguagePoints { get; set; }
+        public Nullable<int> PhysicsPoints { get; set; }
+        public Nullable<int> MathematicaPoints { get; set; }
+        public Nullable<int> ChemistryPoints { get; set; }
+        public Nullable<int> BiologyPoints { get; set; }
+        public string InfoFrom { get; set; }
+        public string PrioritySpecialities { get; set; }
     
         public virtual Group Group { get; set; }
         public virtual ICollection<Parent> Parents { get; set; }

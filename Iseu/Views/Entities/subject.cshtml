@@ -1,0 +1,44 @@
+﻿@model SubjectViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.isVisit)
+{
+    <div id="entity">
+        <div class="title">@(Model.isGuest ? "Профиль пользователя" : "Ваш профиль")</div>
+        @Html.LabelFor(m => m.Title)
+        @Html.DisplayTextFor(m => m.Title)
+
+        @Html.LabelFor(m => m.Professor.Chair.Title)
+        @Html.DisplayTextFor(m => m.Professor.Chair.Title)
+
+        @Html.LabelFor(m => m.Professor.User.FullName)
+        @Html.DisplayTextFor(m => m.Professor.User.FullName)
+    </div>
+}
+@if (Model.isAdd)
+{
+    <form action="@(Url.RouteUrl(SubjectRoutes.Add))" method="post" id="add">
+        <div class="title">Добавление дисциплины</div>
+        <div id="user">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title)
+            @Html.ValidationMessageFor(m => m.Title)
+
+            @Html.DropDownListFor(m=>m.Professor, UsersExtension.GetProfessors())
+
+            <button type="submit">Сохранить</button>
+        </div>
+    </form>
+}
+@if (Model.isEdit)
+{
+    <form action="@Url.RouteUrl(SubjectRoutes.Edit, new { id = Model.SubjectId })" method="post">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title)
+        @Html.ValidationMessageFor(m => m.Title)
+
+        @Html.DropDownListFor(m=>m.Professor, UsersExtension.GetProfessors())
+        <input type="submit" value="Сохранить" />
+    </form>
+}

@@ -1,0 +1,24 @@
+﻿@model NotesViewModel
+<div id="modal">
+    <div class="fullname">@Model.Student.User.FullName</div>
+    <div style="width: 1600px; text-align: center; font-size: 16px">
+        @foreach (var item in Model.NotesToSyllabus)
+        {
+            <div style="width: 1600px">
+                @Html.DisplayText(item.Item1.ToString() + " курс")
+                <div>@item.Item1 курс</div>
+                <br />
+                <div>
+                    @foreach (var note in item.Item2)
+                    {
+                        <div style="height: 50px">
+                            <div style="display: inline-block; width: 500px">@note.Subject.Title</div>
+                            <div class="black" style="display:inline-block;width:50px;background-color:@(!note.Note1.HasValue ? "#FFFFFF" : note.Note1.Value < 4 ? "#FF0033" : "#00FF00")">@(note.Note1.HasValue ? note.Note1.ToString() : "-")</div>
+                            <div style="display: inline-block; width: 500px"><a href="@Url.RouteUrl(UserRoutes.Index, new { id = note.Subject.Professor.Id })">@note.Subject.Professor.User.ShortFullName</a></div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

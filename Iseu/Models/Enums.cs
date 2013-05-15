@@ -13,6 +13,7 @@ namespace Iseu.Models
 
     public enum AccountRole 
     { 
+        User,
         Student,
         Professor,
         Decanat,
@@ -37,4 +38,12 @@ namespace Iseu.Models
         Graduated,
         Expelled
     }
+
+    public enum Competition
+    {
+        City,
+        CountrySide,
+        OutOfCompetition
+    }
+
 }

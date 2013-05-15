@@ -22,15 +22,24 @@ namespace Iseu
         public string MiddleName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public Nullable<int> CityId { get; set; }
+        public string City { get; set; }
         public string Address { get; set; }
-        public int Role { get; set; }
+        public Nullable<int> Role { get; set; }
         public int Status { get; set; }
         public string LoginName { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
         public Nullable<System.DateTime> DateRegistered { get; set; }
         public Nullable<System.DateTime> DateLastVisited { get; set; }
+        public string Nationality { get; set; }
+        public string Passport { get; set; }
+        public string PassportIssuing { get; set; }
+        public string Region { get; set; }
+        public string Country { get; set; }
+        public string Area { get; set; }
+        public Nullable<int> Index { get; set; }
+        public string HomePhone { get; set; }
+        public string Job { get; set; }
     
         public virtual Parent Parent { get; set; }
         public virtual Professor Professor { get; set; }

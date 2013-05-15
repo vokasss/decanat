@@ -1,0 +1,202 @@
+﻿@model StudentViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.isVisit)
+{
+    <div id="profile">
+        <div class="title">@(Model.isGuest ? "Профиль студента" : "Ваш профиль")</div>
+        <div id="student">
+            <p>Студент</p>
+            @Html.LabelFor(m => m.FullName)
+            @Html.DisplayTextFor(m => m.FullName)
+
+            @Html.Label(Model.BirthDate.Value.ToShortDateString(), "Дата рождения")
+            @Model.BirthDate.Value.ToShortDateString()
+
+            @Html.LabelFor(m=>m.Gender)
+            @(Model.Gender == (int)Gender.Male ? "М" : "Ж")
+
+            @Html.LabelFor(m => m.EntryYear)
+            @Html.DisplayTextFor(m => m.EntryYear)
+
+            @Html.LabelFor(m => m.GroupTitle)
+            @Html.DisplayTextFor(m => m.GroupTitle)
+
+            @Html.LabelFor(m => m.Address)
+            @Html.DisplayTextFor(m => m.Address)
+
+            @Html.LabelFor(m => m.Phone)
+            @Html.DisplayTextFor(m => m.Phone)
+
+            @Html.LabelFor(m => m.Email)
+            @Html.DisplayTextFor(m => m.Email)
+
+            @Html.LabelFor(m => m.Characteristic)
+            @Html.DisplayTextFor(m => m.Characteristic)
+
+            @if (!Model.isGuest || Model.GuestIsDecanat || Model.GuestIsAdmin)
+            {<div>
+                <a class="modal" href="@Url.RouteUrl(StudentRoutes.Notes, new { id = Model.Id })">Ведомость</a></div>
+            }
+        </div>
+        @if (Model.GuestIsDecanat || Model.GuestIsAdmin)
+        {
+            if (Model.GuestIsAdmin)
+            {
+            @Html.Partial("~/Views/partial/sidebar2.cshtml", new FooterModel() { UserId = Model.Id, Role = AccountRole.Admin })
+            }
+            else
+            {
+            @Html.Partial("~/Views/partial/sidebar2.cshtml", new FooterModel() { UserId = Model.Id, Role = AccountRole.Decanat })
+              }
+        }
+        @if (!Model.Parents.Any(p=>p.User.IsIdOnly))
+        {
+            <div class="parents">
+                @foreach (var p in Model.Parents)
+                {
+                    if (!p.User.IsIdOnly)
+                    {
+                    <div id="@(p.User.Gender == (int)Gender.Male ? "father" : "female")">
+                        <p>@(p.User.Gender == (int)Gender.Male ? "Отец" : "Мать")</p>
+
+                        <label>ФИО</label>
+                        @p.User.FullName
+
+                        @Html.Label(p.User.BirthDate.Value.ToShortDateString(), "Дата рождения")
+                        @p.User.BirthDate.Value.ToShortDateString()
+
+                        @Html.Label(p.User.Job, "Место работы")
+                        @p.User.Job
+
+                        @Html.Label(p.User.Phone, "Телефон")
+                        @p.User.Phone
+
+                        @Html.Label(p.User.Address, "Адрес")
+                        @p.User.Address
+
+                        @Html.Label(p.User.Email, "Электронная почта")
+                        @p.User.Email
+                    </div>
+                    }
+                }
+            </div> 
+        }
+    </div>
+}
+else
+{
+    <div class="add">
+        <form action="@(Model.isAdd ? Url.RouteUrl(StudentRoutes.Add) : Url.RouteUrl(StudentRoutes.Edit, new{ id = Model.Id }))" method="post">
+            <div class="title">@(Model.isAdd ? "Добавление студента": "Редактирование студента")</div>
+            <div id="student">
+                <p>Студент</p>
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName)
+                @Html.ValidationMessageFor(m => m.LastName)
+
+                @Html.LabelFor(m => m.FirstName)
+                @Html.TextBoxFor(m => m.FirstName)
+                @Html.ValidationMessageFor(m => m.FirstName)
+
+                @Html.LabelFor(m => m.MiddleName)
+                @Html.TextBoxFor(m => m.MiddleName)
+
+                @Html.LabelFor(m => m.BirthDate)
+                @Html.TextBoxFor(m => m.BirthDate)
+                @Html.ValidationMessageFor(m => m.BirthDate)
+
+                @Html.LabelFor(m => m.Gender)
+                @Html.DropDownListFor(m => m.Gender, UsersExtension.GetGenders(), new { @class = "dropdownlist" })
+
+                @Html.LabelFor(m => m.LoginName, "Номер зачетки")
+                @Html.TextBoxFor(m => m.LoginName)
+                @Html.ValidationMessageFor(m => m.LoginName)
+
+                @Html.LabelFor(m => m.Phone)
+                @Html.TextBoxFor(m => m.Phone)
+                @Html.ValidationMessageFor(m => m.Phone)
+
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address)
+                @Html.ValidationMessageFor(m => m.Address)
+
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+
+                @Html.LabelFor(m => m.GroupTitle)
+                @Html.TextBoxFor(m => m.GroupTitle)
+
+                @Html.LabelFor(m => m.EntryYear)
+                @Html.TextBoxFor(m => m.EntryYear)
+
+                @Html.LabelFor(m => m.Characteristic)
+                @Html.TextBoxFor(m => m.Characteristic)
+
+                @Html.LabelFor(m => m.StudyStatus)
+                @Html.DropDownListFor(m => m.StudyStatus, UsersExtension.GetStudyStatus())
+
+                @Html.LabelFor(m => m.PaymentStatus)
+                @Html.DropDownListFor(m => m.PaymentStatus, UsersExtension.GetPayments())
+                <button type="submit">Сохранить</button>
+            </div>
+            <div class="parents">
+                <div id="father">
+                    <p>Отец</p>
+                    @Html.LabelFor(m => m.Parents[0].User.LastName, "Фамилия")
+                    @Html.TextBoxFor(m => m.Parents[0].User.LastName)
+
+                    @Html.LabelFor(m => m.Parents[0].User.FirstName, "Имя")
+                    @Html.TextBoxFor(m => m.Parents[0].User.FirstName)
+
+                    @Html.LabelFor(m => m.Parents[0].User.MiddleName, "Отчество")
+                    @Html.TextBoxFor(m => m.Parents[0].User.MiddleName)
+
+                    @Html.LabelFor(m => m.Parents[0].User.BirthDate, "Дата рождения")
+                    @Html.TextBoxFor(m => m.Parents[0].User.BirthDate)
+
+
+                    @Html.LabelFor(m => m.Parents[0].User.Job, "Место работы")
+                    @Html.TextBoxFor(m => m.Parents[0].User.Job)
+
+                    @Html.LabelFor(m => m.Parents[0].User.Phone, "Телефон")
+                    @Html.TextBoxFor(m => m.Parents[0].User.Phone)
+
+                    @Html.LabelFor(m => m.Parents[0].User.Address, "Адрес")
+                    @Html.TextBoxFor(m => m.Parents[0].User.Address)
+
+                    @Html.LabelFor(m => m.Parents[0].User.Email, "Электронная почта")
+                    @Html.TextBoxFor(m => m.Parents[0].User.Email)
+                </div>
+                <div id="mother">
+                    <p>Мать</p>
+                    @Html.LabelFor(m => m.Parents[1].User.LastName, "Фамилия")
+                    @Html.TextBoxFor(m => m.Parents[1].User.LastName)
+
+                    @Html.LabelFor(m => m.Parents[1].User.FirstName, "Имя")
+                    @Html.TextBoxFor(m => m.Parents[1].User.FirstName)
+
+                    @Html.LabelFor(m => m.Parents[1].User.MiddleName, "Отчество")
+                    @Html.TextBoxFor(m => m.Parents[1].User.MiddleName)
+
+                    @Html.LabelFor(m => m.Parents[1].User.BirthDate, "Дата рождения")
+                    @Html.TextBoxFor(m => m.Parents[1].User.BirthDate)
+
+                    @Html.LabelFor(m => m.Parents[1].User.Job, "Место работы")
+                    @Html.TextBoxFor(m => m.Parents[1].User.Job)
+
+                    @Html.LabelFor(m => m.Parents[1].User.Phone, "Телефон")
+                    @Html.TextBoxFor(m => m.Parents[1].User.Phone)
+
+                    @Html.LabelFor(m => m.Parents[1].User.Address, "Адрес")
+                    @Html.TextBoxFor(m => m.Parents[1].User.Address)
+
+                    @Html.LabelFor(m => m.Parents[1].User.Email, "Электронная почта")
+                    @Html.TextBoxFor(m => m.Parents[1].User.Email)
+                </div>
+            </div>
+        </form>
+    </div>
+}

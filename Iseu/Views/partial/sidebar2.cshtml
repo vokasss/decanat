@@ -1,0 +1,33 @@
+﻿@model FooterModel
+@{
+    var user = Core.DBcontext.Users.Single(u => u.Id == Model.UserId);
+}
+@if (user.Id != Core.CurrentUser.Id)
+{
+    <div class="sidebar2">
+        <ul class="inline">
+            <li>
+                <a href="@(user.IsStudent ? Url.RouteUrl(StudentRoutes.Edit, new { id = Model.UserId }) :
+                user.IsProfessor ? Url.RouteUrl(ProfessorRoutes.Edit, new  {id = Model.UserId }) : 
+                Url.RouteUrl(UserRoutes.Edit, new  {id = Model.UserId }))">Редактировать</a>
+            </li>
+            @if (Model.Role == AccountRole.Admin)
+            {
+                <li>
+                    <a href="@(user.IsBanned ? Url.RouteUrl(AdminRoutes.Unban, new { id = Model.UserId }) : Url.RouteUrl(AdminRoutes.Ban, new { id = Model.UserId }))">@(user.IsBanned ? "Разбанить" : "Забанить")</a>
+                </li>
+                if(user.Role != (int)AccountRole.Professor && user.Role != (int)AccountRole.Professor)
+                {
+                <li>
+                    <p>Назначить уровень доступа</p>
+                    <select id="set-role"  value="@user.Role">
+                        <option @(user.Role == (int)AccountRole.Admin ? "selected" : "") value="@Url.RouteUrl(AdminRoutes.SetRole, new { id = Model.UserId, role = (int)AccountRole.Admin })">Админ</option>
+                        <option @(user.Role == (int)AccountRole.Decanat ? "selected" : "") value="@Url.RouteUrl(AdminRoutes.SetRole, new { id = Model.UserId, role = (int)AccountRole.Decanat })">Деканат</option>
+                        <option @(user.Role == (int)AccountRole.User ? "selected" : "") value="@Url.RouteUrl(AdminRoutes.SetRole, new { id = Model.UserId, role = (int)AccountRole.User })">Только зарегистрированый</option>
+                    </select>
+                </li>
+                }
+            }
+        </ul>
+    </div>
+}

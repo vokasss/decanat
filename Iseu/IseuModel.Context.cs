@@ -33,6 +33,7 @@ namespace Iseu
         public DbSet<Note> Notes { get; set; }
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Professor> Professors { get; set; }
+        public DbSet<Speciality> Specialities { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentsView> StudentsViews { get; set; }
         public DbSet<Subject> Subjects { get; set; }

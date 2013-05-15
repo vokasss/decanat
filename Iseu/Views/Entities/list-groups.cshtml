@@ -1,0 +1,21 @@
+﻿@model List<Group>
+<table border="1" cellpadding="5" >
+    <caption>Группы</caption>
+        <tr>
+            <th>Группа</th>
+            <th>Факультет</th>
+            <th>Кафедра</th>
+            <th>Специальность</th>
+            <th></th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td><a href="@Url.RouteUrl(SearchRoutes.Group, new { id = i.Id })">@i.Title</a></td>
+                <td>@i.Speciality.Chair.Faculty.Title</td>
+                <td>@i.Speciality.Chair.Title</td>
+                <td>@i.Speciality.Title</td>
+                <td><a href="@Url.RouteUrl(SyllabusRoutes.Index, new { id=i.Speciality.SyllabusId })">Учебный план</a></td>
+            </tr> 
+        }
+</table>

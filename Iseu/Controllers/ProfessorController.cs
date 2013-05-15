@@ -16,10 +16,10 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            if (CurrentUser.IsStudent || CurrentUser.IsAnounymous)
-                return Error("Действие не доступно");
+            if (CurrentUser.IsStudent || CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly)
+                return Error("Недостаточный уровень доступа");
 
-            return View("~/views/professor/add.cshtml", new ProfessorViewModel());
+            return View("~/views/user/professor.cshtml", new ProfessorViewModel() { isAdd = true });
         }
 
         [HttpPost]
@@ -27,15 +27,15 @@ namespace Iseu.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("~/views/professor/add.cshtml", model);
+                return View("~/views/user/professor.cshtml", model);
             }
-            User newUser = DBcontext.Users.Add(new User());
-            Professor professor = DBcontext.Professors.Add(new Professor());
+            
+            Professor professor = new Professor();
 
             professor.ChairId = model.ChairId;
             professor.ADegree = model.AcademicDegreeId;
             professor.ATitle = model.AcademicTitleId;
-            newUser.CityId = 1;
+            User newUser = new User();
             newUser.Email = model.Email;
             newUser.BirthDate = model.BirthDate;
             newUser.Gender = model.Gender;
@@ -49,7 +49,10 @@ namespace Iseu.Controllers
             newUser.DateRegistered = DateTime.Now;
             professor.User = newUser;
 
+            DBcontext.Professors.Add(professor);
+
             DBcontext.SaveChanges();
+
             return RedirectToRoute(UserRoutes.Index, new { id = professor.Id });
         }
         #endregion
@@ -58,8 +61,8 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            if (CurrentUser.IsStudent || CurrentUser.IsAnounymous)
-                return Error("Действие не доступно");
+            if (CurrentUser.IsStudent || CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly)
+                return Error("Недостаточный уровень доступа");
 
             Professor professor = null;
             if (!DBcontext.Professors.Any(u => u.Id == id))
@@ -83,10 +86,11 @@ namespace Iseu.Controllers
                 Phone = professor.User.Phone,
                 AcademicDegreeId = professor.ADegree.Value,
                 AcademicTitleId = professor.ATitle.Value,
-                ChairId = professor.Chair.Id
+                ChairId = professor.Chair.Id,
+                isEdit = true
             };
 
-            return View("~/views/professor/edit.cshtml", model);
+            return View("~/views/user/professor.cshtml", model);
         }
 
         [HttpPost]
@@ -94,11 +98,11 @@ namespace Iseu.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("~/views/professor/edit.cshtml", model);
+                model.isEdit = true;
+                return View("~/views/user/professor.cshtml", model);
             }
 
             Professor professor = DBcontext.Professors.Single(p=>p.Id == model.Id);
-            professor.User.CityId = 1;
             professor.User.Email = model.Email;
             professor.User.BirthDate = model.BirthDate;
             professor.User.Gender = model.Gender;
@@ -112,6 +116,7 @@ namespace Iseu.Controllers
             professor.ATitle = model.AcademicTitleId;
 
             DBcontext.SaveChanges();
+
             return RedirectToRoute(UserRoutes.Index, new { id = model.Id });
         }
         #endregion

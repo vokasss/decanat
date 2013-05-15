@@ -16,10 +16,10 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
-                return Error("Действие не доступно");
+            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly)
+                return Error("Недостаточный уровень доступа");
 
-            return View("~/views/student/add.cshtml", new StudentViewModel());
+            return View("~/views/user/student.cshtml", new StudentViewModel() { isAdd = true });
         }
 
         [HttpPost]
@@ -27,17 +27,17 @@ namespace Iseu.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("~/views/student/add.cshtml", model);
+                return View("~/views/user/student.cshtml", model);
             }
-            User newUser = DBcontext.Users.Add(new User());
-            Student newStudent = DBcontext.Students.Add(new Student());
+            User newUser = new User();
+            Student newStudent = new Student();
+
             var group = DBcontext.Groups.Any(g=>g.Title == model.GroupTitle) ? DBcontext.Groups.Single(g=>g.Title == model.GroupTitle):DBcontext.Groups.Create();
             newStudent.Group = group;
             newStudent.EntryYear = model.EntryYear;
             newStudent.Status = (int)StudyStatus.Active;
-            newStudent.Type = model.PaymentStatus;
+            newStudent.Type = (int)model.PaymentStatus;
             newStudent.Characteristic = model.Characteristic;
-            newStudent.User = newUser;
             newUser.Email = model.Email;
             newUser.BirthDate = model.BirthDate;
             newUser.Gender = model.Gender;
@@ -51,11 +51,23 @@ namespace Iseu.Controllers
             newUser.Status = (int)AccountStatus.Normal;
             newUser.DateRegistered = DateTime.Now;
             newStudent.User = newUser;
-            foreach (var p in model.Parents)
+            var father = model.Parents[0];
+            father.StudentId = newStudent.Id;
+            DBcontext.Parents.Add(father);
+            var mother = model.Parents[1];
+            mother.StudentId = newStudent.Id;
+            DBcontext.Parents.Add(mother);
+
+            var student = DBcontext.Students.Add(newStudent);
+
+            DBcontext.SaveChanges();
+
+            var notes = UsersExtension.CreateSyllabusForStudent(student.Id, student.Group);
+            notes.ForEach(n =>
             {
-                p.StudentId = newStudent.Id;
-                DBcontext.Parents.Add(p);
-            }
+                if (!DBcontext.Notes.Any(nn => nn.StudentId == n.StudentId && nn.SubjectId == n.SubjectId))
+                    DBcontext.Notes.Add(n);
+            });
 
             DBcontext.SaveChanges();
             return RedirectToRoute(UserRoutes.Index, new { id = newStudent.Id });
@@ -66,8 +78,8 @@ namespace Iseu.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
-                return Error("Действие не доступно");
+            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly)
+                return Error("Недостаточный уровень доступа");
             
             Student student = null;
             if (!DBcontext.Students.Any(u => u.Id == id))
@@ -92,12 +104,14 @@ namespace Iseu.Controllers
                 Phone = student.User.Phone,
                 GroupTitle = student.User.Student.Group.Title,
                 EntryYear = student.EntryYear,
-                PaymentStatus = student.User.Student.Type,
+                PaymentStatus = student.Type,
+                StudyStatus = student.Status,
                 Characteristic = student.Characteristic,
-                Parents = student.Parents.ToList()
+                Parents = student.Parents.ToList(),
+                isEdit = true
             };
 
-            return View("~/views/student/edit.cshtml", model);
+            return View("~/views/user/student.cshtml", model);
         }
 
         [HttpPost]
@@ -105,96 +119,114 @@ namespace Iseu.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("~/views/student/edit.cshtml", model);
+                model.isEdit = true;
+                return View("~/views/user/student.cshtml", model);
             }
 
-            Student newStudent = DBcontext.Students.Single(s => s.Id == model.Id);
+            Student student = DBcontext.Students.Single(s => s.Id == model.Id);
             var group = DBcontext.Groups.Any(g => g.Title == model.GroupTitle) ? DBcontext.Groups.Single(g => g.Title == model.GroupTitle) : DBcontext.Groups.Create();
-            newStudent.Group = group;
-            newStudent.User.Email = model.Email;
-            newStudent.User.BirthDate = model.BirthDate;
-            newStudent.User.Gender = model.Gender;
-            newStudent.User.FirstName = model.FirstName;
-            newStudent.User.LastName = model.LastName;
-            newStudent.User.MiddleName = model.MiddleName;
-            newStudent.User.LoginName = model.LoginName;
-            newStudent.User.Phone = model.Phone;
-            newStudent.User.Address = model.Address;
-            newStudent.EntryYear = model.EntryYear;
-            newStudent.Type = model.PaymentStatus;
-            newStudent.Parents = model.Parents;
+            student.Group = group;
+            student.User.Email = model.Email;
+            student.User.BirthDate = model.BirthDate;
+            student.User.Gender = model.Gender;
+            student.User.FirstName = model.FirstName;
+            student.User.LastName = model.LastName;
+            student.User.MiddleName = model.MiddleName;
+            student.User.LoginName = model.LoginName;
+            student.User.Phone = model.Phone;
+            student.User.Address = model.Address;
+            student.EntryYear = model.EntryYear;
+            student.Type = (int)model.PaymentStatus;
+            student.Status = (int)model.StudyStatus;
 
+            var parents = DBcontext.Parents.Where(p=>p.StudentId == student.Id).ToList();
+            parents.ForEach(parent => {
+                if (parent.User.Gender == (int)Gender.Male) 
+                {
+                    var newParent = model.Parents[0];
+                    parent.User.Job = newParent.User.Job;
+                    parent.User.FirstName = newParent.User.FirstName;
+                    parent.User.LastName = newParent.User.LastName;
+                    parent.User.MiddleName = newParent.User.MiddleName;
+                    parent.User.BirthDate = newParent.User.BirthDate;
+                    parent.User.Address = newParent.User.Address;
+                    parent.User.Phone = newParent.User.Phone;
+                    parent.User.Email = newParent.User.Email;
+                }
+                if (parent.User.Gender == (int)Gender.Female)
+                {
+                    var newParent = model.Parents[1];
+                    parent.User.Job = newParent.User.Job;
+                    parent.User.FirstName = newParent.User.FirstName;
+                    parent.User.LastName = newParent.User.LastName;
+                    parent.User.MiddleName = newParent.User.MiddleName;
+                    parent.User.BirthDate = newParent.User.BirthDate;
+                    parent.User.Address = newParent.User.Address;
+                    parent.User.Phone = newParent.User.Phone;
+                    parent.User.Email = newParent.User.Email;
+                }
+            });
+
+            student.Parents = parents;
+
+            var notes = UsersExtension.CreateSyllabusForStudent(student.Id, student.Group);
+            notes.ForEach(n => { 
+                if(!DBcontext.Notes.Any(nn=>nn.StudentId == n.StudentId && nn.SubjectId == n.SubjectId))
+                DBcontext.Notes.Add(n);
+            });
             DBcontext.SaveChanges();
+
             return RedirectToRoute(UserRoutes.Index, new { id = model.Id });
         }
         #endregion
 
-        #region Activate Expelle Graduate
         [HttpGet]
-        public ActionResult Activate(int id)
-        {
-            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
-            {
-                return Error("Действие не доступно");
-            }
-            var student = DBcontext.Students.Single(u => u.Id == id);
-            student.Status = (int)StudyStatus.Active;
-            student.GraduationYear = null;
-            DBcontext.SaveChanges();
-            return RedirectToRoute(UserRoutes.Index, new { id = id });
-        }
-
-        [HttpGet]
-        public ActionResult Graduate(int id)
-        {
-            if ((!CurrentUser.IsDecanat && !CurrentUser.IsAdmin) || CurrentUser.IsAnounymous)
-            {
-                return Error("Действие не доступно");
-            }
-            var student = DBcontext.Students.Single(u => u.Id == id);
-            student.Status = (int)StudyStatus.Graduated;
-            student.GraduationYear = DateTime.Now.Year;
-            DBcontext.SaveChanges();
-            return RedirectToRoute(UserRoutes.Index, new { id = id });
-        }
-
-        [HttpGet]
-        public ActionResult Expelle(int id)
+        public ActionResult StudentStatus(int id, int status)
         {
             if (!CurrentUser.IsAdmin)
             {
                 return Error("Действие не доступно");
             }
             var student = DBcontext.Students.Single(u => u.Id == id);
-            student.Status = (int)StudyStatus.Expelled;
-            student.GraduationYear = DateTime.Now.Year;
+            switch (id)
+            {
+                case (int)StudyStatus.Active: student.Status = status; student.GraduationYear = null; break;
+                case (int)StudyStatus.Expelled: student.Status = status; student.GraduationYear = DateTime.Now.Year; break;
+                case (int)StudyStatus.Graduated: student.Status = status; student.GraduationYear = DateTime.Now.Year; break;
+            }
+
             DBcontext.SaveChanges();
             return RedirectToRoute(UserRoutes.Index, new { id = id });
         }
-        #endregion
 
         [HttpGet]
         public ActionResult Notes(int id)
         {
+            if(CurrentUser.IsAnounymous || CurrentUser.IsRegisterOnly || (CurrentUser.IsStudent && CurrentUser.Id != id))
+                return Error("Недостаточный уровень доступа");
             var student = DBcontext.Students.Single(s => s.Id == id);
-            var syl = DBcontext.Syllabuses.Single(s => s.Groups.Select(g => g.Id).Contains(student.GroupId.Value)).Syllabus1;
-            var sylla = JsonConvert.DeserializeObject<SyllabusModel>(syl);
+            var syl = student.Group.Speciality.Syllabus.Syllabus1;
+            var sylla = JsonConvert.DeserializeObject<SyllabusViewModel>(syl);
             var notes = DBcontext.Notes.Where(n => n.StudentId == id);
             List<Tuple<int, List<Note>>> list = new List<Tuple<int, List<Note>>>();
-            foreach (var course in sylla.Syllabus)
+            foreach (var sem in sylla.Syllabus1)
             {
                 List<Note> courseNotes = new List<Note>();
-                foreach (var subjectId in course)
+                foreach (var subjectId in sem)
                 {
                     courseNotes.Add(notes.Single(n => n.SubjectId == subjectId));
                 }
-                Tuple<int, List<Note>> tuple = new Tuple<int, List<Note>>(sylla.Syllabus.IndexOf(course) + 1, courseNotes);
+                Tuple<int, List<Note>> tuple = new Tuple<int, List<Note>>(sylla.Syllabus1.IndexOf(sem) + 1, courseNotes);
                 list.Add(tuple);
             }
             NotesViewModel model = new NotesViewModel();
             model.Student = student;
             model.NotesToSyllabus = list;
-            return View("~/views/student/notes.cshtml", model);
+            if (Request.IsAjaxRequest())
+            {
+                return JsonGet(new { view = RenderString("~/views/entities/notes.cshtml", model) });
+            }
+            return View("~/views/entities/notes.cshtml", model);
         }
     }
 }

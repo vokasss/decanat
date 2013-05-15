@@ -20,6 +20,7 @@ text-decoration: none;
 .header ul.inline, .header ol.inline {
 margin: 0;
 position:absolute;
+top:35%;
 left:35%;
 }
 
@@ -33,14 +34,9 @@ left:35%;
 .header ul.inline  li,
 .header ol.inline  li {
 	list-style-type:none;
-    display: inline-block;
+    display: inline;
 	padding:20px 10px;
 }
-	.header .fullname {
-		position:relative;
-		left:100%;
-	}
-
 	#login-name,#login-pass,#login-enter{
 	height:26px;
 	width: 100px;

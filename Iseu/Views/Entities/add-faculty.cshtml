@@ -1,0 +1,27 @@
+﻿@model FacultyViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    @if (Model.isVisit)
+    {
+        <div class="title">Факультет</div>
+        @Html.LabelFor(m => m.Title)
+        <div>
+            @Model.Faculty.Title
+        </div>
+    }
+    @if (Model.isAdd)
+    {
+        <div class="add">
+            <form action="@(Url.RouteUrl(AdminRoutes.AddFaculty))" method="post" id="add">
+                <div class="title">Добавление факультета</div>
+
+                @Html.LabelFor(m => m.Title)
+                @Html.TextBoxFor(m => m.Title)
+
+                <button type="submit">Сохранить</button>
+            </form>
+        </div>
+    }
+</div>

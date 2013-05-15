@@ -21,11 +21,9 @@ namespace Iseu
     
         public int Id { get; set; }
         public string Title { get; set; }
-        public Nullable<int> ChairId { get; set; }
-        public Nullable<int> SyllabusId { get; set; }
+        public Nullable<int> SpecialityId { get; set; }
     
-        public virtual Chair Chair { get; set; }
-        public virtual Syllabus Syllabus { get; set; }
+        public virtual Speciality Speciality { get; set; }
         public virtual ICollection<Student> Students { get; set; }
     }
 }
